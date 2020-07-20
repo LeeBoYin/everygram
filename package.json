@@ -55,7 +55,7 @@
 		"@material/theme": "^6.0.0",
 		"@material/top-app-bar": "^6.0.0",
 		"bootstrap": "^4.5.0",
-		"lodash": "^4.17.15",
+		"lodash": "^4.17.19",
 		"moment": "^2.24.0",
 		"serviceworker-webpack-plugin": "^1.0.1",
 		"vee-validate": "^3.3.0"
