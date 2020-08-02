@@ -1,0 +1,53 @@
+@media (display-mode: standalone) {
+	/* All installed PWAs */
+	body {
+		// Disable over scroll
+		overscroll-behavior: none;
+		// Disable text selection
+		-webkit-user-select: none;
+		// Disable highlighting
+		-webkit-tap-highlight-color: transparent;
+		// Disable callouts
+		-webkit-touch-callout: none;
+	}
+}
+@media (max-width: 576px) and (display-mode: standalone) {
+	/* Installed PWAs on mobile devices */
+
+	@supports (-webkit-overflow-scrolling: touch) {
+		/* Installed PWAs on mobile Apple devices */
+
+		body {
+			// #hack status bar background color
+			background-color: $c-primary;
+
+			&:before, &:after {
+				content: '';
+				display: block;
+				position: fixed;
+				left: 0;
+				width: 100%;
+			}
+
+			// #hack fix body over scroll status bar background color on iOS
+			&:before {
+				top: -50px;
+				// height must be higher then top offset to be rendered
+				height: 50.1px;
+				background-color: $c-primary;
+				z-index: 9999999999;
+			}
+			// #hack fix body over scroll background on iOS
+			&:after {
+				top: 0;
+				height: 100%;
+				background-color: $c-background;
+				z-index: -1;
+			}
+		}
+	}
+
+	@supports not (-webkit-overflow-scrolling: touch) {
+		/* Installed PWAs on mobile non-Apple devices */
+	}
+}

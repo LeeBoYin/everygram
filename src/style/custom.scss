@@ -18,6 +18,7 @@
 
 // 2. generic
 @import "2_generic/generic.normalize";
+@import "2_generic/generic.standalone";
 
 // 3. elements
 @import "3_elements/elements";
@@ -27,7 +28,6 @@
 
 // 5. components
 @import "5_components/components.AlertInline";
-@import "5_components/components.App";
 @import "5_components/components.Avatar";
 @import "5_components/components.Board";
 @import "5_components/components.CategoryListItem";
@@ -50,6 +50,5 @@
 @import "5_components/components.MdcTopAppBar";
 @import "5_components/components.NotFound";
 @import "5_components/components.Settings";
-@import "5_components/components.StatusBarBackground";
 
 // 6. utilities

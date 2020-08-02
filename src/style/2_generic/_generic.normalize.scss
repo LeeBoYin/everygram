@@ -9,32 +9,5 @@ body {
 	margin: 0;
 	color: $c-gray-800;
 	line-height: 1.5;
-}
-
-@media (display-mode: standalone) {
-	/* All installed PWAs */
-	html {
-		background-color: $c-primary;
-	}
-	body {
-		// Disable over scroll
-		overscroll-behavior: none;
-		// Disable text selection
-		-webkit-user-select: none;
-		// Disable highlighting
-		-webkit-tap-highlight-color: transparent;
-		// Disable callouts
-		-webkit-touch-callout: none;
-	}
-}
-@media (max-width: 576px) and (display-mode: standalone) {
-	/* Installed PWAs on mobile devices */
-
-	@supports (-webkit-overflow-scrolling: touch) {
-		/* Installed PWAs on mobile Apple devices */
-	}
-
-	@supports not (-webkit-overflow-scrolling: touch) {
-		/* Installed PWAs on mobile non-Apple devices */
-	}
+	background-color: $c-background;
 }
