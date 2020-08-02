@@ -4,16 +4,18 @@
 			<div class="row">
 				<div class="col-xl-5">
 					<Board>
-						<div slot="header" class="settings__profile-header">
-							<div
-								class="avatar settings__profile-avatar"
-								:style="{ 'background-image': isUploadingProfilePicture ? '' : `url(${ user.photoURL })` }"
-							>
-								<i class="material-icons-outlined settings__profile-camera">photo_camera</i>
-								<input type="file" @change="onProfilePictureSelected" accept="image/*" title="" />
-								<MdcCircularProgress v-if="isUploadingProfilePicture" class="settings__profile-avatar-loading" />
+						<template #header>
+							<div class="settings__profile-header">
+								<div
+									class="avatar settings__profile-avatar"
+									:style="{ 'background-image': isUploadingProfilePicture ? '' : `url(${ user.photoURL })` }"
+								>
+									<i class="material-icons-outlined settings__profile-camera">photo_camera</i>
+									<input type="file" @change="onProfilePictureSelected" accept="image/*" title="" />
+									<MdcCircularProgress v-if="isUploadingProfilePicture" class="settings__profile-avatar-loading" />
+								</div>
 							</div>
-						</div>
+						</template>
 						<template #body>
 							<EditableTextField
 								type="text"

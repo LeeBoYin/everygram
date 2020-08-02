@@ -17,9 +17,10 @@ const getters = {
 		if(!state.user) {
 			return {};
 		}
-		return _.assign({
-			photoURL: _.get(rootState.member, ['member', 'photoURL'], constant('DEFAULT_MEMBER_PHOTO_URL')),
-		}, _.pickBy(state.user));
+		const photoURL = _.get(rootState.member, ['member', 'photoURL']) || _.get(state.user, 'photoURL') || constant('DEFAULT_MEMBER_PHOTO_URL');
+		return _.assign(_.pickBy(state.user), {
+			photoURL,
+		});
 	},
 };
 
