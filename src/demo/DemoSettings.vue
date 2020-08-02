@@ -3,15 +3,17 @@
 		<div class="container-xl">
 			<div class="row">
 				<div class="col-xl-5">
-					<div
-						class="avatar settings__profile-avatar"
-						:style="{ 'background-image': `url(${ constant('DEFAULT_MEMBER_PHOTO_URL') }` }"
-					>
-						<i class="material-icons-outlined settings__profile-camera">photo_camera</i>
-						<input type="file">
-					</div>
+
 					<Board>
-						<div slot="header" class="settings__profile-header"></div>
+						<div slot="header" class="settings__profile-header">
+							<div
+								class="avatar settings__profile-avatar"
+								:style="{ 'background-image': `url(${ constant('DEFAULT_MEMBER_PHOTO_URL') }` }"
+							>
+								<i class="material-icons-outlined settings__profile-camera">photo_camera</i>
+								<input type="file">
+							</div>
+						</div>
 						<template #body>
 							<EditableTextField
 								label="名稱"

@@ -1,11 +1,19 @@
 .settings {
 	$setting-avatar-width: 120px;
 
+	&__profile-header {
+		padding: 24px 24px 0;
+		background-image: url('/static/images/illustration/illu-mountains.jpg');
+		background-size: cover;
+		background-position: bottom;
+		border-radius: $border-radius-lg $border-radius-lg 0 0;
+	}
+
 	&__profile-avatar {
 		position: relative;
 		width: $setting-avatar-width;
 		height: $setting-avatar-width;
-		margin: 0 auto -#{$setting-avatar-width / 2};
+		margin: 0 auto;
 		z-index: 1;
 		box-shadow: $box-shadow-md;
 		transition: box-shadow .3s;
@@ -13,10 +21,6 @@
 
 		&:hover {
 			box-shadow: $box-shadow-lg;
-		}
-
-		@include media-breakpoint-down(md) {
-			margin: 24px auto -#{$setting-avatar-width + 24px};
 		}
 
 		> input[type=file] {
@@ -47,22 +51,10 @@
 		@extend %absolute-center;
 	}
 
-	&__profile-header {
-		height: $setting-avatar-width / 3;
-
-		@include media-breakpoint-down(md) {
-			height: $setting-avatar-width + 48px;
-			background-image: url('/static/images/illustration/illu-mountains.jpg');
-			background-size: cover;
-			background-position: bottom;
-		}
-	}
-
 	&__board {
 		margin-bottom: 24px;
 
 		&:first-child {
-			margin-top: $setting-avatar-width / 2;
 			@include media-breakpoint-down(lg) {
 				margin-top: 24px;
 			}
