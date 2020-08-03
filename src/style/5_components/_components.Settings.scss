@@ -3,10 +3,15 @@
 
 	&__profile-header {
 		padding: 24px 24px 0;
-		background-image: url('/static/images/illustration/illu-mountains.jpg');
+		background-color: $c-primary-ligther;
+		background-image: url('/static/images/placeholder-profile-header.png');
 		background-size: cover;
 		background-position: bottom;
 		border-radius: $border-radius-lg $border-radius-lg 0 0;
+
+		@include media-breakpoint-down(md) {
+			background-color: $c-background;
+		}
 	}
 
 	&__profile-avatar {
