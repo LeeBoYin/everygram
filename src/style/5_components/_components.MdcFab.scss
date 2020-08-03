@@ -6,8 +6,13 @@
 	padding: 24px 0 0;
 	position: sticky;
 	bottom: 0;
+	pointer-events:none;
 
 	@include media-breakpoint-down(md) {
 		padding: 16px;
+	}
+
+	.mdc-fab {
+		pointer-events: auto;
 	}
 }
