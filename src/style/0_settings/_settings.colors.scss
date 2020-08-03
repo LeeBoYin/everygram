@@ -3,6 +3,7 @@ $c-bright: #FFFFFF;
 $c-primary: #9D8B73;
 $c-primary-dark: #6e5e47;
 $c-primary-light: #cebba2;
+$c-primary-ligther: #ECEAE8;
 $c-on-primary: $c-bright;
 
 $c-secondary: #7B909C;
@@ -36,7 +37,7 @@ $c-overlay: rgba(0,0,0,0.3);
   $secondary: $c-secondary,
   $on-secondary: $c-bright,
   $error: $c-danger,
-  
+
   $text-colors: (
     dark: (
       primary: $c-gray-800,
