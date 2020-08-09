@@ -27,7 +27,7 @@ module.exports = function () {
 				cacheGroups: {
 					// 必要的第三方套件，需在 layout 引入
 					coreVendors: {
-						test: /[\\/]node_modules[\\/](lodash|moment|@firebase|vue)([\\/]|$)/,
+						test: /[\\/]node_modules[\\/](lodash|lodash-es|moment|@firebase|vue)([\\/]|$)/,
 						name: 'coreVendors',
 						priority: 10,
 						reuseExistingChunk: true,
@@ -115,7 +115,7 @@ module.exports = function () {
 			new VueLoaderPlugin(),
 			new GoogleFontsPlugin('./googlefonts.config.json'),
 			new webpack.ProvidePlugin({
-				_: 'lodash',
+				_: ['@libs/lodash', 'default'],
 				moment: 'moment',
 				Vue: ['vue/dist/vue.esm.js', 'default'],
 				firebase: 'firebase/app',

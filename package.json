@@ -59,7 +59,7 @@
 		"@material/top-app-bar": "^6.0.0",
 		"bootstrap": "^4.5.0",
 		"compressorjs": "^1.0.6",
-		"lodash": "^4.17.19",
+		"lodash-es": "^4.17.15",
 		"moment": "^2.27.0",
 		"serviceworker-webpack-plugin": "^1.0.1",
 		"sortablejs": "^1.10.2",
