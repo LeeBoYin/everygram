@@ -13,15 +13,14 @@
 
 	@include media-breakpoint-down(md) {
 		border-radius: 0;
-		margin: 0 -#{$padding-container};
 	}
+
 	.mdc-list {
 		padding: 0;
 	}
 	.mdc-list-item {
 		height: auto;
-		padding-top: 16px;
-		padding-bottom: 16px;
+		padding: 20px;
 		border-bottom: 1px solid $c-gray-200;
 
 		&:first-child {

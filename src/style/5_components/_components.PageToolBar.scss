@@ -1,0 +1,11 @@
+.page-tool-bar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	position: sticky;
+	top: -40px;
+	margin-top: -4px;
+	padding: 4px 8px;
+	background-color: $c-background;
+	z-index: 4;
+}

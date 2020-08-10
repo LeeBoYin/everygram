@@ -3,3 +3,17 @@
 	white-space: nowrap;
 	text-overflow: ellipsis;
 }
+
+// Text size
+@each $size, $value in $font-sizes {
+	.text-#{$size} {
+		font-size: $value !important;
+	}
+}
+
+// Text color
+@each $color, $value in $grays {
+	.text-gray-#{$color} {
+		color: $value !important;
+	}
+}

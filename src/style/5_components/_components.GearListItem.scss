@@ -1,0 +1,22 @@
+.gear-list-item {
+	font-size: $font-size-sm;
+	line-height: 1.4;
+
+	.img-thumbnail {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 64px;
+		height: 64px;
+		margin-right: 20px;
+		overflow: hidden;
+		color: $c-gray-500;
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			object-position: center;
+		}
+	}
+}

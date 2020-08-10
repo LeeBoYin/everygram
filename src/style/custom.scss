@@ -27,15 +27,7 @@
 @import "4_objects/objects.sortable";
 
 // 5. components
-@import "5_components/components.AlertInline";
-@import "5_components/components.Avatar";
-@import "5_components/components.Board";
-@import "5_components/components.CategoryListItem";
-@import "5_components/components.DrawerHeader";
-@import "5_components/components.EditableTextField";
-@import "5_components/components.IconRadio";
-@import "5_components/components.Login";
-@import "5_components/components.Main";
+// mdc components
 @import "5_components/components.MdcButton";
 @import "5_components/components.MdcCircularProgress";
 @import "5_components/components.MdcDialogs";
@@ -48,7 +40,21 @@
 @import "5_components/components.MdcTextField";
 @import "5_components/components.MdcTextFieldHelperText";
 @import "5_components/components.MdcTopAppBar";
+
+// Custom components
+@import "5_components/components.AlertInline";
+@import "5_components/components.App";
+@import "5_components/components.Avatar";
+@import "5_components/components.Board";
+@import "5_components/components.CategoryListItem";
+@import "5_components/components.DrawerHeader";
+@import "5_components/components.EditableTextField";
+@import "5_components/components.GearListItem";
+@import "5_components/components.IconRadio";
+@import "5_components/components.Login";
+@import "5_components/components.Main";
 @import "5_components/components.NotFound";
+@import "5_components/components.PageToolBar";
 @import "5_components/components.Settings";
 
 // 6. utilities

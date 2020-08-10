@@ -12,10 +12,32 @@ $theme-colors: (
 	"dark":       $c-gray-800
 );
 
+$grays: ();
+$grays: map-merge(
+  (
+    "100": $c-gray-100,
+    "200": $c-gray-200,
+    "300": $c-gray-300,
+    "400": $c-gray-400,
+    "500": $c-gray-500,
+    "600": $c-gray-600,
+    "700": $c-gray-700,
+    "800": $c-gray-800,
+    "900": $c-gray-900
+  ),
+  $grays
+);
+
+
 $grid-gutter-width: $padding-container * 2;
+
+$thumbnail-padding:                 0;
+$thumbnail-bg:                      $c-gray-200;
+$thumbnail-border-width:            0;
 
 @import "bootstrap/scss/functions";
 @import "bootstrap/scss/variables";
 @import "bootstrap/scss/mixins";
 @import "bootstrap/scss/utilities";
 @import "bootstrap/scss/bootstrap-grid";
+@import "bootstrap/scss/images";
