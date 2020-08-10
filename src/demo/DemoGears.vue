@@ -4,12 +4,8 @@
 			<div class="page-tool-bar">
 				<div class="mr-auto">共有 54 個裝備</div>
 				<MdcButton>選取</MdcButton>
-				<MdcButton>
-					<i class="material-icons-outlined mdc-button__icon" aria-hidden="true">view_module</i>
-				</MdcButton>
-				<MdcButton>
-					<i class="material-icons-outlined mdc-button__icon" aria-hidden="true">view_list</i>
-				</MdcButton>
+				<MdcIconButton class="text-primary">view_module</MdcIconButton>
+				<MdcIconButton class="text-primary">view_list</MdcIconButton>
 			</div>
 			<template v-for="(gearList, categoryLabel) in gearLists">
 				<h3 :key="'categoryLabel' + categoryLabel" class="mdc-list-group__subheader d-flex align-items-center mt-4 mb-2">
