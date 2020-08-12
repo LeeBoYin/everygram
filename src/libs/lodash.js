@@ -5,6 +5,8 @@ import {
 	every,
 	filter,
 	find,
+	findIndex,
+	forEach,
 	get,
 	includes,
 	indexOf,
@@ -14,10 +16,10 @@ import {
 	map,
 	pick,
 	pickBy,
+	replace,
 	set,
 	some,
 	trim,
-	forEach,
 } from 'lodash-es';
 
 export default {
@@ -27,6 +29,8 @@ export default {
 	every,
 	filter,
 	find,
+	findIndex,
+	forEach,
 	get,
 	includes,
 	indexOf,
@@ -36,8 +40,8 @@ export default {
 	map,
 	pick,
 	pickBy,
+	replace,
 	set,
 	some,
 	trim,
-	forEach,
 };
