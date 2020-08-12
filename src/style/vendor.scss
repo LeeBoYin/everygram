@@ -14,8 +14,8 @@ $theme-colors: (
 
 $grid-gutter-width: $padding-container * 2;
 
-@import "bootstrap/scss/functions";
-@import "bootstrap/scss/variables";
-@import "bootstrap/scss/mixins";
-@import "bootstrap/scss/utilities";
-@import "bootstrap/scss/bootstrap-grid";
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+@import "node_modules/bootstrap/scss/mixins";
+@import "node_modules/bootstrap/scss/utilities";
+@import "node_modules/bootstrap/scss/bootstrap-grid";

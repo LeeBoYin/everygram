@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const { merge } = require('webpack-merge');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = function(env) {
 	console.log('run development webpack config');
 	const baseConfig = require('./webpack.config.base')(env);
@@ -9,7 +10,8 @@ module.exports = function(env) {
 			filename: '[name].bundle.js',
 		},
 		plugins: [
-			new webpack.HotModuleReplacementPlugin()
+			new webpack.HotModuleReplacementPlugin(),
+			new MiniCssExtractPlugin(),
 		],
 		devServer: {
 			open: false,

@@ -2,6 +2,7 @@ import { precacheAndRoute, createHandlerBoundToURL } from 'workbox-precaching';
 import { NavigationRoute, registerRoute } from 'workbox-routing';
 import { StaleWhileRevalidate } from 'workbox-strategies';
 // import { CacheFirst } from 'workbox-strategies'; // seems has some problem
+// import { ExpirationPlugin } from 'workbox-expiration';
 
 // precache webpack output dist files
 const wbManifest = self.__WB_MANIFEST;
@@ -33,6 +34,17 @@ registerRoute(
 	new StaleWhileRevalidate({
 		cacheName: 'static-resources',
 	})
+	// new CacheFirst({
+	// 	cacheName: 'static-resources',
+	// 	plugins: [
+	// 		new ExpirationPlugin({
+	// 			// Only cache requests for a week
+	// 			maxAgeSeconds: 7 * 24 * 60 * 60,
+	// 			// Only cache 10 requests.
+	// 			// maxEntries: 10,
+	// 		}),
+	// 	]
+	// })
 );
 
 // image cache
