@@ -115,6 +115,7 @@
 </template>
 
 <script>
+import { uploadFile } from '@libs/storage';
 import settingsConfig from '@/settingsConfig.json';
 import Compressor from 'compressorjs';
 import Board from '@components/Board';
@@ -267,7 +268,7 @@ export default {
 				// clear input
 				e.target.value = '';
 				// upload
-				const photoURL = await this.uploadFile({
+				const photoURL = await uploadFile({
 					path: `member/${ this.user.uid }`,
 					file: compressedFile,
 					fileName: 'profile_picture',
@@ -284,9 +285,6 @@ export default {
 		},
 		...mapActions('member', [
 			'updateMember',
-		]),
-		...mapActions('storage', [
-			'uploadFile',
 		]),
 		...mapActions('user', [
 			'signOut',

@@ -12,6 +12,7 @@ import {
 	indexOf,
 	isFunction,
 	isNil,
+	join,
 	keys,
 	map,
 	pick,
@@ -19,6 +20,7 @@ import {
 	replace,
 	set,
 	some,
+	split,
 	trim,
 } from 'lodash-es';
 
@@ -36,6 +38,7 @@ export default {
 	indexOf,
 	isFunction,
 	isNil,
+	join,
 	keys,
 	map,
 	pick,
@@ -43,5 +46,6 @@ export default {
 	replace,
 	set,
 	some,
+	split,
 	trim,
 };
