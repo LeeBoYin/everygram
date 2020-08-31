@@ -1,0 +1,11 @@
+@use "node_modules/@material/select";
+@use "node_modules/@material/select/mdc-select";
+
+.mdc-select {
+	@include select.bottom-line-color($c-gray-200);
+	@include select.hover-bottom-line-color($c-primary);
+}
+
+.mdc-select-width {
+	width: 100%;
+}

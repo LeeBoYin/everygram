@@ -46,7 +46,7 @@
 						<MdcList>
 							<MdcListItem>
 								<template #text>裝備類別設定</template>
-								<template #icon>arrow_right</template>
+								<template #icon>keyboard_arrow_right</template>
 								<RouterLink :to="{ name: 'DemoSettingsCategories' }" />
 							</MdcListItem>
 						</MdcList>

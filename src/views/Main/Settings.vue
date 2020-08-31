@@ -54,7 +54,7 @@
 						<MdcList>
 							<MdcListItem>
 								<template #text>{{ lang('title_settings_categories') }}</template>
-								<template #icon>arrow_right</template>
+								<template #icon>keyboard_arrow_right</template>
 								<RouterLink :to="{ name: 'SettingsCategories' }" />
 							</MdcListItem>
 						</MdcList>

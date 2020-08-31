@@ -65,7 +65,7 @@
 		</ValidationObserver>
 		<div>
 			<MdcButton el="router-link" :to="{ name: 'SignIn' }">
-				<i slot="icon" class="material-icons material-icons-outlined mdc-button__icon">keyboard_arrow_left</i>
+				<i slot="leading-icon" class="material-icons material-icons-outlined mdc-button__icon">keyboard_arrow_left</i>
 				{{ lang('action_back_to_sign_in') }}
 			</MdcButton>
 		</div>

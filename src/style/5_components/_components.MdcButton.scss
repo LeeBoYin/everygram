@@ -7,7 +7,12 @@
 	font-size: $font-size-base;
 }
 
+.mdc-button--text,
+.mdc-button--outlined {
+	@include button.ink-color($c-primary-dark);
+}
+
 .button--white {
 	@include button.filled-accessible(white);
-	@include button.ink-color($c-gray-700);
+	@include button.ink-color($c-gray-600);
 }

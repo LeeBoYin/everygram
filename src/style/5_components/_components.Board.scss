@@ -2,6 +2,7 @@
 	$root: &;
 	border-radius: $border-radius-lg;
 	background-color: $c-bright;
+	// box-shadow: $box-shadow-sm;
 
 	&__body {
 		padding: 24px;
@@ -20,8 +21,7 @@
 	}
 	.mdc-list-item {
 		height: auto;
-		padding: 20px;
-		border-bottom: 1px solid $c-gray-200;
+		border-bottom: 1px solid $c-gray-50;
 
 		&:first-child {
 			border-top-left-radius: $border-radius-lg;

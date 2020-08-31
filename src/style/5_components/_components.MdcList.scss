@@ -2,7 +2,7 @@
 @use "node_modules/@material/list";
 
 @include list.core-styles;
-@include list.group-subheader-ink-color($c-gray-700);
+@include list.group-subheader-ink-color($c-gray-600);
 
 .mdc-list {
 	&:not(.mdc-list--non-interactive) {
@@ -11,6 +11,7 @@
 		}
 	}
 	.mdc-list-item {
+		padding: $padding-list-item;
 
 		> select, a {
 			position: absolute;

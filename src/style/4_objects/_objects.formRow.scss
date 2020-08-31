@@ -1,0 +1,7 @@
+.form-row {
+	margin: 0 -#{$form-grid-gutter-width / 2};
+
+	[class*=col] {
+		padding: 0 $form-grid-gutter-width / 2;
+	}
+}

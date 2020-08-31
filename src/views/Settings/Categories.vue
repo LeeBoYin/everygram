@@ -12,7 +12,7 @@
 				<div class="col-lg-6 mx-auto">
 					<div class="d-none d-lg-block">
 						<MdcButton el="router-link" class="mdc-button--text" :to="{ name: 'Settings' }">
-							<i slot="icon" class="material-icons material-icons-outlined mdc-button__icon">keyboard_arrow_left</i>
+							<i slot="leading-icon" class="material-icons material-icons-outlined mdc-button__icon">keyboard_arrow_left</i>
 							{{ lang('action_back') }}
 						</MdcButton>
 						<h2 class="mt-2 px-3">{{ lang('title_settings_categories') }}</h2>

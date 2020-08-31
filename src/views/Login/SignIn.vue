@@ -55,7 +55,7 @@
 				class="mdc-button--raised button--white w-100"
 				@click.native="onClickSignInWithGoogle"
 			>
-				<img slot="icon" src="/static/images/social-google.svg" alt="Google" class="mdc-button__icon">
+				<img slot="leading-icon" src="/static/images/social-google.svg" alt="Google" class="mdc-button__icon">
 				{{ lang('action_sign_in_with_google') }}
 			</MdcButton>
 		</div>

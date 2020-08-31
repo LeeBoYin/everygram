@@ -1,0 +1,24 @@
+.fake {
+	position: relative;
+}
+
+.shimmer {
+    animation-duration: 0.8s;
+    animation-fill-mode: forwards;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+    animation-name: shimmer;
+    animation-timing-function: linear;
+	background: $c-gray-100;
+	border-radius: $border-radius-sm;
+}
+
+@keyframes shimmer {
+	from {
+		opacity: 0.4;
+	}
+
+	to {
+		opacity: 1;
+	}
+}

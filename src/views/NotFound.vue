@@ -11,7 +11,7 @@
 			href="https://github.com/LeeBoYin/everygram"
 			target="_blank"
 		>
-			<i class="material-icons-outlined mdc-button__icon" slot="icon">whatshot</i>
+			<i class="material-icons-outlined mdc-button__icon" slot="leading-icon">whatshot</i>
 			View on GitHub
 		</MdcButton>
 	</div>
