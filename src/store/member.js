@@ -58,7 +58,9 @@ const actions = {
 	},
 	async updateMember(context, updateObj) {
 		try {
-			await context.state.memberRef.update(updateObj);
+			context.state.memberRef.update(updateObj).then(() => {
+				// update successfully written to the backend
+			});
 			// get member and update state.member
 			await context.dispatch('getMember');
 		} catch (e) {

@@ -1,5 +1,4 @@
 import memberStore from '@store/member';
-import storageStore from '@store/storage';
 import userStore from '@store/user';
 
 const state = {
@@ -59,7 +58,6 @@ export default {
 	actions,
 	modules: {
 		member: memberStore,
-		storage: storageStore,
 		user: userStore,
 	},
 };

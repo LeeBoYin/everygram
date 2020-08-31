@@ -10,12 +10,9 @@
 		// Disable callouts
 		-webkit-touch-callout: none;
 	}
-}
-@media (max-width: 576px) and (display-mode: standalone) {
-	/* Installed PWAs on mobile devices */
 
-	@supports (-webkit-overflow-scrolling: touch) {
-		/* Installed PWAs on mobile Apple devices */
+	@supports (-webkit-touch-callout: none) {
+		/* Installed PWAs on Apple devices */
 
 		body {
 			// #hack status bar background color
@@ -47,7 +44,7 @@
 		}
 	}
 
-	@supports not (-webkit-overflow-scrolling: touch) {
-		/* Installed PWAs on mobile non-Apple devices */
+	@supports not (-webkit-touch-callout: none) {
+		/* Installed PWAs on non-Apple devices */
 	}
 }

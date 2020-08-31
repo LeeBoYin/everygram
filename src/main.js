@@ -9,6 +9,20 @@ import 'firebase/storage';
 import firebaseConfig from '../firebase.config';
 export const project = firebase.initializeApp(firebaseConfig);
 
+// enable firestore offline persistence
+firebase.firestore().enablePersistence()
+.then(() => {
+	// enablePersistence success
+})
+.catch((err) => {
+	console.log('EnablePersistence fail', err);
+	if (err.code == 'failed-precondition') {
+		console.log('multiple tabs open');
+	} else if (err.code == 'unimplemented') {
+		console.log('current browser does not support');
+	}
+});
+
 // vue
 import Vue from 'vue';
 import router from '@/router';
