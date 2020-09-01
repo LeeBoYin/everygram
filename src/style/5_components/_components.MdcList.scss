@@ -38,3 +38,10 @@
 .mdc-list-item__meta {
 	margin-left: 32px;
 }
+
+.mdc-list-group__subheader {
+	@include media-breakpoint-down(md) {
+		margin-left: 0;
+		margin-right: 0;
+	}
+}

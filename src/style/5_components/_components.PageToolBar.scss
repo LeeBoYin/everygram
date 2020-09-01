@@ -8,4 +8,8 @@
 	padding: 4px 0;
 	background-color: $c-background;
 	z-index: 4;
+
+	@include media-breakpoint-down(md) {
+		display: none;
+	}
 }

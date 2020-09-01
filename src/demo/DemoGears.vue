@@ -24,11 +24,7 @@
 				<div class="font-weight-bolder text-gray-700">已選取 5 個裝備</div>
 				<MdcButton class="mdc-button--text ml-2">
 					<i slot="leading-icon" class="material-icons-outlined mdc-button__icon" aria-hidden="true">add</i>
-					新增到行程
-				</MdcButton>
-				<MdcButton class="mdc-button--text ml-2">
-					<i slot="leading-icon" class="material-icons-outlined mdc-button__icon" aria-hidden="true">add</i>
-					新增到裝備組合
+					新增到
 				</MdcButton>
 				<MdcButton class="mdc-button--text ml-2">
 					<i slot="leading-icon" class="material-icons-outlined mdc-button__icon" aria-hidden="true">archive</i>
@@ -52,7 +48,7 @@
 			</div>
 
 			<template v-for="(gearList, categoryLabel) in gearLists">
-				<h3 :key="'categoryLabel' + categoryLabel" class="mdc-list-group__subheader d-flex align-items-center mb-3 mx-1">
+				<h3 :key="'categoryLabel' + categoryLabel" class="mdc-list-group__subheader d-flex align-items-center mb-3">
 					<div class="category-avatar mr-2" :style="{ 'background-color': gearList.color }">
 						<i class="category-avatar__icon material-icons-outlined">{{ gearList.categoryIconName }}</i>
 					</div>
@@ -93,7 +89,7 @@
 				</Board>
 			</template>
 
-			<h3 class="mdc-list-group__subheader d-flex align-items-center mb-3 mx-1">
+			<h3 class="mdc-list-group__subheader d-flex align-items-center mb-3">
 				<div class="category-avatar mr-2">
 					<i class="category-avatar__icon material-icons-outlined">backpack</i>
 				</div>
