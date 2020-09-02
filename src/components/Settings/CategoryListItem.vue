@@ -1,5 +1,5 @@
 <template>
-	<li class="category-list-item mdc-list-item py-2">
+	<li class="category-list-item mdc-list-item">
 		<span class="category-list-item__handle mdc-list-item__graphic material-icons-outlined" aria-hidden="true">drag_handle</span>
 		<span class="mdc-list-item__text d-flex align-items-center">
 			<CategoryIcon :icon-type="category.iconType" :icon-name="category.iconName" />

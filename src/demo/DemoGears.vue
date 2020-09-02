@@ -64,7 +64,7 @@
 									<div class="row align-items-center">
 										<div class="col-lg-9">
 											<div class="d-flex align-items-start">
-												<div class="img-thumbnail flex-shrink-0">
+												<div class="img-thumbnail gear-list-item__img-thumbnail flex-shrink-0">
 													<img v-if="gear.imgUrl" :src="gear.imgUrl" alt="...">
 													<i v-else class="material-icons-outlined">{{ gearList.categoryIconName }}</i>
 												</div>
@@ -103,7 +103,7 @@
 								<div class="row align-items-center">
 									<div class="col-lg-9">
 										<div class="d-flex align-items-start">
-											<div class="img-thumbnail flex-shrink-0 shimmer shimmer-1"></div>
+											<div class="img-thumbnail gear-list-item__img-thumbnail flex-shrink-0 shimmer shimmer-1"></div>
 											<div class="flex-grow-1">
 												<h5 class="mt-0 mb-1 shimmer shimmer-2"></h5>
 												<div class="text-gray-600 shimmer shimmer-3"></div>
@@ -119,7 +119,7 @@
 								<div class="row align-items-center">
 									<div class="col-lg-9">
 										<div class="d-flex align-items-start">
-											<div class="img-thumbnail flex-shrink-0">
+											<div class="img-thumbnail gear-list-item__img-thumbnail flex-shrink-0">
 												<i class="material-icons-outlined">backpack</i>
 											</div>
 											<div class="flex-grow-1">
@@ -144,7 +144,7 @@
 								<div class="row align-items-center">
 									<div class="col-lg-9">
 										<div class="d-flex align-items-start">
-											<div class="img-thumbnail flex-shrink-0">
+											<div class="img-thumbnail gear-list-item__img-thumbnail flex-shrink-0">
 												<i class="material-icons-outlined">backpack</i>
 											</div>
 											<div class="flex-grow-1">
