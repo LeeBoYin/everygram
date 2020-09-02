@@ -1,0 +1,41 @@
+$theme-colors: (
+	"primary":    $c-primary,
+	"secondary":  $c-secondary,
+	"success":    $c-success,
+	"warning":    $c-warning,
+	"danger":     $c-danger,
+	"light":      $c-bright,
+	"dark":       $c-gray-800
+);
+
+$grays:(
+  "50":  $c-gray-50,
+  "100": $c-gray-100,
+  "200": $c-gray-200,
+  "300": $c-gray-300,
+  "400": $c-gray-400,
+  "500": $c-gray-500,
+  "600": $c-gray-600,
+  "700": $c-gray-700,
+  "800": $c-gray-800,
+  "900": $c-gray-900
+);
+
+$spacer: 1rem;
+$spacers:(
+	0: 0,
+	1: ($spacer * .25),
+	2: ($spacer * .5),
+	3: $spacer,
+	4: ($spacer * 1.5),
+	5: ($spacer * 2),
+	6: ($spacer * 2.5),
+	7: ($spacer * 3),
+);
+
+$grid-gutter-width: $padding-container * 2;
+$form-grid-gutter-width: $padding-container;
+
+$thumbnail-padding:                 0;
+$thumbnail-bg:                      $c-gray-50;
+$thumbnail-border-width:            0;

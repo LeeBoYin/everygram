@@ -9,14 +9,14 @@
 	&:focus,
 	&:focus-within {
 		.icon-radio__icon {
-			background-color: $c-gray-200;
+			background-color: $c-gray-50;
 		}
 	}
 
 	&__icon {
 		padding: 12px;
 		border-radius: $border-radius-md;
-		color: $c-gray-700;
+		color: $c-gray-600;
 	}
 
 	[type=radio] {

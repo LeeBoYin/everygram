@@ -12,7 +12,7 @@
 				<div class="col-lg-6 mx-auto">
 					<div class="d-none d-lg-block">
 						<MdcButton el="router-link" class="mdc-button--text" :to="{ name: 'DemoSettings' }">
-							<i slot="icon" class="material-icons material-icons-outlined mdc-button__icon">keyboard_arrow_left</i>
+							<i slot="leading-icon" class="material-icons material-icons-outlined mdc-button__icon">keyboard_arrow_left</i>
 							返回
 						</MdcButton>
 						<h2 class="mt-2 px-3">裝備類別設定</h2>

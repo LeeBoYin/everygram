@@ -6,11 +6,12 @@
 		class="mdc-button"
 	>
 		<div class="mdc-button__ripple"></div>
-		<slot name="icon"></slot>
+		<slot name="leading-icon"></slot>
 		<span class="mdc-button__label">
 			<MdcCircularProgress v-if="isLoading" class="mdc-circular-progress--small" />
 			<slot v-else></slot>
 		</span>
+		<slot name="trailing-icon"></slot>
 		<div class="mdc-button__touch"></div>
 	</component>
 </template>

@@ -2,6 +2,7 @@
 @use "node_modules/@material/list";
 
 @include list.core-styles;
+@include list.group-subheader-ink-color($c-gray-600);
 
 .mdc-list {
 	&:not(.mdc-list--non-interactive) {
@@ -10,7 +11,7 @@
 		}
 	}
 	.mdc-list-item {
-		position: relative;
+		padding: $padding-list-item;
 
 		> select, a {
 			position: absolute;
@@ -27,5 +28,20 @@
 			white-space: normal;
 			word-break: break-word;
 		}
+	}
+}
+
+.mdc-list-item__text {
+	margin-right: auto;
+}
+
+.mdc-list-item__meta {
+	margin-left: 32px;
+}
+
+.mdc-list-group__subheader {
+	@include media-breakpoint-down(md) {
+		margin-left: 0;
+		margin-right: 0;
 	}
 }

@@ -1,14 +1,14 @@
 $c-bright: #FFFFFF;
 
 $c-primary: #9D8B73;
-$c-primary-dark: #6e5e47;
-$c-primary-light: #cebba2;
-$c-primary-ligther: #ECEAE8;
+$c-primary-dark: #6C5647;
+$c-primary-light: #C1B5A4;
+$c-primary-ligther: #EBE7E0;
 $c-on-primary: $c-bright;
 
 $c-secondary: #7B909C;
-$c-secondary-dark: #4e636e;
-$c-secondary-light: #aac0cd;
+$c-secondary-dark: #4D5D66;
+$c-secondary-light: #B3C3CC;
 $c-on-secondary: $c-bright;
 
 $c-success: #48A735;
@@ -17,13 +17,15 @@ $c-warning: #ffa100;
 
 $c-gray-900: black;
 $c-gray-800: rgba(0, 0, 0, .8);
-$c-gray-700: rgba(0, 0, 0, .6);
-$c-gray-600: rgba(0, 0, 0, .4);
-$c-gray-500: rgba(0, 0, 0, .2);
-$c-gray-400: rgba(0, 0, 0, .16);
-$c-gray-300: rgba(0, 0, 0, .12);
-$c-gray-200: rgba(0, 0, 0, .06);
-$c-gray-100: rgba(0, 0, 0, .02);
+$c-gray-700: rgba(0, 0, 0, .7);
+$c-gray-600: rgba(0, 0, 0, .6);
+$c-gray-500: rgba(0, 0, 0, .5);
+$c-gray-400: rgba(0, 0, 0, .4);
+$c-gray-300: rgba(0, 0, 0, .3);
+$c-gray-200: rgba(0, 0, 0, .2);
+$c-gray-100: rgba(0, 0, 0, .1);
+$c-gray-50:  rgba(0, 0, 0, .05);
+$c-gray-40:  rgba(0, 0, 0, .04);
 
 $c-background: #f2f3f2;
 
@@ -41,10 +43,10 @@ $c-overlay: rgba(0,0,0,0.3);
   $text-colors: (
     dark: (
       primary: $c-gray-800,
-      secondary: $c-gray-700,
-      hint: $c-gray-600,
-      disabled: $c-gray-500,
-      icon: $c-gray-600
+      secondary: $c-gray-600,
+      hint: $c-gray-400,
+      disabled: $c-gray-200,
+      icon: $c-gray-400
     ),
     light: (
       primary: white,

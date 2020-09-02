@@ -39,7 +39,7 @@
 						<div class="mb-3 text-center text-muted">或</div>
 						<div>
 							<MdcButton class="mdc-button--raised button--white w-100">
-								<img slot="icon"  src="/static/images/social-google.svg" alt="" class="mdc-button__icon">
+								<img slot="leading-icon"  src="/static/images/social-google.svg" alt="" class="mdc-button__icon">
 								使用 Google 登入
 							</MdcButton>
 						</div>
@@ -71,7 +71,7 @@
 						</div>
 						<div>
 							<MdcButton @click.native="mode = 'signIn'">
-								<i slot="icon" class="material-icons material-icons-outlined mdc-button__icon">keyboard_arrow_left</i>
+								<i slot="leading-icon" class="material-icons material-icons-outlined mdc-button__icon">keyboard_arrow_left</i>
 								返回登入
 							</MdcButton>
 						</div>
@@ -91,7 +91,7 @@
 						</div>
 						<div>
 							<MdcButton @click.native="mode = 'signIn'">
-								<i slot="icon" class="material-icons material-icons-outlined mdc-button__icon">keyboard_arrow_left</i>
+								<i slot="leading-icon" class="material-icons material-icons-outlined mdc-button__icon">keyboard_arrow_left</i>
 								返回登入
 							</MdcButton>
 						</div>
@@ -107,7 +107,7 @@
 						</div>
 						<div>
 							<MdcButton @click.native="mode = 'signIn'">
-								<i slot="icon" class="material-icons material-icons-outlined mdc-button__icon">keyboard_arrow_left</i>
+								<i slot="leading-icon" class="material-icons material-icons-outlined mdc-button__icon">keyboard_arrow_left</i>
 								返回登入
 							</MdcButton>
 						</div>

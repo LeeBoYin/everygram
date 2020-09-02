@@ -1,5 +1,7 @@
 @use "node_modules/@material/floating-label/mdc-floating-label";
 @use "node_modules/@material/line-ripple/mdc-line-ripple";
+@use "node_modules/@material/ripple/mixins" as ripple-mixins;
+@use "node_modules/@material/ripple/functions" as ripple-functions;
 @use "node_modules/@material/textfield";
 @use "node_modules/@material/textfield/icon";
 
@@ -8,12 +10,14 @@
 
 .mdc-text-field {
 	width: 100%;
-	@include textfield.fill-color(transparent);
-	@include textfield.placeholder-color($c-gray-600);
+	@include textfield.fill-color($c-gray-40);
+	@include textfield.bottom-line-color($c-gray-200);
+	@include textfield.placeholder-color($c-gray-400);
 	@include textfield.disabled-fill-color(transparent);
-	@include textfield.disabled-placeholder-color($c-gray-400);
-	@include textfield.disabled-label-color($c-gray-600);
+	@include textfield.disabled-placeholder-color($c-gray-200);
+	@include textfield.disabled-label-color($c-gray-400);
 	@include textfield.disabled-ink-color($c-gray-800);
+	@include textfield.disabled-bottom-line-color($c-gray-100);
 	@include textfield.hover-bottom-line-color($c-primary);
 
 	&--focused:not(.mdc-text-field--disabled) .mdc-floating-label {
@@ -36,4 +40,14 @@
 			transform: translateY(-106%) scale(.75);
 		}
 	}
+}
+
+
+// 修正 Ripple 顏色
+.mdc-text-field--filled:hover .mdc-text-field__ripple::before {
+	opacity: 0.04;
+}
+
+.mdc-text-field--filled.mdc-ripple-upgraded--background-focused .mdc-text-field__ripple::before, .mdc-text-field--filled:not(.mdc-ripple-upgraded):focus .mdc-text-field__ripple::before {
+	opacity: 0.06;
 }

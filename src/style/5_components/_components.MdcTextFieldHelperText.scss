@@ -2,7 +2,7 @@
 @include helper-text.helper-text-core-styles;
 
 .mdc-text-field {
-	@include helper-text.helper-text-color($c-gray-700);
-	@include helper-text.disabled-helper-text-color($c-gray-700);
+	@include helper-text.helper-text-color($c-gray-600);
+	@include helper-text.disabled-helper-text-color($c-gray-600);
 	@include helper-text.helper-text-validation-color($c-danger);
 }

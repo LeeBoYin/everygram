@@ -1,0 +1,28 @@
+.gear-list-item {
+	font-size: $font-size-sm;
+	line-height: 1.4;
+
+	&__img-thumbnail {
+		width: 64px;
+		height: 64px;
+		margin-right: 20px;
+	}
+
+	&--expand {
+		border-radius: $border-radius;
+		box-shadow: $box-shadow-lg;
+	}
+
+	&.fake {
+		.shimmer-2 {
+			width: 50%;
+			height: 20px;
+		}
+
+		.shimmer-3 {
+			width: 30%;
+			height: 14px;
+			margin-top: 8px;
+		}
+	}
+}

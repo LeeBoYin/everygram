@@ -1,21 +1,11 @@
+// 0.1. setting bootstrap
 @import "0_settings/settings.colors";
 @import "0_settings/settings.padding";
+@import "0_settings/settings.bootstrap";
 
-// Bootstrap
-$theme-colors: (
-	"primary":    $c-primary,
-	"secondary":  $c-secondary,
-	"success":    $c-success,
-	"warning":    $c-warning,
-	"danger":     $c-danger,
-	"light":      $c-bright,
-	"dark":       $c-gray-800
-);
-
-$grid-gutter-width: $padding-container * 2;
-
-@import "node_modules/bootstrap/scss/functions";
-@import "node_modules/bootstrap/scss/variables";
-@import "node_modules/bootstrap/scss/mixins";
-@import "node_modules/bootstrap/scss/utilities";
-@import "node_modules/bootstrap/scss/bootstrap-grid";
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/utilities";
+@import "bootstrap/scss/bootstrap-grid";
+@import "bootstrap/scss/images";

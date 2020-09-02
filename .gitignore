@@ -65,6 +65,9 @@ node_modules/
 .env
 .idea/
 
-#dist
+# dist
 .dist/
 /dist/
+
+# vs code setting
+.vscode

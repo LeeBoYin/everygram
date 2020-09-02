@@ -17,14 +17,14 @@ export default {
 					text: lang('title_gears'),
 				},
 				{
-					name: 'Trips',
-					icon: 'landscape',
-					text: lang('title_trips'),
-				},
-				{
 					name: 'Collections',
 					icon: 'collections_bookmark',
 					text: lang('title_collections'),
+				},
+				{
+					name: 'Trips',
+					icon: 'landscape',
+					text: lang('title_trips'),
 				},
 				{
 					name: 'Wishes',

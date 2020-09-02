@@ -18,17 +18,17 @@ export default {
 				{
 					name: 'DemoGears',
 					icon: 'category',
-					text: '裝備清單',
+					text: '裝備庫',
+				},
+				{
+					name: 'DemoCollections',
+					icon: 'collections_bookmark',
+					text: '裝備組合',
 				},
 				{
 					name: 'DemoTrips',
 					icon: 'landscape',
 					text: '行程裝備',
-				},
-				{
-					name: 'DemoCollections',
-					icon: 'collections_bookmark',
-					text: '常用裝備組合',
 				},
 				{
 					name: 'DemoWishes',
