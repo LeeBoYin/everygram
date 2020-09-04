@@ -1,8 +1,17 @@
 rules_version = '2';
 service cloud.firestore {
+	function isAuthenticated() {
+    return request.auth != null;
+  }
   match /databases/{database}/documents {
   	match /member/{memberID} {
     	allow read, write: if memberID == request.auth.uid;
+      match /gearList/{gearListID} {
+      	allow read, write: if memberID == request.auth.uid;
+      }
+    }
+    match /gear/{gearID} {
+    	allow write: if isAuthenticated();
     }
   }
 }
