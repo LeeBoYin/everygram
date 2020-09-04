@@ -14,13 +14,13 @@ const getters = {
 
 const mutations = {
 	setDB(state, db) {
-		// if (location.hostname === "localhost") {
-		// 	console.log('db host = localhost:3670');
-		// 	db.settings({
-		// 		host: "localhost:3670",
-		// 		ssl: false
-		// 	});
-		// }
+		if (location.hostname === "localhost" && location.port === "3660") {
+			console.log('db host = localhost:3670');
+			db.settings({
+				host: "localhost:3670",
+				ssl: false
+			});
+		}
 		state.db = db;
 	},
 	setDisplayMode(state, displayMode) {

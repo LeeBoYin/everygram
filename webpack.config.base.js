@@ -49,6 +49,7 @@ module.exports = function () {
 				'vue$': 'vue/dist/vue.esm.js',
 				'@': path.resolve(__dirname, 'src'),
 				'@assets': path.resolve(__dirname, 'src/assets'),
+				'@class': path.resolve(__dirname, 'src/class'),
 				'@components': path.resolve(__dirname, 'src/components'),
 				'@demo': path.resolve(__dirname, 'src/demo'),
 				'@directives': path.resolve(__dirname, 'src/directives'),
@@ -121,6 +122,7 @@ module.exports = function () {
 				lang: ['@libs/lang', 'lang'],
 				getCategoryName: ['@libs/lang', 'getCategoryName'],
 				constant: ['@libs/constants', 'constant'],
+				uuid: ['uuid', 'v4'],
 			}),
 			new InjectManifest({
 				swSrc: '@/service-worker.js',

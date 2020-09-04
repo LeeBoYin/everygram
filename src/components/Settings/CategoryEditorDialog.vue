@@ -123,6 +123,7 @@ export default {
 				name: this.categoryName,
 				iconType: this.categoryIcons[this.iconIndex].type,
 				iconName: this.categoryIcons[this.iconIndex].name,
+				uuid: this.isEditing ? this.categories[this.categoryIndex].uuid : uuid(),
 			};
 		},
 	},

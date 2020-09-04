@@ -86,18 +86,26 @@ const actions = {
 		const userAgent = window.navigator.userAgent;
 		const displayMode = context.rootState.displayMode;
 		const updateData = {
-			userAgents: firebase.firestore.FieldValue.arrayUnion(userAgent),
 			displayModes: firebase.firestore.FieldValue.arrayUnion(displayMode),
-			lastUserAgent: userAgent,
 			lastDisplayMode: displayMode,
+			lastUserAgent: userAgent,
 			lastVisitTimestamp: firebase.firestore.FieldValue.serverTimestamp(),
 			loadCount: firebase.firestore.FieldValue.increment(1),
+			userAgents: firebase.firestore.FieldValue.arrayUnion(userAgent),
 		};
 
 		// set default settings
 		_.forEach(_.keys(settingsConfig.default), settingKey => {
 			if(!_.get(context.state.member, [settingKey])) {
 				updateData[settingKey] = _.get(context.getters.memberSettings, [settingKey]);
+				if(settingKey === 'categories') {
+					updateData[settingKey] = _.map(updateData[settingKey], category => {
+						return {
+							...category,
+							uuid: uuid(),
+						};
+					});
+				}
 			}
 		});
 
