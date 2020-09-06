@@ -4,6 +4,12 @@
 .mdc-select {
 	@include select.bottom-line-color($c-gray-200);
 	@include select.hover-bottom-line-color($c-primary);
+
+	&--fullwidth,
+	&--fullwidth &__anchor,
+	&--fullwidth &__menu {
+		width: 100%;
+	}
 }
 
 .mdc-select-width {
