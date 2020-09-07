@@ -5,7 +5,8 @@
 		"clean": "rimraf dist",
 		"analyze": "npm run clean && webpack --env.analyze --mode production",
 		"build": "npm run clean && webpack --env.production --mode production",
-		"serve": "webpack-dev-server --env.development --mode development"
+		"watch": "npm run clean && webpack --watch --env.development",
+		"serve": "npm run clean && webpack-dev-server --env.development --mode development"
 	},
 	"author": "leeboyin",
 	"license": "ISC",
@@ -48,7 +49,7 @@
 	"dependencies": {
 		"@material/button": "^6.0.0",
 		"@material/circular-progress": "^6.0.0",
-		"@material/dialog": "^6.0.0",
+		"@material/dialog": "^7.0.0",
 		"@material/drawer": "^6.0.0",
 		"@material/fab": "^6.0.0",
 		"@material/icon-button": "^6.0.0",

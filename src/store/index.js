@@ -1,3 +1,4 @@
+import gearStore from '@store/gear';
 import memberStore from '@store/member';
 import userStore from '@store/user';
 
@@ -42,6 +43,7 @@ const actions = {
 	async init(context) {
 		context.commit('setDB', firebase.firestore());
 		await context.dispatch('user/init');
+		await context.dispatch('gear/init');
 		context.commit('setIsInitialized');
 		console.log('store initialized');
 	},
@@ -57,6 +59,7 @@ export default {
 	mutations,
 	actions,
 	modules: {
+		gear: gearStore,
 		member: memberStore,
 		user: userStore,
 	},

@@ -1,5 +1,5 @@
 <template>
-	<div class="mdc-dialog">
+	<div class="mdc-dialog" :class="{ 'mdc-dialog--with-tab-bar': $slots['tab-bar'] }">
 		<div class="mdc-dialog__container">
 			<div
 				class="mdc-dialog__surface"
@@ -8,6 +8,9 @@
 			>
 				<!-- Title cannot contain leading whitespace due to mdc-typography-baseline-top() -->
 				<h2 v-if="title" class="mdc-dialog__title" id="my-dialog-title">{{ title }}</h2>
+				<div v-if="$slots['tab-bar']" class="mdc-dialog__tab-bar">
+					<slot name="tab-bar"></slot>
+				</div>
 				<div ref="content" class="mdc-dialog__content">
 					<slot></slot>
 				</div>

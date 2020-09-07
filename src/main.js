@@ -30,8 +30,6 @@ Object.defineProperty(Vue.prototype, 'constant', { value: constant });
 import snackbar from '@plugins/snackbar';
 Vue.use(snackbar);
 
-export const EventBus = new Vue();
-
 new Vue({
 	el: '#app',
 	store,
@@ -39,15 +37,17 @@ new Vue({
 	created() {
 		this.$store.dispatch('init');
 		// enable firestore offline persistence
-		firebase.firestore().enablePersistence()
+		firebase.firestore().enablePersistence({
+			synchronizeTabs: true,
+		})
 		.then(() => {
 			// enablePersistence success
 		})
 		.catch((err) => {
 			console.log('EnablePersistence fail', err);
-			if (err.code == 'failed-precondition') {
+			if (err.code === 'failed-precondition') {
 				console.log('multiple tabs open');
-			} else if (err.code == 'unimplemented') {
+			} else if (err.code === 'unimplemented') {
 				console.log('current browser does not support');
 			}
 		});

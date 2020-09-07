@@ -8,8 +8,25 @@
 	@include dialog.shape-radius(6px);
 	@include dialog.min-width(400px);
 	@include dialog.max-width(800px, 16px);
+	@include dialog.content-padding(
+		$padding-dialog-content-top,
+		$padding-dialog-content-right,
+		$padding-dialog-content-bottom,
+		$padding-dialog-content-left
+	);
 
 	@include media-breakpoint-down(sm) {
 		@include dialog.min-width(calc(100vw - 40px)); // 40px = 2 * 20px(兩側 margin)
+	}
+
+	&--with-tab-bar {
+		.mdc-dialog__title {
+			border-bottom: 0;
+		}
+	}
+	&__tab-bar {
+		// border color same as .mdc-dialog.mdc-dialog--scrollable .mdc-dialog__title
+		border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+		padding: 0 $padding-dialog-content-right 0 $padding-dialog-content-left;
 	}
 }

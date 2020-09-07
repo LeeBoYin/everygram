@@ -54,6 +54,7 @@ module.exports = function () {
 				'@demo': path.resolve(__dirname, 'src/demo'),
 				'@directives': path.resolve(__dirname, 'src/directives'),
 				'@libs': path.resolve(__dirname, 'src/libs'),
+				'@mixins': path.resolve(__dirname, 'src/mixins'),
 				'@plugins': path.resolve(__dirname, 'src/plugins'),
 				'@store': path.resolve(__dirname, 'src/store'),
 				'@style': path.resolve(__dirname, 'src/style'),

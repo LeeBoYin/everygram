@@ -2,9 +2,11 @@
 	<div>
 		<div class="container-xl">
 			<!-- 預設模式 -->
-			<div class="page-tool-bar">
-				<div class="text-gray-700">共有 54 個裝備</div>
-				<div class="ml-auto">
+			<PageToolBar>
+				<template #left>
+					<div class="text-gray-700">共有 54 個裝備</div>
+				</template>
+				<template #right>
 					<MdcButton class="mdc-button--text ml-2">選取</MdcButton>
 					<MdcButton class="mdc-button--text ml-2">編輯排序</MdcButton>
 					<MdcButton class="mdc-button--text ml-2">
@@ -16,38 +18,42 @@
 						view_module
 						view_list
 					</MdcIconButton> -->
-				</div>
-			</div>
+				</template>
+			</PageToolBar>
 
 			<!-- 選取模式 -->
-			<div class="page-tool-bar">
-				<div class="font-weight-bolder text-gray-700">已選取 5 個裝備</div>
-				<MdcButton class="mdc-button--text ml-2">
-					<i slot="leading-icon" class="material-icons-outlined mdc-button__icon" aria-hidden="true">add</i>
-					新增到
-				</MdcButton>
-				<MdcButton class="mdc-button--text ml-2">
-					<i slot="leading-icon" class="material-icons-outlined mdc-button__icon" aria-hidden="true">archive</i>
-					封存
-				</MdcButton>
-				<MdcButton class="mdc-button--text ml-2">
-					<i slot="leading-icon" class="material-icons-outlined mdc-button__icon" aria-hidden="true">delete</i>
-					刪除
-				</MdcButton>
-				<div class="ml-auto">
+			<PageToolBar>
+				<template #left>
+					<div class="font-weight-bolder text-gray-700">已選取 5 個裝備</div>
+					<MdcButton class="mdc-button--text ml-2">
+						<i slot="leading-icon" class="material-icons-outlined mdc-button__icon" aria-hidden="true">add</i>
+						新增到
+					</MdcButton>
+					<MdcButton class="mdc-button--text ml-2">
+						<i slot="leading-icon" class="material-icons-outlined mdc-button__icon" aria-hidden="true">archive</i>
+						封存
+					</MdcButton>
+					<MdcButton class="mdc-button--text ml-2">
+						<i slot="leading-icon" class="material-icons-outlined mdc-button__icon" aria-hidden="true">delete</i>
+						刪除
+					</MdcButton>
+				</template>
+				<template #right>
 					<MdcButton class="mdc-button--text ml-2">取消選取</MdcButton>
-				</div>
-			</div>
+				</template>
+			</PageToolBar>
 
 			<!-- 編輯排序模式 -->
-			<div class="page-tool-bar">
-				<div class="font-weight-bolder text-gray-700">拖動裝備進行排序</div>
-				<div class="ml-auto">
+			<PageToolBar>
+				<template #left>
+					<div class="font-weight-bolder text-gray-700">拖動裝備進行排序</div>
+				</template>
+				<template #right>
 					<MdcButton class="mdc-button--text ml-2">完成</MdcButton>
-				</div>
-			</div>
-
-			<template v-for="(gearList, categoryLabel) in gearLists">
+				</template>
+			</PageToolBar>
+<div class="category-list">
+			<div v-for="(gearList, categoryLabel) in gearLists" :key="categoryLabel">
 				<h3 :key="'categoryLabel' + categoryLabel" class="mdc-list-group__subheader d-flex align-items-center mb-3">
 					<div class="category-avatar mr-2" :style="{ 'background-color': gearList.color }">
 						<i class="category-avatar__icon material-icons-outlined">{{ gearList.categoryIconName }}</i>
@@ -87,7 +93,7 @@
 						</MdcList>
 					</div>
 				</Board>
-			</template>
+			</div>
 
 			<h3 class="mdc-list-group__subheader d-flex align-items-center mb-3">
 				<div class="category-avatar mr-2">
@@ -171,6 +177,7 @@
 				<img src="/static/images/logo-icon-gray.svg" alt="" width="40">
 				<div class="mt-1 text-gray-400 text-sm">沒有更多裝備了</div>
 			</div>
+</div>
 		</div>
 		<div class="fab--sticky">
 			<MdcFab
@@ -185,42 +192,27 @@
 			ref="gearEditorDialog"
 			title="新增裝備"
 		>
+			<template #tab-bar>
+				<MdcTabBar
+					v-model="activeTab"
+					:dense="true"
+					:tabs="[
+						{
+							value: 'basic',
+							text: '基本資訊',
+						},
+						{
+							value: 'purchase',
+							text: '購買資訊',
+						},
+						{
+							value: 'note',
+							text: '備註',
+						},
+					]"
+				/>
+			</template>
 			<template #default>
-				<div class="mdc-tab-bar" role="tablist">
-					<div class="mdc-tab-scroller">
-						<div class="mdc-tab-scroller__scroll-area">
-							<div class="mdc-tab-scroller__scroll-content">
-								<button class="mdc-tab mdc-tab--min-width mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
-									<span class="mdc-tab__content">
-										<span class="mdc-tab__text-label">基本資訊</span>
-									</span>
-									<span class="mdc-tab-indicator mdc-tab-indicator--active">
-										<span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
-									</span>
-									<span class="mdc-tab__ripple"></span>
-								</button>
-								<button class="mdc-tab mdc-tab--min-width" role="tab" tabindex="0">
-									<span class="mdc-tab__content">
-										<span class="mdc-tab__text-label">購買資訊</span>
-									</span>
-									<span class="mdc-tab-indicator">
-										<span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
-									</span>
-									<span class="mdc-tab__ripple"></span>
-								</button>
-								<button class="mdc-tab mdc-tab--min-width" role="tab" tabindex="0">
-									<span class="mdc-tab__content">
-										<span class="mdc-tab__text-label">備註</span>
-									</span>
-									<span class="mdc-tab-indicator">
-										<span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
-									</span>
-									<span class="mdc-tab__ripple"></span>
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
 				<div class="row mt-4">
 					<div class="col-6 col-sm-3 mx-auto">
 						<div class="mb-3">
@@ -239,34 +231,12 @@
 							/>
 						</div>
 						<div class="mb-3">
-							<div class="mdc-select mdc-select--filled mdc-select-width">
-								<div class="mdc-select__anchor mdc-select-width">
-									<span class="mdc-select__ripple"></span>
-									<span class="mdc-select__selected-text"></span>
-									<span class="mdc-select__dropdown-icon">
-									<i class="material-icons-outlined text-gray-600">arrow_drop_down</i>
-									</span>
-									<span class="mdc-floating-label">類別</span>
-									<span class="mdc-line-ripple"></span>
-								</div>
-
-								<div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
-									<ul class="mdc-list">
-										<li class="mdc-list-item" data-value="grains">
-											<span class="mdc-list-item__ripple"></span>
-											<span class="mdc-list-item__text">Bread, Cereal, Rice, and Pasta</span>
-										</li>
-										<li class="mdc-list-item" data-value="vegetables">
-											<span class="mdc-list-item__ripple"></span>
-											<span class="mdc-list-item__text">Vegetables</span>
-										</li>
-										<li class="mdc-list-item" data-value="fruit">
-											<span class="mdc-list-item__ripple"></span>
-											<span class="mdc-list-item__text">Fruit</span>
-										</li>
-									</ul>
-								</div>
-								</div>
+							<MdcSelect
+								v-model="selectedCategory"
+								label="類別"
+								:options="categoryOptions"
+								class="mdc-select--fullwidth"
+							/>
 						</div>
 						<div class="mb-3">
 							<MdcTextField
@@ -350,10 +320,12 @@ import MdcDialogActionButton from '@components/MdcDialogActionButton';
 import MdcFab from '@components/MdcFab';
 import MdcIconButton from '@components/MdcIconButton';
 import MdcList from '@components/MdcList';
-import MdcListItem from '@components/MdcListItem';
+import MdcSelect from '@components/MdcSelect';
+import MdcTabBar from '@components/MdcTabBar';
 import MdcTextField from '@components/MdcTextField';
-import {MDCTabBar} from '@material/tab-bar';
-import {MDCSelect} from '@material/select';
+import PageToolBar from '@components/PageToolBar';
+import settingsConfig from '@/settingsConfig';
+import { getCategoryName } from '@libs/lang';
 
 export default {
 	components: {
@@ -364,10 +336,10 @@ export default {
 		MdcFab,
 		MdcIconButton,
 		MdcList,
-		MdcListItem,
-		MDCSelect,
+		MdcSelect,
+		MdcTabBar,
 		MdcTextField,
-		MDCTabBar,
+		PageToolBar,
 	},
 	data() {
 		return {
@@ -479,17 +451,22 @@ export default {
 						},
 					]
 				}
-			]
+			],
+			activeTab: 'basic',
+			selectedCategory: null,
 		};
 	},
-	mounted() {
-		const tabBar = new MDCTabBar(document.querySelector('.mdc-tab-bar'));
-
-		const select = new MDCSelect(document.querySelector('.mdc-select'));
-
-		select.listen('MDCSelect:change', () => {
-		// alert(`Selected option at index ${select.selectedIndex} with value "${select.value}"`);
-		});
+	computed: {
+		categoryOptions() {
+			return _.map(settingsConfig.default.categories, category => {
+				return {
+					value: category.langKey,
+					text: getCategoryName(category),
+					iconType: category.iconType,
+					iconName: category.iconName,
+				};
+			});
+		},
 	},
 	methods: {
 		onClickCreateGear() {

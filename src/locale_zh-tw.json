@@ -92,5 +92,13 @@
 	"title_wishes": "願望清單",
 	"unit_system_imperial": "英制",
 	"unit_system_metric": "公制",
+	"action_create_gear": "新增裝備",
+	"title_edit_gear": "編輯裝備",
+	"title_create_gear": "新增裝備",
+	"msg_gear_created": "裝備已新增",
+	"label_gear_name": "名稱",
+	"info_gear_total_num": "共有 %s 個裝備",
+	"action_select": "選取",
+	"action_sort": "編輯排序",
 	"util_or": "或"
 }

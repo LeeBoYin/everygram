@@ -24,7 +24,9 @@
 <!--			>-->
 <!--				{{ selectedOption.iconName }}-->
 <!--			</i>-->
-			<span class="mdc-select__selected-text">{{ _.get(selectedOption, 'text', '') }}</span>
+			<span class="mdc-select__selected-text">
+				{{ _.get(selectedOption, 'text', '') }}
+			</span>
 			<span class="mdc-select__dropdown-icon">
 				<i class="material-icons-outlined text-gray-600">arrow_drop_down</i>
 			</span>

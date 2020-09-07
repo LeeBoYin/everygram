@@ -51,8 +51,7 @@
 </template>
 
 <script>
-import { ValidationObserver, ValidationProvider } from 'vee-validate';
-import AlertInline from '@components/AlertInline';
+import mixinForm from '@mixins/mixinForm';
 import settingsConfig from '@/settingsConfig';
 import CategoryIcon from '@components/CategoryIcon';
 import MdcDialog from '@components/MdcDialog';
@@ -60,15 +59,15 @@ import MdcDialogActionButton from '@components/MdcDialogActionButton';
 import MdcTextField from '@components/MdcTextField';
 import TextFieldErrorMessage from '@components/TextFieldErrorMessage';
 export default {
+	mixins: [
+		mixinForm,
+	],
 	components: {
-		AlertInline,
 		CategoryIcon,
 		MdcDialog,
 		MdcDialogActionButton,
 		MdcTextField,
 		TextFieldErrorMessage,
-		ValidationObserver,
-		ValidationProvider,
 	},
 	props: {
 		categories: {
@@ -88,7 +87,6 @@ export default {
 		return {
 			categoryIndex: null,
 			categoryName: '',
-			errorMessage: null,
 			iconIndex: null,
 			isEditing: false,
 			isSaving: false,
