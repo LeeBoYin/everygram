@@ -2,8 +2,10 @@
 	<li class="category-list-item mdc-list-item">
 		<span class="category-list-item__handle mdc-list-item__graphic material-icons-outlined" aria-hidden="true">drag_handle</span>
 		<span class="mdc-list-item__text d-flex align-items-center">
-			<CategoryIcon :icon-type="category.iconType" :icon-name="category.iconName" />
-			<span class="ml-4">
+			<div class="category-avatar mr-2" style="background-color: rgb(153, 153, 153);">
+				<CategoryIcon :icon-type="category.iconType" :icon-name="category.iconName" />
+			</div>
+			<span class="ml-2">
 				{{ getCategoryName(category) }}
 			</span>
 		</span>
