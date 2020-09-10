@@ -186,42 +186,7 @@
 			title="新增裝備"
 		>
 			<template #default>
-				<div class="mdc-tab-bar" role="tablist">
-					<div class="mdc-tab-scroller">
-						<div class="mdc-tab-scroller__scroll-area">
-							<div class="mdc-tab-scroller__scroll-content">
-								<button class="mdc-tab mdc-tab--min-width mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
-									<span class="mdc-tab__content">
-										<span class="mdc-tab__text-label">基本資訊</span>
-									</span>
-									<span class="mdc-tab-indicator mdc-tab-indicator--active">
-										<span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
-									</span>
-									<span class="mdc-tab__ripple"></span>
-								</button>
-								<button class="mdc-tab mdc-tab--min-width" role="tab" tabindex="0">
-									<span class="mdc-tab__content">
-										<span class="mdc-tab__text-label">購買資訊</span>
-									</span>
-									<span class="mdc-tab-indicator">
-										<span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
-									</span>
-									<span class="mdc-tab__ripple"></span>
-								</button>
-								<button class="mdc-tab mdc-tab--min-width" role="tab" tabindex="0">
-									<span class="mdc-tab__content">
-										<span class="mdc-tab__text-label">備註</span>
-									</span>
-									<span class="mdc-tab-indicator">
-										<span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
-									</span>
-									<span class="mdc-tab__ripple"></span>
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row mt-4">
+				<div class="row">
 					<div class="col-6 col-sm-3 mx-auto">
 						<div class="mb-3">
 							<div class="img-thumbnail w-100 embed-responsive embed-responsive-1by1">
@@ -317,12 +282,23 @@
 								</div>
 							</div>
 						</div>
-						<div class="mb-3">
-							<MdcTextField
-								type="text"
-								autocomplete="off"
-								label="製造日期"
-							/>
+						<div>
+							<MdcButton class="mdc-button--text">
+								<i slot="leading-icon" class="material-icons-outlined mdc-button__icon" aria-hidden="true">add</i>
+								製造日期
+							</MdcButton>
+						</div>
+						<div>
+							<MdcButton class="mdc-button--text">
+								<i slot="leading-icon" class="material-icons-outlined mdc-button__icon" aria-hidden="true">add</i>
+								購買資訊
+							</MdcButton>
+						</div>
+						<div>
+							<MdcButton class="mdc-button--text">
+								<i slot="leading-icon" class="material-icons-outlined mdc-button__icon" aria-hidden="true">add</i>
+								備註
+							</MdcButton>
 						</div>
 					</div>
 				</div>
