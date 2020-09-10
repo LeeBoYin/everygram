@@ -5,6 +5,7 @@
 			'mdc-text-field--no-label': !label,
 			'mdc-text-field--with-leading-icon': $slots.leadingIcon,
 			'mdc-text-field--with-trailing-icon': $slots.trailingIcon,
+			'mdc-text-field--text-right': type === 'number',
 		}"
 		class="mdc-text-field mdc-text-field--filled"
 	>
@@ -22,13 +23,16 @@
 			ref="input"
 			:value="value"
 			:type="type"
-			:class="{ 'mdc-text-field--label-floating': !!value.length }"
+			:inputmode="inputmode"
+			:class="{ 'mdc-text-field--label-floating': !isValueEmpty }"
 			class="mdc-text-field__input"
 			:placeholder="placeholder"
 			:disabled="disabled"
 			:required="required"
 			:name="name"
 			:autocomplete="autocomplete"
+			:max="max"
+			:min="min"
 			@input="$emit('input', $event.target.value)"
 			@change="$emit('change', $event.target.value)"
 			@keypress="$emit('keypress', $event)"
@@ -43,7 +47,7 @@
 		</span>
 		<!-- label -->
 		<span
-			:class="{ 'mdc-floating-label--float-above': !!value.length }"
+			:class="{ 'mdc-floating-label--float-above': !isValueEmpty }"
 			class="mdc-floating-label"
 		>
 			{{ label }}
@@ -60,7 +64,7 @@ export default {
 	props: {
 		autocomplete: {
 			type: String,
-			default: 'on',
+			default: 'off',
 		},
 		autofocus: {
 			type: Boolean,
@@ -70,12 +74,24 @@ export default {
 			type: Boolean,
 			default: false,
 		},
+		inputmode: {
+			type: String,
+			default: null,
+		},
 		invalid: {
 			type: Boolean,
 			default: false,
 		},
 		label: {
 			type: String,
+			default: null,
+		},
+		max: {
+			type: Number,
+			default: null,
+		},
+		min: {
+			type: Number,
 			default: null,
 		},
 		name: {
@@ -95,7 +111,7 @@ export default {
 			default: 'text',
 		},
 		value: {
-			type: String,
+			type: [String, Number],
 			default: '',
 		},
 	},
@@ -103,6 +119,11 @@ export default {
 		return {
 			mdcTextField: null,
 		};
+	},
+	computed: {
+		isValueEmpty() {
+			return _.isNil(this.value) || !this.value.toString().length;
+		},
 	},
 	watch: {
 		invalid() {

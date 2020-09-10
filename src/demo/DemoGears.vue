@@ -188,157 +188,31 @@
 			>
 			</MdcFab>
 		</div>
-		<MdcDialog
+		<GearEditorDialog
 			ref="gearEditorDialog"
-			title="新增裝備"
-		>
-			<template #tab-bar>
-				<MdcTabBar
-					v-model="activeTab"
-					:dense="true"
-					:tabs="[
-						{
-							value: 'basic',
-							text: '基本資訊',
-						},
-						{
-							value: 'purchase',
-							text: '購買資訊',
-						},
-						{
-							value: 'note',
-							text: '備註',
-						},
-					]"
-				/>
-			</template>
-			<template #default>
-				<div class="row mt-4">
-					<div class="col-6 col-sm-3 mx-auto">
-						<div class="mb-3">
-							<div class="img-thumbnail w-100 embed-responsive embed-responsive-1by1">
-								<i class="material-icons-outlined">photo_camera</i>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-9">
-						<div class="mb-3">
-							<MdcTextField
-								type="text"
-								autocomplete="off"
-								label="名稱"
-								:required="true"
-							/>
-						</div>
-						<div class="mb-3">
-							<MdcSelect
-								v-model="selectedCategory"
-								label="類別"
-								:options="categoryOptions"
-								class="mdc-select--fullwidth"
-							/>
-						</div>
-						<div class="mb-3">
-							<MdcTextField
-								type="text"
-								autocomplete="off"
-								label="品牌"
-							/>
-						</div>
-						<div class="row form-row">
-							<div class="col-md-6">
-								<div class="mb-3">
-									<MdcTextField
-										type="text"
-										autocomplete="off"
-										label="型號"
-									/>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="mb-3">
-									<MdcTextField
-										type="text"
-										autocomplete="off"
-										label="尺寸"
-									/>
-								</div>
-							</div>
-						</div>
-						<div class="row form-row">
-							<div class="col-md-6">
-								<div class="mb-3">
-									<MdcTextField
-										type="text"
-										autocomplete="off"
-										label="重量"
-									/>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="mb-3">
-									<MdcTextField
-										type="number"
-										autocomplete="off"
-										label="數量"
-										value="1"
-										:required="true"
-									/>
-								</div>
-							</div>
-						</div>
-						<div class="mb-3">
-							<MdcTextField
-								type="text"
-								autocomplete="off"
-								label="製造日期"
-							/>
-						</div>
-					</div>
-				</div>
-			</template>
-			<template #actions>
-				<MdcButton class="mdc-button--text" @click.native="onClickCancel">
-					{{ lang('action_cancel') }}
-				</MdcButton>
-				<MdcButton class="mdc-button--outlined ml-2">
-					新增下一個
-				</MdcButton>
-				<MdcButton class="mdc-button--raised ml-2">
-					新增
-				</MdcButton>
-			</template>
-		</MdcDialog>
+			:categories="settingsConfig.default.categories"
+		/>
 	</div>
 </template>
 
 <script>
 import Board from '@components/Board';
+import GearEditorDialog from '@components/Gears/GearEditorDialog';
 import MdcButton from '@components/MdcButton';
-import MdcDialog from '@components/MdcDialog';
-import MdcDialogActionButton from '@components/MdcDialogActionButton';
 import MdcFab from '@components/MdcFab';
 import MdcIconButton from '@components/MdcIconButton';
 import MdcList from '@components/MdcList';
-import MdcSelect from '@components/MdcSelect';
-import MdcTabBar from '@components/MdcTabBar';
-import MdcTextField from '@components/MdcTextField';
 import PageToolBar from '@components/PageToolBar';
 import settingsConfig from '@/settingsConfig';
-import { getCategoryName } from '@libs/lang';
 
 export default {
 	components: {
 		Board,
+		GearEditorDialog,
 		MdcButton,
-		MdcDialog,
-		MdcDialogActionButton,
 		MdcFab,
 		MdcIconButton,
 		MdcList,
-		MdcSelect,
-		MdcTabBar,
-		MdcTextField,
 		PageToolBar,
 	},
 	data() {
@@ -452,25 +326,12 @@ export default {
 					]
 				}
 			],
-			activeTab: 'basic',
-			selectedCategory: null,
+			settingsConfig,
 		};
-	},
-	computed: {
-		categoryOptions() {
-			return _.map(settingsConfig.default.categories, category => {
-				return {
-					value: category.langKey,
-					text: getCategoryName(category),
-					iconType: category.iconType,
-					iconName: category.iconName,
-				};
-			});
-		},
 	},
 	methods: {
 		onClickCreateGear() {
-			this.$refs.gearEditorDialog.open();
+			this.$refs.gearEditorDialog.create();
 		},
 		onClickCancel() {
 			this.$refs.gearEditorDialog.close();

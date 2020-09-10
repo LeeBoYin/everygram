@@ -24,6 +24,10 @@
 		color: $c-primary-dark;
 	}
 
+	&--text-right input {
+		text-align: right;
+	}
+
 	&__input {
 		// Reset style "opacity 0.4" on mobile browser
 		opacity: 1;

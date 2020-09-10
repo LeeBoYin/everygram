@@ -18,10 +18,8 @@
 						<div class="mb-3">
 							<ValidationProvider :name="lang('label_gear_name')" rules="required" v-slot="{ failed, errors }">
 								<MdcTextField
-									type="text"
 									v-model.trim="gearName"
 									name="gear-name"
-									autocomplete="off"
 									:label="lang('label_gear_name')"
 									:required="true"
 									:invalid="failed"
@@ -30,58 +28,33 @@
 							</ValidationProvider>
 						</div>
 						<div class="mb-3">
-							<div class="mdc-select mdc-select--filled mdc-select-width">
-								<div class="mdc-select__anchor mdc-select-width">
-									<span class="mdc-select__ripple"></span>
-									<span class="mdc-select__selected-text"></span>
-									<span class="mdc-select__dropdown-icon">
-								<i class="material-icons-outlined text-gray-600">arrow_drop_down</i>
-								</span>
-									<span class="mdc-floating-label">類別</span>
-									<span class="mdc-line-ripple"></span>
-								</div>
-
-								<div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
-									<ul class="mdc-list">
-										<li class="mdc-list-item" data-value="grains">
-											<span class="mdc-list-item__ripple"></span>
-											<span class="mdc-list-item__text">Bread, Cereal, Rice, and Pasta</span>
-										</li>
-										<li class="mdc-list-item" data-value="vegetables">
-											<span class="mdc-list-item__ripple"></span>
-											<span class="mdc-list-item__text">Vegetables</span>
-										</li>
-										<li class="mdc-list-item" data-value="fruit">
-											<span class="mdc-list-item__ripple"></span>
-											<span class="mdc-list-item__text">Fruit</span>
-										</li>
-									</ul>
-								</div>
-							</div>
+							<MdcSelect
+								v-model="categoryUuid"
+								:label="lang('label_category')"
+								:options="categoryOptions"
+								class="mdc-select--fullwidth"
+							/>
 						</div>
 						<div class="mb-3">
 							<MdcTextField
-								type="text"
-								autocomplete="off"
-								label="品牌"
+								v-model="gearBrand"
+								:label="lang('label_brand')"
 							/>
 						</div>
 						<div class="row form-row">
 							<div class="col-md-6">
 								<div class="mb-3">
 									<MdcTextField
-										type="text"
-										autocomplete="off"
-										label="型號"
+										v-model="gearModel"
+										:label="lang('label_model')"
 									/>
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="mb-3">
 									<MdcTextField
-										type="text"
-										autocomplete="off"
-										label="尺寸"
+										v-model="gearSize"
+										:label="lang('label_size')"
 									/>
 								</div>
 							</div>
@@ -89,31 +62,39 @@
 						<div class="row form-row">
 							<div class="col-md-6">
 								<div class="mb-3">
-									<MdcTextField
-										type="text"
-										autocomplete="off"
-										label="重量"
-									/>
+									<ValidationProvider :name="lang('label_weight')" rules="numeric|min_value:0" v-slot="{ failed, errors }">
+										<WeightTextField
+											v-model="gearWeight"
+											:label="lang('label_weight')"
+											unit-system="metric"
+										/>
+										<TextFieldErrorMessage :message="errors[0]" />
+									</ValidationProvider>
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="mb-3">
-									<MdcTextField
-										type="number"
-										autocomplete="off"
-										label="數量"
-										value="1"
-										:required="true"
-									/>
+									<ValidationProvider :name="lang('label_quantity')" rules="numeric|min_value:1" v-slot="{ failed, errors }">
+										<NumberTextField
+											v-model="gearQuantity"
+											:label="lang('label_quantity')"
+											:min="1"
+										/>
+										<TextFieldErrorMessage :message="errors[0]" />
+									</ValidationProvider>
 								</div>
 							</div>
 						</div>
 						<div class="mb-3">
-							<MdcTextField
-								type="text"
-								autocomplete="off"
-								label="製造日期"
-							/>
+							<ValidationProvider :name="lang('label_manufactured_date')" rules="yearMonthDate" v-slot="{ failed, errors }">
+								<DateTextField
+									v-model="gearManufacturedDate"
+									:label="lang('label_manufactured_date')"
+									:date-format="memberSettings.dateFormat"
+									:max-date="moment().format(memberSettings.dateFormat)"
+								/>
+								<TextFieldErrorMessage :message="errors[0]" />
+							</ValidationProvider>
 						</div>
 					</div>
 				</div>
@@ -123,11 +104,15 @@
 			</ValidationObserver>
 		</template>
 		<template #actions>
-			<MdcDialogActionButton @click.native="onClickCancel">
+			<MdcDialogActionButton
+				class="mdc-button--text"
+				@click.native="onClickCancel"
+			>
 				{{ lang('action_cancel') }}
 			</MdcDialogActionButton>
 			<MdcDialogActionButton
 				:is-loading="isSaving"
+				class="mdc-button--raised"
 				@click.native="onClickAccept"
 			>
 				{{ isEditing ? lang('action_save') : lang('action_create') }}
@@ -138,21 +123,35 @@
 
 <script>
 import mixinForm from '@mixins/mixinForm';
+import DateTextField from '@components/DateTextField';
 import MdcDialog from '@components/MdcDialog';
 import MdcDialogActionButton from '@components/MdcDialogActionButton';
+import MdcSelect from '@components/MdcSelect';
 import MdcTextField from '@components/MdcTextField';
+import NumberTextField from '@components/NumberTextField';
 import TextFieldErrorMessage from '@components/TextFieldErrorMessage';
+import WeightTextField from '@components/WeightTextField';
+
+import { getCategoryName } from '@libs/lang';
 export default {
 	mixins: [
 		mixinForm,
 	],
 	components: {
+		DateTextField,
 		MdcDialog,
 		MdcDialogActionButton,
+		MdcSelect,
 		MdcTextField,
+		NumberTextField,
 		TextFieldErrorMessage,
+		WeightTextField,
 	},
 	props: {
+		categories: {
+			type: Array,
+			default: () => [],
+		},
 		onCreateGear: {
 			type: Function,
 			default: () => {},
@@ -164,12 +163,29 @@ export default {
 	},
 	data() {
 		return {
-			gearName: '',
+			gearName: null,
+			categoryUuid: null,
+			gearBrand: null,
+			gearModel: null,
+			gearSize: null,
+			gearWeight: 12345,
+			gearQuantity: 1,
+			gearManufacturedDate: null,
 			isEditing: false,
 			isSaving: false,
 		};
 	},
 	computed: {
+		categoryOptions() {
+			return _.map(this.categories, category => {
+				return {
+					value: category.langKey,
+					text: getCategoryName(category),
+					iconType: category.iconType,
+					iconName: category.iconName,
+				};
+			});
+		},
 		newGear() {
 			return {};
 		},

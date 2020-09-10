@@ -64,6 +64,7 @@
 		"@material/theme": "^6.0.0",
 		"@material/top-app-bar": "^6.0.0",
 		"bootstrap": "^4.5.0",
+		"cleave.js": "^1.6.0",
 		"compressorjs": "^1.0.6",
 		"lodash-es": "^4.17.15",
 		"moment": "^2.27.0",

@@ -22,6 +22,7 @@ import { lang, getCategoryName } from '@libs/lang';
 
 // use _ in all of vue component template
 Object.defineProperty(Vue.prototype, '_', { value: _ });
+Object.defineProperty(Vue.prototype, 'moment', { value: moment });
 Object.defineProperty(Vue.prototype, 'lang', { value: lang });
 Object.defineProperty(Vue.prototype, 'getCategoryName', { value: getCategoryName });
 Object.defineProperty(Vue.prototype, 'constant', { value: constant });
