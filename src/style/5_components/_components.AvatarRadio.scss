@@ -1,0 +1,40 @@
+.avatar-radio {
+	display: inline-block;
+	position: relative;
+	margin: 4px;
+	user-select: none;
+	cursor: pointer;
+
+	&:hover,
+	&:focus,
+	&:focus-within {
+		.avatar-radio__avatar {
+			box-shadow: $box-shadow-md;
+		}
+	}
+
+	&__avatar {
+		color: #FFF;
+
+		.category-avatar__icon {
+			display: none;
+		}
+	}
+
+	[type=radio] {
+		position: absolute;
+		opacity: 0;
+		cursor: pointer;
+
+		&:checked + .avatar-radio__avatar {
+			border: 4px solid #FFF;
+			box-shadow: $box-shadow-md;
+			transform: scale(1.2);
+
+			.category-avatar__icon {
+				display: block;
+			}
+		}
+	}
+
+}
