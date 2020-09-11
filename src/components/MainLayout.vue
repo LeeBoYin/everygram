@@ -8,11 +8,11 @@
 		<aside ref="mdcDrawer" class="mdc-drawer mdc-drawer--modal">
 			<div class="mdc-drawer__header">
 				<div class="drawer-header">
-					<div
+					<Avatar
 						v-if="user.photoURL"
-						class="avatar drawer-header__avatar"
-						:style="{ 'background-image': `url(${ user.photoURL })` }"
-					></div>
+						class="drawer-header__avatar"
+						:image-url="user.photoURL"
+					/>
 					<div class="drawer-header__title">
 						{{ user.displayName }}
 					</div>
@@ -54,9 +54,11 @@ import { MDCList } from "@material/list";
 import { MDCDrawer } from "@material/drawer";
 import { MDCTopAppBar } from "@material/top-app-bar";
 import { MDCRipple } from '@material/ripple/index';
+import Avatar from '@components/Avatar';
 import MdcTopAppBar from '@components/MdcTopAppBar';
 export default {
 	components: {
+		Avatar,
 		MdcTopAppBar,
 	},
 	props: {

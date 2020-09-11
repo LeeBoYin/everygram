@@ -9,9 +9,14 @@
 				<div class="row mt-4">
 					<div class="col-6 col-sm-3 mx-auto">
 						<div class="mb-3">
-							<div class="img-thumbnail w-100 embed-responsive embed-responsive-1by1">
-								<i class="material-icons-outlined">photo_camera</i>
-							</div>
+							<ImageFileInput
+								class="img-thumbnail w-100 embed-responsive embed-responsive-1by1"
+								v-model="gearPhotoURL"
+								:max-width="800"
+								:max-height="800"
+								:path="`gear`"
+								:file-name="uuid()"
+							/>
 						</div>
 					</div>
 					<div class="col-sm-9">
@@ -124,6 +129,7 @@
 <script>
 import mixinForm from '@mixins/mixinForm';
 import DateTextField from '@components/DateTextField';
+import ImageFileInput from '@components/ImageFileInput';
 import MdcDialog from '@components/MdcDialog';
 import MdcDialogActionButton from '@components/MdcDialogActionButton';
 import MdcSelect from '@components/MdcSelect';
@@ -139,6 +145,7 @@ export default {
 	],
 	components: {
 		DateTextField,
+		ImageFileInput,
 		MdcDialog,
 		MdcDialogActionButton,
 		MdcSelect,
@@ -168,9 +175,10 @@ export default {
 			gearBrand: null,
 			gearModel: null,
 			gearSize: null,
-			gearWeight: 12345,
+			gearWeight: null,
 			gearQuantity: 1,
 			gearManufacturedDate: null,
+			gearPhotoURL: null,
 			isEditing: false,
 			isSaving: false,
 		};
