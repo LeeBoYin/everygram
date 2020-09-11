@@ -1,6 +1,21 @@
 <template>
 	<div>
 		<div class="container-xl">
+			<!-- 空白狀態 -->
+			<div class="text-center p-7">
+				<p>你的裝備庫是空的</p>
+				<MdcFab
+					icon="add"
+					label="新增裝備"
+					class="mdc-fab--extended"
+					@click.native="onClickCreateGear"
+				>
+				</MdcFab>
+			</div>
+			<div class="mt-7">
+				<img src="/static/images/illustration/illu-mountains-gray.png" alt="" class="w-100">
+			</div>
+
 			<!-- 預設模式 -->
 			<div class="page-tool-bar">
 				<div class="text-gray-700">共有 54 個裝備</div>
@@ -58,6 +73,7 @@
 					<div class="mdc-list-group">
 						<MdcList>
 							<li v-for="(gear, id) in gearList.gears" :key="id" class="mdc-list-item gear-list-item">
+								<span class="mdc-list-item__ripple"></span>
 								<!-- 編輯排序模式才出現 -->
 								<!-- <span class="mdc-list-item__graphic material-icons-outlined" aria-hidden="true">drag_handle</span> -->
 								<div class="mdc-list-item__text flex-grow-1">
@@ -99,6 +115,7 @@
 				<div class="mdc-list-group">
 					<MdcList>
 						<li class="mdc-list-item gear-list-item fake">
+							<span class="mdc-list-item__ripple"></span>
 							<div class="mdc-list-item__text flex-grow-1">
 								<div class="row align-items-center">
 									<div class="col-lg-9">
@@ -114,6 +131,7 @@
 							</div>
 						</li>
 						<li class="mdc-list-item gear-list-item gear-list-item--expand">
+							<span class="mdc-list-item__ripple"></span>
 							<!-- <span class="mdc-list-item__graphic material-icons-outlined" aria-hidden="true">drag_handle</span> -->
 							<div class="mdc-list-item__text flex-grow-1">
 								<div class="row align-items-center">
@@ -139,7 +157,8 @@
 							</span>
 						</li>
 						<li class="mdc-list-item gear-list-item">
-							<!-- <span class="mdc-list-item__graphic material-icons-outlined" aria-hidden="true">drag_handle</span> -->
+							<span class="mdc-list-item__ripple"></span>
+							<span class="mdc-list-item__graphic material-icons-outlined" aria-hidden="true">drag_handle</span>
 							<div class="mdc-list-item__text flex-grow-1">
 								<div class="row align-items-center">
 									<div class="col-lg-9">
@@ -148,7 +167,49 @@
 												<i class="material-icons-outlined">backpack</i>
 											</div>
 											<div class="flex-grow-1">
-												<h5 class="mt-0 mb-1">Item demo</h5>
+												<h5 class="mt-0 mb-1">Draggable</h5>
+												<div class="text-gray-600">Everygram</div>
+												<div class="text-gray-600">Everygram</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3 d-none d-lg-block text-right text-gray-600">
+										100g
+									</div>
+								</div>
+							</div>
+							<span class="mdc-list-item__meta text-nowrap">
+								<MdcIconButton>more_vert</MdcIconButton>
+							</span>
+						</li>
+						<li class="mdc-list-item mdc-list-item--selected gear-list-item">
+							<span class="mdc-list-item__graphic material-icons-outlined" aria-hidden="true">
+								<div class="mdc-checkbox mdc-checkbox--selected">
+									<input type="checkbox"
+										class="mdc-checkbox__native-control"
+										id="checkbox-1"
+										checked/>
+									<div class="mdc-checkbox__background">
+									<svg class="mdc-checkbox__checkmark"
+										viewBox="0 0 24 24">
+										<path class="mdc-checkbox__checkmark-path"
+											fill="none"
+											d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+									</svg>
+									<div class="mdc-checkbox__mixedmark"></div>
+									</div>
+									<div class="mdc-checkbox__ripple"></div>
+								</div>
+							</span>
+							<div class="mdc-list-item__text flex-grow-1">
+								<div class="row align-items-center">
+									<div class="col-lg-9">
+										<div class="d-flex align-items-start">
+											<div class="img-thumbnail gear-list-item__img-thumbnail flex-shrink-0">
+												<i class="material-icons-outlined">backpack</i>
+											</div>
+											<div class="flex-grow-1">
+												<h5 class="mt-0 mb-1">Selectable</h5>
 												<div class="text-gray-600">Everygram</div>
 												<div class="text-gray-600">Everygram</div>
 											</div>
@@ -328,7 +389,7 @@ import MdcIconButton from '@components/MdcIconButton';
 import MdcList from '@components/MdcList';
 import MdcListItem from '@components/MdcListItem';
 import MdcTextField from '@components/MdcTextField';
-import {MDCTabBar} from '@material/tab-bar';
+import {MDCCheckbox} from '@material/checkbox';
 import {MDCSelect} from '@material/select';
 
 export default {
@@ -343,7 +404,6 @@ export default {
 		MdcListItem,
 		MDCSelect,
 		MdcTextField,
-		MDCTabBar,
 	},
 	data() {
 		return {
@@ -355,7 +415,7 @@ export default {
 					gears: [
 						{
 							id: "1",
-							imgUrl: "https://scontent.ftpe7-3.fna.fbcdn.net/v/t1.0-9/103585657_5473153589367637_1310014277959382298_o.jpg?_nc_cat=108&_nc_sid=cdbe9c&_nc_ohc=DwcLJEHGKJEAX9yqBMz&_nc_ht=scontent.ftpe7-3.fna&oh=f80e97d925bc7322f2d57fd72c5be69d&oe=5F549700",
+							imgUrl: "https://scontent.ftpe7-3.fna.fbcdn.net/v/t1.0-9/103585657_5473153589367637_1310014277959382298_o.jpg?_nc_cat=108&_nc_sid=cdbe9c&_nc_ohc=t2WkNZPi8rYAX8UHaWU&_nc_ht=scontent.ftpe7-3.fna&oh=69d035275590f913a351b01348af3562&oe=5F801880",
 							title: "Rawlow Bambi 輕量包awlow Bambi 輕量包awlow Bambi 輕量包awlow Bambi 輕量包",
 							brand: "Rawlow Mountain Works",
 							model: "Bambi 28L",
@@ -398,7 +458,7 @@ export default {
 						},
 						{
 							id: "5",
-							imgUrl: "https://scontent.ftpe7-3.fna.fbcdn.net/v/t1.0-9/103585657_5473153589367637_1310014277959382298_o.jpg?_nc_cat=108&_nc_sid=cdbe9c&_nc_ohc=DwcLJEHGKJEAX9yqBMz&_nc_ht=scontent.ftpe7-3.fna&oh=f80e97d925bc7322f2d57fd72c5be69d&oe=5F549700",
+							imgUrl: "https://scontent.ftpe7-3.fna.fbcdn.net/v/t1.0-9/103585657_5473153589367637_1310014277959382298_o.jpg?_nc_cat=108&_nc_sid=cdbe9c&_nc_ohc=t2WkNZPi8rYAX8UHaWU&_nc_ht=scontent.ftpe7-3.fna&oh=69d035275590f913a351b01348af3562&oe=5F801880",
 							title: "Rawlow Bambi 輕量包",
 							brand: "Rawlow Mountain Works",
 							model: "Bambi 28L",
@@ -431,7 +491,7 @@ export default {
 						},
 						{
 							id: "8",
-							imgUrl: "https://scontent.ftpe7-3.fna.fbcdn.net/v/t1.0-9/103585657_5473153589367637_1310014277959382298_o.jpg?_nc_cat=108&_nc_sid=cdbe9c&_nc_ohc=DwcLJEHGKJEAX9yqBMz&_nc_ht=scontent.ftpe7-3.fna&oh=f80e97d925bc7322f2d57fd72c5be69d&oe=5F549700",
+							imgUrl: "https://scontent.ftpe7-3.fna.fbcdn.net/v/t1.0-9/103585657_5473153589367637_1310014277959382298_o.jpg?_nc_cat=108&_nc_sid=cdbe9c&_nc_ohc=t2WkNZPi8rYAX8UHaWU&_nc_ht=scontent.ftpe7-3.fna&oh=69d035275590f913a351b01348af3562&oe=5F801880",
 							title: "Snow Peak 天幕",
 							brand: "Snow Peak",
 							model: "Penda",
@@ -459,13 +519,13 @@ export default {
 		};
 	},
 	mounted() {
-		const tabBar = new MDCTabBar(document.querySelector('.mdc-tab-bar'));
-
 		const select = new MDCSelect(document.querySelector('.mdc-select'));
 
 		select.listen('MDCSelect:change', () => {
 		// alert(`Selected option at index ${select.selectedIndex} with value "${select.value}"`);
 		});
+
+		const checkbox = new MDCCheckbox(document.querySelector('.mdc-checkbox'));
 	},
 	methods: {
 		onClickCreateGear() {
