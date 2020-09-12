@@ -20,7 +20,7 @@
 					<Board>
 						<MdcList ref="categoryList" class="mdc-list--non-interactive">
 							<CategoryListItem
-								v-for="(category, index) in categories"
+								v-for="(category, index) in memberSettings.categories"
 								:key="index"
 								:category="category"
 								:data-id="index"
@@ -43,11 +43,9 @@
 		</div>
 		<CategoryEditorDialog
 			ref="categoryEditorDialog"
-			:categories="categories"
 		/>
 		<CategoryDeleteDialog
 			ref="categoryDeleteDialog"
-			:categories="categories"
 		/>
 	</FullLayout>
 </template>
@@ -77,10 +75,10 @@ export default {
 		MdcList,
 		MdcTopAppBar,
 	},
-	data() {
-		return {
-			categories: settingsConfig.default.categories,
-		};
+	computed: {
+		...mapGetters('member', [
+			'memberSettings',
+		]),
 	},
 	mounted() {
 		Sortable.create(this.$refs.categoryList.$el, {

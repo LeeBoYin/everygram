@@ -70,10 +70,6 @@ export default {
 		TextFieldErrorMessage,
 	},
 	props: {
-		categories: {
-			type: Array,
-			default: () => [],
-		},
 		onCreateCategory: {
 			type: Function,
 			default: () => {},
@@ -95,7 +91,7 @@ export default {
 	computed: {
 		categoryIcons() {
 			if(this.isEditing) {
-				const category = this.categories[this.categoryIndex];
+				const category = this.memberSettings.categories[this.categoryIndex];
 				const isCurrentIconIncluded = _.some(settingsConfig.categoryIcons, categoryIcon => {
 					return category.iconType === categoryIcon.type && category.iconName === categoryIcon.name;
 				});
@@ -121,16 +117,19 @@ export default {
 				name: this.categoryName,
 				iconType: this.categoryIcons[this.iconIndex].type,
 				iconName: this.categoryIcons[this.iconIndex].name,
-				uuid: this.isEditing ? this.categories[this.categoryIndex].uuid : uuid(),
+				uuid: this.isEditing ? this.memberSettings.categories[this.categoryIndex].uuid : uuid(),
 			};
 		},
+		...mapGetters('member', [
+			'memberSettings',
+		]),
 	},
 	methods: {
 		create() {
 			this.$refs.mdcDialog.open();
 		},
 		edit(index) {
-			const category = this.categories[index];
+			const category = this.memberSettings.categories[index];
 			this.isEditing = true;
 			this.categoryIndex = index;
 			this.categoryName = getCategoryName(category);
@@ -182,7 +181,7 @@ export default {
 			this.$refs.validationObserver.reset();
 		},
 		checkIsCategoryNameExisting() {
-			const existingIndex = _.findIndex(this.categories, category => {
+			const existingIndex = _.findIndex(this.memberSettings.categories, category => {
 				return this.categoryName === getCategoryName(category);
 			});
 			if(existingIndex !== -1) {

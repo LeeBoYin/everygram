@@ -12,10 +12,10 @@
 							<ImageFileInput
 								class="img-thumbnail w-100 embed-responsive embed-responsive-1by1"
 								v-model="gearPhotoURL"
-								:max-width="800"
-								:max-height="800"
-								:path="`gear`"
-								:file-name="uuid()"
+								:max-width="600"
+								:max-height="600"
+								:path="constant('STORAGE_PATH_TO_GEAR_PHOTO')"
+								:file-name="gearPhotoFileName"
 							/>
 						</div>
 					</div>
@@ -42,7 +42,7 @@
 						</div>
 						<div class="mb-3">
 							<MdcTextField
-								v-model="gearBrand"
+								v-model.trim="gearBrand"
 								:label="lang('label_brand')"
 							/>
 						</div>
@@ -50,7 +50,7 @@
 							<div class="col-md-6">
 								<div class="mb-3">
 									<MdcTextField
-										v-model="gearModel"
+										v-model.trim="gearModel"
 										:label="lang('label_model')"
 									/>
 								</div>
@@ -58,7 +58,7 @@
 							<div class="col-md-6">
 								<div class="mb-3">
 									<MdcTextField
-										v-model="gearSize"
+										v-model.trim="gearSize"
 										:label="lang('label_size')"
 									/>
 								</div>
@@ -69,9 +69,9 @@
 								<div class="mb-3">
 									<ValidationProvider :name="lang('label_weight')" rules="numeric|min_value:0" v-slot="{ failed, errors }">
 										<WeightTextField
-											v-model="gearWeight"
+											v-model.number="gearWeight"
 											:label="lang('label_weight')"
-											unit-system="metric"
+											:unit-system="memberSettings.unitSystem"
 										/>
 										<TextFieldErrorMessage :message="errors[0]" />
 									</ValidationProvider>
@@ -81,7 +81,7 @@
 								<div class="mb-3">
 									<ValidationProvider :name="lang('label_quantity')" rules="numeric|min_value:1" v-slot="{ failed, errors }">
 										<NumberTextField
-											v-model="gearQuantity"
+											v-model.number="gearQuantity"
 											:label="lang('label_quantity')"
 											:min="1"
 										/>
@@ -138,7 +138,25 @@ import NumberTextField from '@components/NumberTextField';
 import TextFieldErrorMessage from '@components/TextFieldErrorMessage';
 import WeightTextField from '@components/WeightTextField';
 
-import { getCategoryName } from '@libs/lang';
+const initialState = () => {
+	return {
+		gearName: null,
+		categoryUuid: null,
+		gearBrand: null,
+		gearModel: null,
+		gearSize: null,
+		gearWeight: null,
+		gearQuantity: 1,
+		gearManufacturedDate: null,
+		gearPhotoFileName: uuid(), // random file name
+		gearPhotoURL: null,
+		gearNote: null,
+		isEditing: false,
+		isSaving: false,
+		editingGear: null,
+	}
+};
+
 export default {
 	mixins: [
 		mixinForm,
@@ -155,10 +173,6 @@ export default {
 		WeightTextField,
 	},
 	props: {
-		categories: {
-			type: Array,
-			default: () => [],
-		},
 		onCreateGear: {
 			type: Function,
 			default: () => {},
@@ -169,23 +183,11 @@ export default {
 		},
 	},
 	data() {
-		return {
-			gearName: null,
-			categoryUuid: null,
-			gearBrand: null,
-			gearModel: null,
-			gearSize: null,
-			gearWeight: null,
-			gearQuantity: 1,
-			gearManufacturedDate: null,
-			gearPhotoURL: null,
-			isEditing: false,
-			isSaving: false,
-		};
+		return initialState();
 	},
 	computed: {
 		categoryOptions() {
-			return _.map(this.categories, category => {
+			return _.map(this.memberSettings.categories, category => {
 				return {
 					value: category.langKey,
 					text: getCategoryName(category),
@@ -194,8 +196,20 @@ export default {
 				};
 			});
 		},
-		newGear() {
-			return {};
+		gearData() {
+			return {
+				brand: this.gearBrand,
+				manufacturedDate: this.gearManufacturedDate,
+				model: this.gearModel,
+				name: this.gearName,
+				photoFileName: this.gearPhotoURL ? this.gearPhotoFileName : null,
+				photoURL: this.gearPhotoURL,
+				quantity: this.gearQuantity,
+				size: this.gearSize,
+				unitSystem: this.memberSettings.unitSystem,
+				weight: this.gearWeight,
+				note: this.gearNote,
+			};
 		},
 		...mapGetters('member', [
 			'memberSettings',
@@ -206,7 +220,8 @@ export default {
 			this.$refs.mdcDialog.open();
 		},
 		edit(gearId) {
-			// this.gear = gear;
+			console.log('edit', gearId);
+			// this.editingGear = gear;
 			this.isEditing = true;
 			this.$refs.mdcDialog.open();
 		},
@@ -214,21 +229,20 @@ export default {
 			this.$refs.mdcDialog.close();
 		},
 		async onClickAccept() {
-			this.errorMessage = null;
 			try {
+				this.resetFormState();
 				const success = await this.$refs.validationObserver.validate();
 				if (!success) {
 					return;
 				}
-				this.$refs.validationObserver.reset();
 				this.isSaving = true;
 				if (this.isEditing) {
-					await this.onUpdateGear(this.newGear);
+					await this.onUpdateGear(this.gearData);
 					this.$snackbar({
 						message: lang('msg_changes_are_saved'),
 					});
 				} else {
-					await this.onCreateGear(this.newGear);
+					await this.onCreateGear(this.gearData);
 					this.$snackbar({
 						message: lang('msg_gear_created'),
 					});
@@ -241,10 +255,8 @@ export default {
 			}
 		},
 		onDialogClosed() {
-			this.gear = null;
-			this.isEditing = false;
-			this.errorMessage = null;
-			this.$refs.validationObserver.reset();
+			_.assign(this.$data, initialState());
+			this.resetFormState();
 		},
 	}
 };

@@ -1,3 +1,6 @@
+import Gear from '@class/Gear';
+import { errorMessageLang } from '@libs/lang';
+
 const state = {
 	gearCollectionRef: null,
 };
@@ -13,15 +16,22 @@ const actions = {
 	async init(context) {
 		context.commit('setGearCollectionRef', context.rootState.db.collection('gear'));
 	},
-	async createGear(context, { gear }) {
-		const gearId = await state.gearCollectionRef.add({
-			...gear,
-			createTimestamp: firebase.firestore.FieldValue.serverTimestamp(),
-		}).then((gearRef) => {
-			return gearRef.id;
-		}).catch((error) => {
-			console.error("Error adding gear: ", error);
-		});
+	async createGear(context, { gearData }) {
+		try {
+			await state.gearCollectionRef
+			.add(new Gear({
+				ownerUserUid: context.rootGetters['user/user'].uid,
+				...gearData,
+			}))
+			.then((gearRef) => {
+				return gearRef.id;
+			}).catch((error) => {
+				console.error("Error adding gear: ", error);
+			});
+		} catch (e) {
+			console.log(e);
+			throw errorMessageLang(e.code);
+		}
 	},
 };
 

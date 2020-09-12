@@ -69,11 +69,16 @@ export default {
 		onClickCreateGear() {
 			this.$refs.gearEditorDialog.create();
 		},
-		onCreateGear() {
-
+		async onCreateGear(gearData) {
+console.log(gearData);
+			await this.createGear({
+				gearData,
+			});
+			// insert gear into main gear list
 		},
-		onUpdateGear() {
-
+		onUpdateGear(gearData) {
+console.log(gearData);
+			//
 		},
 		...mapActions('gear', [
 			'createGear',

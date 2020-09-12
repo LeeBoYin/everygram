@@ -28,11 +28,11 @@ export default {
 	props: {
 		maxHeight: {
 			type: Number,
-			default: 300,
+			default: null,
 		},
 		maxWidth: {
 			type: Number,
-			default: 300,
+			default: null,
 		},
 		quality: {
 			type: Number,
@@ -80,6 +80,7 @@ export default {
 				const compressedFile = await new Promise((resolve) => {
 					new Compressor(file, {
 						quality: this.quality,
+						convertSize: 0, // convert all png to jpeg
 						maxHeight: this.maxHeight,
 						maxWidth: this.maxWidth,
 						success(result) {

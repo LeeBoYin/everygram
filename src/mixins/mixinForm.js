@@ -12,4 +12,12 @@ export default {
 			errorMessage: null,
 		};
 	},
+	methods: {
+		resetFormState() {
+			this.errorMessage = null;
+			if(this.$refs.validationObserver) {
+				this.$refs.validationObserver.reset();
+			}
+		},
+	},
 };
