@@ -5,7 +5,7 @@ export default function (data = {}) {
 	} = data;
 
 	const order = {
-		others: [],
+		[constant('CATEGORY_OTHERS')]: [],
 	};
 
 	_.forEach(categories, category => {

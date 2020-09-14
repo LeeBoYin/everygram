@@ -107,5 +107,6 @@
 	"label_quantity": "數量",
 	"label_weight": "重量",
 	"label_manufactured_date": "製造日期",
+	"error_permission-denied": "權限不足",
 	"util_or": "或"
 }

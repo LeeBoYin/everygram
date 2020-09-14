@@ -35,5 +35,6 @@ export default function (data = {}) {
 		unitSystem,
 		weight,
 		note,
+		createTimestamp: firebase.firestore.FieldValue.serverTimestamp(),
 	};
 }

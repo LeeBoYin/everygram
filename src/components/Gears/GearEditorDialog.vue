@@ -189,7 +189,7 @@ export default {
 		categoryOptions() {
 			return _.map(this.memberSettings.categories, category => {
 				return {
-					value: category.langKey,
+					value: category.uuid,
 					text: getCategoryName(category),
 					iconType: category.iconType,
 					iconName: category.iconName,
@@ -237,12 +237,18 @@ export default {
 				}
 				this.isSaving = true;
 				if (this.isEditing) {
-					await this.onUpdateGear(this.gearData);
+					await this.onUpdateGear({
+						gearData: this.gearData,
+						categoryUuid: this.categoryUuid,
+					});
 					this.$snackbar({
 						message: lang('msg_changes_are_saved'),
 					});
 				} else {
-					await this.onCreateGear(this.gearData);
+					await this.onCreateGear({
+						gearData: this.gearData,
+						categoryUuid: this.categoryUuid,
+					});
 					this.$snackbar({
 						message: lang('msg_gear_created'),
 					});

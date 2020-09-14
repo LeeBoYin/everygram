@@ -45,8 +45,24 @@ const actions = {
 			if(!gearListSnapshot.exists) {
 				return;
 			}
-console.log('gearListSnapshot', gearListSnapshot);
 			context.commit('setGearListData', gearListSnapshot.data());
+		} catch (e) {
+			console.log(e);
+			throw errorMessageLang(e.code);
+		}
+	},
+	async appendGear(context, { gearId, categoryUuid }) {
+		const gear = await context.dispatch('gear/getGear', gearId, { root: true });
+		const updateObj = {
+			[`gearData.${ gearId }`]: gear.data(),
+			[`order.${ categoryUuid || constant('CATEGORY_OTHERS') }`]: firebase.firestore.FieldValue.arrayUnion(gearId),
+		};
+		try {
+			context.state.gearListDocRef.update(updateObj).then(() => {
+				// update successfully written to the backend
+			});
+			// get gearList and update state.getGearListData
+			await context.dispatch('getGearList');
 		} catch (e) {
 			console.log(e);
 			throw errorMessageLang(e.code);

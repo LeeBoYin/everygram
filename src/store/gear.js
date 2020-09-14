@@ -18,7 +18,7 @@ const actions = {
 	},
 	async createGear(context, { gearData }) {
 		try {
-			await state.gearCollectionRef
+			return await context.state.gearCollectionRef
 			.add(new Gear({
 				ownerUserUid: context.rootGetters['user/user'].uid,
 				...gearData,
@@ -28,6 +28,14 @@ const actions = {
 			}).catch((error) => {
 				console.error("Error adding gear: ", error);
 			});
+		} catch (e) {
+			console.log(e);
+			throw errorMessageLang(e.code);
+		}
+	},
+	async getGear(context, gearId) {
+		try {
+			return await context.state.gearCollectionRef.doc(gearId).get();
 		} catch (e) {
 			console.log(e);
 			throw errorMessageLang(e.code);
