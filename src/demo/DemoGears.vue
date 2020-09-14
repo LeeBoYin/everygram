@@ -278,19 +278,89 @@
 
 								<div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
 									<ul class="mdc-list">
-										<li class="mdc-list-item" data-value="grains">
+										<li class="mdc-list-item" data-value="backpack">
 											<span class="mdc-list-item__ripple"></span>
-											<span class="mdc-list-item__text">Bread, Cereal, Rice, and Pasta</span>
+											<span class="mdc-list-item__graphic category-avatar mr-3" style="background-color: #CC4545;">
+												<i class="material-icons-outlined category-avatar__icon">backpack</i>
+											</span>
+											<span class="mdc-list-item__text">
+												背包
+											</span>
 										</li>
-										<li class="mdc-list-item" data-value="vegetables">
+										<li class="mdc-list-item" data-value="sleeping">
 											<span class="mdc-list-item__ripple"></span>
-											<span class="mdc-list-item__text">Vegetables</span>
+											<div class="mdc-list-item__graphic category-avatar mr-3" style="background-color: #B68383;">
+												<i class="material-icons-outlined category-avatar__icon">hotel</i>
+											</div>
+											<span class="mdc-list-item__text">
+												睡眠系統
+											</span>
 										</li>
-										<li class="mdc-list-item" data-value="fruit">
+										<li class="mdc-list-item" data-value="shelter">
 											<span class="mdc-list-item__ripple"></span>
-											<span class="mdc-list-item__text">Fruit</span>
+											<div class="mdc-list-item__graphic category-avatar mr-3" style="background-color: #E1BA51;">
+												<i class="material-icons-outlined category-avatar__icon">foundation</i>
+											</div>
+											<span class="mdc-list-item__text">
+												遮蔽系統
+											</span>
+										</li>
+										<li class="mdc-list-item" data-value="cook">
+											<span class="mdc-list-item__ripple"></span>
+											<div class="mdc-list-item__graphic category-avatar mr-3" style="background-color: #8BB683;">
+												<i class="material-icons-outlined category-avatar__icon">outdoor_grill</i>
+											</div>
+											<span class="mdc-list-item__text">
+												炊事系統
+											</span>
+										</li>
+										<li class="mdc-list-item" data-value="backpack">
+											<span class="mdc-list-item__ripple"></span>
+											<span class="mdc-list-item__graphic category-avatar mr-3" style="background-color: #CC4545;">
+												<i class="material-icons-outlined category-avatar__icon">backpack</i>
+											</span>
+											<span class="mdc-list-item__text">
+												背包
+											</span>
+										</li>
+										<li class="mdc-list-item" data-value="sleeping">
+											<span class="mdc-list-item__ripple"></span>
+											<div class="mdc-list-item__graphic category-avatar mr-3" style="background-color: #B68383;">
+												<i class="material-icons-outlined category-avatar__icon">hotel</i>
+											</div>
+											<span class="mdc-list-item__text">
+												睡眠系統
+											</span>
+										</li>
+										<li class="mdc-list-item" data-value="shelter">
+											<span class="mdc-list-item__ripple"></span>
+											<div class="mdc-list-item__graphic category-avatar mr-3" style="background-color: #E1BA51;">
+												<i class="material-icons-outlined category-avatar__icon">foundation</i>
+											</div>
+											<span class="mdc-list-item__text">
+												遮蔽系統
+											</span>
+										</li>
+										<li class="mdc-list-item" data-value="cook">
+											<span class="mdc-list-item__ripple"></span>
+											<div class="mdc-list-item__graphic category-avatar mr-3" style="background-color: #8BB683;">
+												<i class="material-icons-outlined category-avatar__icon">outdoor_grill</i>
+											</div>
+											<span class="mdc-list-item__text">
+												炊事系統
+											</span>
 										</li>
 									</ul>
+									<div class="mdc-menu__footer">
+										<div class="text-right">
+											<MdcButton el="router-link" class="mdc-button--text" :to="{ name: 'DemoSettingsCategories' }">
+												裝備類別設定
+												<template #trailing-icon>
+													<i class="material-icons-outlined">keyboard_arrow_right</i>
+												</template>
+											</MdcButton>
+										</div>
+									</div>
 								</div>
 								</div>
 						</div>

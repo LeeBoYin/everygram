@@ -6,9 +6,9 @@
 	height: 32px;
 	background-color: $c-gray-400;
 	border-radius: 50%;
-	color: $c-bright;
 
 	& &__icon {
 		font-size: $font-size-lg;
+		color: #FFF;
 	}
 }
