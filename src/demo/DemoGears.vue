@@ -64,9 +64,7 @@
 
 			<template v-for="(gearList, categoryLabel) in gearLists">
 				<h3 :key="'categoryLabel' + categoryLabel" class="mdc-list-group__subheader d-flex align-items-center mb-3">
-					<div class="category-avatar mr-2" :style="{ 'background-color': gearList.color }">
-						<i class="category-avatar__icon material-icons-outlined">{{ gearList.categoryIconName }}</i>
-					</div>
+					<CategoryAvatar class="mr-3" icon-type="material" :icon-name="gearList.categoryIconName" :background-color="gearList.color" />
 					<b class="text-gray-800">{{ gearList.categoryLabel}}</b>
 				</h3>
 				<Board :key="'categoryGears' + categoryLabel" class="mb-6">
@@ -106,9 +104,7 @@
 			</template>
 
 			<h3 class="mdc-list-group__subheader d-flex align-items-center mb-3">
-				<div class="category-avatar mr-2">
-					<i class="category-avatar__icon material-icons-outlined">backpack</i>
-				</div>
+				<CategoryAvatar class="mr-3" icon-type="material" icon-name="backpack" />
 				<b class="text-gray-800">背包</b>
 			</h3>
 			<Board class="mb-6">
@@ -280,72 +276,28 @@
 									<ul class="mdc-list">
 										<li class="mdc-list-item" data-value="backpack">
 											<span class="mdc-list-item__ripple"></span>
-											<span class="mdc-list-item__graphic category-avatar mr-3" style="background-color: #CC4545;">
-												<i class="material-icons-outlined category-avatar__icon">backpack</i>
-											</span>
+											<CategoryAvatar class="mr-3" icon-type="material" icon-name="backpack" background-color="#CC4545" />
 											<span class="mdc-list-item__text">
 												背包
 											</span>
 										</li>
 										<li class="mdc-list-item" data-value="sleeping">
 											<span class="mdc-list-item__ripple"></span>
-											<div class="mdc-list-item__graphic category-avatar mr-3" style="background-color: #B68383;">
-												<i class="material-icons-outlined category-avatar__icon">hotel</i>
-											</div>
+											<CategoryAvatar class="mr-3" icon-type="material" icon-name="hotel" background-color="#B68383" />
 											<span class="mdc-list-item__text">
 												睡眠系統
 											</span>
 										</li>
 										<li class="mdc-list-item" data-value="shelter">
 											<span class="mdc-list-item__ripple"></span>
-											<div class="mdc-list-item__graphic category-avatar mr-3" style="background-color: #E1BA51;">
-												<i class="material-icons-outlined category-avatar__icon">foundation</i>
-											</div>
+											<CategoryAvatar class="mr-3" icon-type="material" icon-name="foundation" background-color="#E1BA51" />
 											<span class="mdc-list-item__text">
 												遮蔽系統
 											</span>
 										</li>
 										<li class="mdc-list-item" data-value="cook">
 											<span class="mdc-list-item__ripple"></span>
-											<div class="mdc-list-item__graphic category-avatar mr-3" style="background-color: #8BB683;">
-												<i class="material-icons-outlined category-avatar__icon">outdoor_grill</i>
-											</div>
-											<span class="mdc-list-item__text">
-												炊事系統
-											</span>
-										</li>
-										<li class="mdc-list-item" data-value="backpack">
-											<span class="mdc-list-item__ripple"></span>
-											<span class="mdc-list-item__graphic category-avatar mr-3" style="background-color: #CC4545;">
-												<i class="material-icons-outlined category-avatar__icon">backpack</i>
-											</span>
-											<span class="mdc-list-item__text">
-												背包
-											</span>
-										</li>
-										<li class="mdc-list-item" data-value="sleeping">
-											<span class="mdc-list-item__ripple"></span>
-											<div class="mdc-list-item__graphic category-avatar mr-3" style="background-color: #B68383;">
-												<i class="material-icons-outlined category-avatar__icon">hotel</i>
-											</div>
-											<span class="mdc-list-item__text">
-												睡眠系統
-											</span>
-										</li>
-										<li class="mdc-list-item" data-value="shelter">
-											<span class="mdc-list-item__ripple"></span>
-											<div class="mdc-list-item__graphic category-avatar mr-3" style="background-color: #E1BA51;">
-												<i class="material-icons-outlined category-avatar__icon">foundation</i>
-											</div>
-											<span class="mdc-list-item__text">
-												遮蔽系統
-											</span>
-										</li>
-										<li class="mdc-list-item" data-value="cook">
-											<span class="mdc-list-item__ripple"></span>
-											<div class="mdc-list-item__graphic category-avatar mr-3" style="background-color: #8BB683;">
-												<i class="material-icons-outlined category-avatar__icon">outdoor_grill</i>
-											</div>
+											<CategoryAvatar class="mr-3" icon-type="material" icon-name="outdoor_grill" background-color="#8BB683" />
 											<span class="mdc-list-item__text">
 												炊事系統
 											</span>
@@ -451,6 +403,7 @@
 
 <script>
 import Board from '@components/Board';
+import CategoryAvatar from '@components/CategoryAvatar';
 import MdcButton from '@components/MdcButton';
 import MdcDialog from '@components/MdcDialog';
 import MdcDialogActionButton from '@components/MdcDialogActionButton';
@@ -465,6 +418,7 @@ import {MDCSelect} from '@material/select';
 export default {
 	components: {
 		Board,
+		CategoryAvatar,
 		MdcButton,
 		MdcDialog,
 		MdcDialogActionButton,

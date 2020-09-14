@@ -1,5 +1,5 @@
 <template>
-	<i :class="iconClass" class="category-avatar__icon"><template v-if="iconType === 'material'">{{ iconName }}</template></i>
+	<i :class="iconClass"><template v-if="iconType === 'material'">{{ iconName }}</template></i>
 </template>
 
 <script>
