@@ -1,0 +1,42 @@
+.color-radio {
+	$root: &;
+	display: inline-block;
+	position: relative;
+	margin: 4px;
+	user-select: none;
+	cursor: pointer;
+
+	&__circle {
+		@extend .icon-circle;
+
+		#{$root}:hover &,
+		#{$root}:focus &,
+		#{$root}:focus-within & {
+			box-shadow: $box-shadow-md;
+		}
+	}
+
+
+	&__icon {
+		display: none;
+		color: #FFF;
+		font-size: $font-size-lg;
+	}
+
+	[type=radio] {
+		position: absolute;
+		opacity: 0;
+		cursor: pointer;
+
+		&:checked + #{$root}__circle {
+			border: 4px solid #FFF;
+			box-shadow: $box-shadow-md;
+			transform: scale(1.4);
+
+			#{$root}__icon {
+				display: block;
+			}
+		}
+	}
+
+}

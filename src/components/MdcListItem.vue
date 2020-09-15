@@ -1,5 +1,6 @@
 <template>
 	<li class="mdc-list-item">
+		<span class="mdc-list-item__ripple"></span>
 		<span v-if="$slots.text" class="mdc-list-item__text">
 			<slot name="text"></slot>
 		</span>

@@ -30,6 +30,7 @@
 						:aria-current="page.name === currentPage.name ? 'page' : null"
 						:tabindex="page.name === currentPage.name ? 0 : -1"
 					>
+						<span class="mdc-list-item__ripple"></span>
 						<i class="material-icons-outlined mdc-list-item__graphic" aria-hidden="true">
 							{{ page.icon }}
 						</i>

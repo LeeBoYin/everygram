@@ -1,6 +1,21 @@
 <template>
 	<div>
 		<div class="container-xl">
+			<!-- 空白狀態 -->
+			<div class="text-center p-7">
+				<p>你的裝備庫是空的</p>
+				<MdcFab
+					icon="add"
+					label="新增裝備"
+					class="mdc-fab--extended"
+					@click.native="onClickCreateGear"
+				>
+				</MdcFab>
+			</div>
+			<div class="mt-7">
+				<img src="/static/images/illustration/illu-mountains-gray.png" alt="" class="w-100">
+			</div>
+
 			<!-- 預設模式 -->
 			<div class="page-tool-bar">
 				<div class="text-gray-700">共有 54 個裝備</div>
@@ -49,15 +64,14 @@
 
 			<template v-for="(gearList, categoryLabel) in gearLists">
 				<h3 :key="'categoryLabel' + categoryLabel" class="mdc-list-group__subheader d-flex align-items-center mb-3">
-					<div class="category-avatar mr-2" :style="{ 'background-color': gearList.color }">
-						<i class="category-avatar__icon material-icons-outlined">{{ gearList.categoryIconName }}</i>
-					</div>
+					<CategoryAvatar class="mr-3" icon-type="material" :icon-name="gearList.categoryIconName" :background-color="gearList.color" />
 					<b class="text-gray-800">{{ gearList.categoryLabel}}</b>
 				</h3>
 				<Board :key="'categoryGears' + categoryLabel" class="mb-6">
 					<div class="mdc-list-group">
 						<MdcList>
 							<li v-for="(gear, id) in gearList.gears" :key="id" class="mdc-list-item gear-list-item">
+								<span class="mdc-list-item__ripple"></span>
 								<!-- 編輯排序模式才出現 -->
 								<!-- <span class="mdc-list-item__graphic material-icons-outlined" aria-hidden="true">drag_handle</span> -->
 								<div class="mdc-list-item__text flex-grow-1">
@@ -90,15 +104,14 @@
 			</template>
 
 			<h3 class="mdc-list-group__subheader d-flex align-items-center mb-3">
-				<div class="category-avatar mr-2">
-					<i class="category-avatar__icon material-icons-outlined">backpack</i>
-				</div>
+				<CategoryAvatar class="mr-3" icon-type="material" icon-name="backpack" />
 				<b class="text-gray-800">背包</b>
 			</h3>
 			<Board class="mb-6">
 				<div class="mdc-list-group">
 					<MdcList>
 						<li class="mdc-list-item gear-list-item fake">
+							<span class="mdc-list-item__ripple"></span>
 							<div class="mdc-list-item__text flex-grow-1">
 								<div class="row align-items-center">
 									<div class="col-lg-9">
@@ -114,6 +127,7 @@
 							</div>
 						</li>
 						<li class="mdc-list-item gear-list-item gear-list-item--expand">
+							<span class="mdc-list-item__ripple"></span>
 							<!-- <span class="mdc-list-item__graphic material-icons-outlined" aria-hidden="true">drag_handle</span> -->
 							<div class="mdc-list-item__text flex-grow-1">
 								<div class="row align-items-center">
@@ -139,7 +153,8 @@
 							</span>
 						</li>
 						<li class="mdc-list-item gear-list-item">
-							<!-- <span class="mdc-list-item__graphic material-icons-outlined" aria-hidden="true">drag_handle</span> -->
+							<span class="mdc-list-item__ripple"></span>
+							<span class="mdc-list-item__graphic material-icons-outlined" aria-hidden="true">drag_handle</span>
 							<div class="mdc-list-item__text flex-grow-1">
 								<div class="row align-items-center">
 									<div class="col-lg-9">
@@ -148,7 +163,49 @@
 												<i class="material-icons-outlined">backpack</i>
 											</div>
 											<div class="flex-grow-1">
-												<h5 class="mt-0 mb-1">Item demo</h5>
+												<h5 class="mt-0 mb-1">Draggable</h5>
+												<div class="text-gray-600">Everygram</div>
+												<div class="text-gray-600">Everygram</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3 d-none d-lg-block text-right text-gray-600">
+										100g
+									</div>
+								</div>
+							</div>
+							<span class="mdc-list-item__meta text-nowrap">
+								<MdcIconButton>more_vert</MdcIconButton>
+							</span>
+						</li>
+						<li class="mdc-list-item mdc-list-item--selected gear-list-item">
+							<span class="mdc-list-item__graphic material-icons-outlined" aria-hidden="true">
+								<div class="mdc-checkbox mdc-checkbox--selected">
+									<input type="checkbox"
+										class="mdc-checkbox__native-control"
+										id="checkbox-1"
+										checked/>
+									<div class="mdc-checkbox__background">
+									<svg class="mdc-checkbox__checkmark"
+										viewBox="0 0 24 24">
+										<path class="mdc-checkbox__checkmark-path"
+											fill="none"
+											d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+									</svg>
+									<div class="mdc-checkbox__mixedmark"></div>
+									</div>
+									<div class="mdc-checkbox__ripple"></div>
+								</div>
+							</span>
+							<div class="mdc-list-item__text flex-grow-1">
+								<div class="row align-items-center">
+									<div class="col-lg-9">
+										<div class="d-flex align-items-start">
+											<div class="img-thumbnail gear-list-item__img-thumbnail flex-shrink-0">
+												<i class="material-icons-outlined">backpack</i>
+											</div>
+											<div class="flex-grow-1">
+												<h5 class="mt-0 mb-1">Selectable</h5>
 												<div class="text-gray-600">Everygram</div>
 												<div class="text-gray-600">Everygram</div>
 											</div>
@@ -186,42 +243,7 @@
 			title="新增裝備"
 		>
 			<template #default>
-				<div class="mdc-tab-bar" role="tablist">
-					<div class="mdc-tab-scroller">
-						<div class="mdc-tab-scroller__scroll-area">
-							<div class="mdc-tab-scroller__scroll-content">
-								<button class="mdc-tab mdc-tab--min-width mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
-									<span class="mdc-tab__content">
-										<span class="mdc-tab__text-label">基本資訊</span>
-									</span>
-									<span class="mdc-tab-indicator mdc-tab-indicator--active">
-										<span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
-									</span>
-									<span class="mdc-tab__ripple"></span>
-								</button>
-								<button class="mdc-tab mdc-tab--min-width" role="tab" tabindex="0">
-									<span class="mdc-tab__content">
-										<span class="mdc-tab__text-label">購買資訊</span>
-									</span>
-									<span class="mdc-tab-indicator">
-										<span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
-									</span>
-									<span class="mdc-tab__ripple"></span>
-								</button>
-								<button class="mdc-tab mdc-tab--min-width" role="tab" tabindex="0">
-									<span class="mdc-tab__content">
-										<span class="mdc-tab__text-label">備註</span>
-									</span>
-									<span class="mdc-tab-indicator">
-										<span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
-									</span>
-									<span class="mdc-tab__ripple"></span>
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row mt-4">
+				<div class="row">
 					<div class="col-6 col-sm-3 mx-auto">
 						<div class="mb-3">
 							<div class="img-thumbnail w-100 embed-responsive embed-responsive-1by1">
@@ -252,19 +274,45 @@
 
 								<div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
 									<ul class="mdc-list">
-										<li class="mdc-list-item" data-value="grains">
+										<li class="mdc-list-item" data-value="backpack">
 											<span class="mdc-list-item__ripple"></span>
-											<span class="mdc-list-item__text">Bread, Cereal, Rice, and Pasta</span>
+											<CategoryAvatar class="mr-3" icon-type="material" icon-name="backpack" background-color="#CC4545" />
+											<span class="mdc-list-item__text">
+												背包
+											</span>
 										</li>
-										<li class="mdc-list-item" data-value="vegetables">
+										<li class="mdc-list-item" data-value="sleeping">
 											<span class="mdc-list-item__ripple"></span>
-											<span class="mdc-list-item__text">Vegetables</span>
+											<CategoryAvatar class="mr-3" icon-type="material" icon-name="hotel" background-color="#B68383" />
+											<span class="mdc-list-item__text">
+												睡眠系統
+											</span>
 										</li>
-										<li class="mdc-list-item" data-value="fruit">
+										<li class="mdc-list-item" data-value="shelter">
 											<span class="mdc-list-item__ripple"></span>
-											<span class="mdc-list-item__text">Fruit</span>
+											<CategoryAvatar class="mr-3" icon-type="material" icon-name="foundation" background-color="#E1BA51" />
+											<span class="mdc-list-item__text">
+												遮蔽系統
+											</span>
+										</li>
+										<li class="mdc-list-item" data-value="cook">
+											<span class="mdc-list-item__ripple"></span>
+											<CategoryAvatar class="mr-3" icon-type="material" icon-name="outdoor_grill" background-color="#8BB683" />
+											<span class="mdc-list-item__text">
+												炊事系統
+											</span>
 										</li>
 									</ul>
+									<div class="mdc-menu__footer">
+										<div class="text-right">
+											<MdcButton el="router-link" class="mdc-button--text" :to="{ name: 'DemoSettingsCategories' }">
+												裝備類別設定
+												<template #trailing-icon>
+													<i class="material-icons-outlined">keyboard_arrow_right</i>
+												</template>
+											</MdcButton>
+										</div>
+									</div>
 								</div>
 								</div>
 						</div>
@@ -317,12 +365,23 @@
 								</div>
 							</div>
 						</div>
-						<div class="mb-3">
-							<MdcTextField
-								type="text"
-								autocomplete="off"
-								label="製造日期"
-							/>
+						<div>
+							<MdcButton class="mdc-button--text">
+								<i slot="leading-icon" class="material-icons-outlined mdc-button__icon" aria-hidden="true">add</i>
+								製造日期
+							</MdcButton>
+						</div>
+						<div>
+							<MdcButton class="mdc-button--text">
+								<i slot="leading-icon" class="material-icons-outlined mdc-button__icon" aria-hidden="true">add</i>
+								購買資訊
+							</MdcButton>
+						</div>
+						<div>
+							<MdcButton class="mdc-button--text">
+								<i slot="leading-icon" class="material-icons-outlined mdc-button__icon" aria-hidden="true">add</i>
+								備註
+							</MdcButton>
 						</div>
 					</div>
 				</div>
@@ -344,6 +403,7 @@
 
 <script>
 import Board from '@components/Board';
+import CategoryAvatar from '@components/CategoryAvatar';
 import MdcButton from '@components/MdcButton';
 import MdcDialog from '@components/MdcDialog';
 import MdcDialogActionButton from '@components/MdcDialogActionButton';
@@ -352,12 +412,13 @@ import MdcIconButton from '@components/MdcIconButton';
 import MdcList from '@components/MdcList';
 import MdcListItem from '@components/MdcListItem';
 import MdcTextField from '@components/MdcTextField';
-import {MDCTabBar} from '@material/tab-bar';
+import {MDCCheckbox} from '@material/checkbox';
 import {MDCSelect} from '@material/select';
 
 export default {
 	components: {
 		Board,
+		CategoryAvatar,
 		MdcButton,
 		MdcDialog,
 		MdcDialogActionButton,
@@ -367,7 +428,6 @@ export default {
 		MdcListItem,
 		MDCSelect,
 		MdcTextField,
-		MDCTabBar,
 	},
 	data() {
 		return {
@@ -379,7 +439,7 @@ export default {
 					gears: [
 						{
 							id: "1",
-							imgUrl: "https://scontent.ftpe7-3.fna.fbcdn.net/v/t1.0-9/103585657_5473153589367637_1310014277959382298_o.jpg?_nc_cat=108&_nc_sid=cdbe9c&_nc_ohc=DwcLJEHGKJEAX9yqBMz&_nc_ht=scontent.ftpe7-3.fna&oh=f80e97d925bc7322f2d57fd72c5be69d&oe=5F549700",
+							imgUrl: "https://scontent.ftpe7-3.fna.fbcdn.net/v/t1.0-9/103585657_5473153589367637_1310014277959382298_o.jpg?_nc_cat=108&_nc_sid=cdbe9c&_nc_ohc=t2WkNZPi8rYAX8UHaWU&_nc_ht=scontent.ftpe7-3.fna&oh=69d035275590f913a351b01348af3562&oe=5F801880",
 							title: "Rawlow Bambi 輕量包awlow Bambi 輕量包awlow Bambi 輕量包awlow Bambi 輕量包",
 							brand: "Rawlow Mountain Works",
 							model: "Bambi 28L",
@@ -422,7 +482,7 @@ export default {
 						},
 						{
 							id: "5",
-							imgUrl: "https://scontent.ftpe7-3.fna.fbcdn.net/v/t1.0-9/103585657_5473153589367637_1310014277959382298_o.jpg?_nc_cat=108&_nc_sid=cdbe9c&_nc_ohc=DwcLJEHGKJEAX9yqBMz&_nc_ht=scontent.ftpe7-3.fna&oh=f80e97d925bc7322f2d57fd72c5be69d&oe=5F549700",
+							imgUrl: "https://scontent.ftpe7-3.fna.fbcdn.net/v/t1.0-9/103585657_5473153589367637_1310014277959382298_o.jpg?_nc_cat=108&_nc_sid=cdbe9c&_nc_ohc=t2WkNZPi8rYAX8UHaWU&_nc_ht=scontent.ftpe7-3.fna&oh=69d035275590f913a351b01348af3562&oe=5F801880",
 							title: "Rawlow Bambi 輕量包",
 							brand: "Rawlow Mountain Works",
 							model: "Bambi 28L",
@@ -455,7 +515,7 @@ export default {
 						},
 						{
 							id: "8",
-							imgUrl: "https://scontent.ftpe7-3.fna.fbcdn.net/v/t1.0-9/103585657_5473153589367637_1310014277959382298_o.jpg?_nc_cat=108&_nc_sid=cdbe9c&_nc_ohc=DwcLJEHGKJEAX9yqBMz&_nc_ht=scontent.ftpe7-3.fna&oh=f80e97d925bc7322f2d57fd72c5be69d&oe=5F549700",
+							imgUrl: "https://scontent.ftpe7-3.fna.fbcdn.net/v/t1.0-9/103585657_5473153589367637_1310014277959382298_o.jpg?_nc_cat=108&_nc_sid=cdbe9c&_nc_ohc=t2WkNZPi8rYAX8UHaWU&_nc_ht=scontent.ftpe7-3.fna&oh=69d035275590f913a351b01348af3562&oe=5F801880",
 							title: "Snow Peak 天幕",
 							brand: "Snow Peak",
 							model: "Penda",
@@ -483,13 +543,13 @@ export default {
 		};
 	},
 	mounted() {
-		const tabBar = new MDCTabBar(document.querySelector('.mdc-tab-bar'));
-
 		const select = new MDCSelect(document.querySelector('.mdc-select'));
 
 		select.listen('MDCSelect:change', () => {
 		// alert(`Selected option at index ${select.selectedIndex} with value "${select.value}"`);
 		});
+
+		const checkbox = new MDCCheckbox(document.querySelector('.mdc-checkbox'));
 	},
 	methods: {
 		onClickCreateGear() {

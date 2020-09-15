@@ -3,6 +3,7 @@
 
 @include list.core-styles;
 @include list.group-subheader-ink-color($c-gray-600);
+@include list.item-selected-text-color($c-gray-800);
 
 .mdc-list {
 	&:not(.mdc-list--non-interactive) {

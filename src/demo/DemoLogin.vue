@@ -71,7 +71,7 @@
 						</div>
 						<div>
 							<MdcButton @click.native="mode = 'signIn'">
-								<i slot="leading-icon" class="material-icons material-icons-outlined mdc-button__icon">keyboard_arrow_left</i>
+								<i slot="leading-icon" class="material-icons-outlined mdc-button__icon">keyboard_arrow_left</i>
 								返回登入
 							</MdcButton>
 						</div>
@@ -91,7 +91,7 @@
 						</div>
 						<div>
 							<MdcButton @click.native="mode = 'signIn'">
-								<i slot="leading-icon" class="material-icons material-icons-outlined mdc-button__icon">keyboard_arrow_left</i>
+								<i slot="leading-icon" class="material-icons-outlined mdc-button__icon">keyboard_arrow_left</i>
 								返回登入
 							</MdcButton>
 						</div>
@@ -107,7 +107,7 @@
 						</div>
 						<div>
 							<MdcButton @click.native="mode = 'signIn'">
-								<i slot="leading-icon" class="material-icons material-icons-outlined mdc-button__icon">keyboard_arrow_left</i>
+								<i slot="leading-icon" class="material-icons-outlined mdc-button__icon">keyboard_arrow_left</i>
 								返回登入
 							</MdcButton>
 						</div>

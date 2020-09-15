@@ -19,6 +19,7 @@
 	@include textfield.disabled-ink-color($c-gray-800);
 	@include textfield.disabled-bottom-line-color($c-gray-100);
 	@include textfield.hover-bottom-line-color($c-primary);
+	@include textfield.label-color($c-gray-600);
 
 	&--focused:not(.mdc-text-field--disabled) .mdc-floating-label {
 		color: $c-primary-dark;
@@ -45,9 +46,9 @@
 
 // 修正 Ripple 顏色
 .mdc-text-field--filled:hover .mdc-text-field__ripple::before {
-	opacity: 0.04;
+	opacity: $opacity-ripple-text-field-hover;
 }
 
 .mdc-text-field--filled.mdc-ripple-upgraded--background-focused .mdc-text-field__ripple::before, .mdc-text-field--filled:not(.mdc-ripple-upgraded):focus .mdc-text-field__ripple::before {
-	opacity: 0.06;
+	opacity: $opacity-ripple-text-field-focus;
 }
