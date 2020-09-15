@@ -51,7 +51,7 @@ const actions = {
 			throw errorMessageLang(e.code);
 		}
 	},
-	async appendGear(context, { gearId, categoryUuid }) {
+	async appendGearToGearList(context, { gearId, categoryUuid }) {
 		const gear = await context.dispatch('gear/getGear', gearId, { root: true });
 		const updateObj = {
 			[`gearData.${ gearId }`]: gear.data(),

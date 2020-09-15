@@ -4,6 +4,8 @@ const CONSTANTS = {
 	STORAGE_PATH_TO_GEAR_PHOTO: 'gear',
 	ROLE_OWNER: 'owner',
 	CATEGORY_OTHERS: 'others',
+	UNIT_SYSTEM_METRIC: 'metric',
+	UNIT_SYSTEM_IMPERIAL: 'imperial',
 };
 
 export const constant = (key) => {

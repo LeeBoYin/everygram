@@ -35,9 +35,9 @@ export default {
 	computed: {
 		unit() {
 			switch (this.unitSystem) {
-				case 'metric':
+				case constant('UNIT_SYSTEM_METRIC'):
 					return 'g';
-				case 'imperial':
+				case constant('UNIT_SYSTEM_IMPERIAL'):
 					return 'oz';
 			}
 			return null;

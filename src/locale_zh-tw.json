@@ -108,5 +108,8 @@
 	"label_weight": "重量",
 	"label_manufactured_date": "製造日期",
 	"error_permission-denied": "權限不足",
+	"weight_unit_gram": "g",
+	"weight_unit_ounce": "oz",
+	"info_gears_empty": "你的裝備庫是空的",
 	"util_or": "或"
 }

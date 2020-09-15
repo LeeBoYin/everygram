@@ -65,8 +65,8 @@
 							<MdcListItemSelect
 								label="預設單位"
 								:options="[
-									{ value: 'metric', text: '公制' },
-									{ value: 'imperial', text: '英制' },
+									{ value: constant('UNIT_SYSTEM_METRIC'), text: '公制' },
+									{ value: constant('UNIT_SYSTEM_IMPERIAL'), text: '英制' },
 								]"
 								v-model="unitSystem"
 							/>
