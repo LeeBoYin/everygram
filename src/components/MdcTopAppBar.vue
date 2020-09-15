@@ -13,7 +13,7 @@
 				<button
 					v-for="actionItem in actionItems"
 					:key="actionItem.icon"
-					class="material-icons mdc-top-app-bar__action-item mdc-icon-button"
+					class="material-icons-outlined mdc-top-app-bar__action-item mdc-icon-button"
 					:aria-label="actionItem.name"
 					@click="$emit(`click:${ actionItem.name }`)"
 				>{{ actionItem.icon }}</button>

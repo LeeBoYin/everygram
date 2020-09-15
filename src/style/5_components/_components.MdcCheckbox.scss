@@ -1,0 +1,10 @@
+@use "@material/checkbox";
+@use "@material/form-field";
+
+@include checkbox.core-styles;
+@include form-field.core-styles;
+
+.mdc-checkbox {
+	@include checkbox.container-colors($c-gray-400, transparent, $c-primary, $c-primary, true);
+	@include checkbox.focus-indicator-color($c-primary);
+}

@@ -7,6 +7,7 @@
 @import "0_settings/settings.border";
 @import "0_settings/settings.colors";
 @import "0_settings/settings.fonts";
+@import "0_settings/settings.opacity";
 @import "0_settings/settings.padding";
 @import "0_settings/settings.shadow";
 
@@ -28,12 +29,14 @@
 
 // 4. objects
 @import "4_objects/objects.formRow";
+@import "4_objects/objects.iconCircle";
 @import "4_objects/objects.shimmer";
 @import "4_objects/objects.sortable";
 
 // 5. components
 // mdc components
 @import "5_components/components.MdcButton";
+@import "5_components/components.MdcCheckbox";
 @import "5_components/components.MdcCircularProgress";
 @import "5_components/components.MdcDialogs";
 @import "5_components/components.MdcDrawer";
@@ -51,6 +54,7 @@
 // Custom components
 @import "5_components/components.AlertInline";
 @import "5_components/components.Avatar";
+@import "5_components/components.ColorRadio";
 @import "5_components/components.Board";
 @import "5_components/components.CategoryAvatar";
 @import "5_components/components.CategoryListItem";

@@ -20,6 +20,8 @@
 						<TextFieldErrorMessage :message="errors[0]" />
 					</div>
 				</ValidationProvider>
+
+				<h5 class="mb-2">類別圖示</h5>
 				<ValidationProvider :name="lang('label_category_icon')" rules="required" v-slot="{ errors }">
 					<div class="row no-gutters">
 						<div class="col-auto" v-for="(categoryIcon, index) in categoryIcons" :key="index">
@@ -31,10 +33,33 @@
 						<TextFieldErrorMessage :message="errors[0]" />
 					</div>
 				</ValidationProvider>
+
 				<AlertInline v-if="pristine && errorMessage" class="text-danger mt-3">
 					{{ errorMessage }}
 				</AlertInline>
 			</ValidationObserver>
+
+			<h5 class="mb-2">類別顏色</h5>
+			<div class="mb-4">
+				<div class="row no-gutters">
+					<div class="col-auto">
+						<label class="color-radio">
+							<input type="radio" name="category_color">
+							<div class="color-radio__circle mr-2" :style="{ 'background-color': '#999' }">
+								<i class="color-radio__icon material-icons-outlined">check</i>
+							</div>
+						</label>
+					</div>
+					<div class="col-auto">
+						<label class="color-radio">
+							<input type="radio" name="category_color">
+							<div class="color-radio__circle mr-2" :style="{ 'background-color': '#999' }">
+								<i class="color-radio__icon material-icons-outlined">check</i>
+							</div>
+						</label>
+					</div>
+				</div>
+			</div>
 		</template>
 		<template #actions>
 			<MdcDialogActionButton @click.native="onClickCancel">
