@@ -43,18 +43,18 @@
 			<div class="mb-4">
 				<div class="row no-gutters">
 					<div class="col-auto">
-						<label class="avatar-radio">
+						<label class="color-radio">
 							<input type="radio" name="category_color">
-							<div class="category-avatar avatar-radio__avatar mr-2" :style="{ 'background-color': '#999' }">
-								<i class="category-avatar__icon material-icons-outlined">check</i>
+							<div class="color-radio__circle mr-2" :style="{ 'background-color': '#999' }">
+								<i class="color-radio__icon material-icons-outlined">check</i>
 							</div>
 						</label>
 					</div>
 					<div class="col-auto">
-						<label class="avatar-radio">
+						<label class="color-radio">
 							<input type="radio" name="category_color">
-							<div class="category-avatar avatar-radio__avatar mr-2" :style="{ 'background-color': '#999' }">
-								<i class="category-avatar__icon material-icons-outlined">check</i>
+							<div class="color-radio__circle mr-2" :style="{ 'background-color': '#999' }">
+								<i class="color-radio__icon material-icons-outlined">check</i>
 							</div>
 						</label>
 					</div>

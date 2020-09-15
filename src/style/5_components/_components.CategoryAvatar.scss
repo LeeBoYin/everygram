@@ -1,13 +1,7 @@
 .category-avatar {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 32px;
-	height: 32px;
-	background-color: $c-gray-400;
-	border-radius: 50%;
+	@extend .icon-circle;
 
-	& &__icon {
+	&__icon {
 		font-size: $font-size-lg;
 		color: #FFF;
 	}

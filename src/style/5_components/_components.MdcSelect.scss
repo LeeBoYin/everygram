@@ -14,13 +14,13 @@
 
 // 修正 Ripple 顏色
 .mdc-select--filled:hover .mdc-select__ripple::before {
-	opacity: 0.03;
+	opacity: $opacity-ripple-text-field-hover;
 }
 
-.mdc-select--filled.mdc-ripple-upgraded--background-focused .mdc-select__ripple::before, .mdc-select--filled:not(.mdc-ripple-upgraded):focus .mdc-select__ripple::before {
-	opacity: 0.06;
+.mdc-select--filled .mdc-ripple-upgraded--background-focused .mdc-select__ripple::before, .mdc-select--filled:not(.mdc-ripple-upgraded):focus .mdc-select__ripple::before {
+	opacity: $opacity-ripple-text-field-focus;
 }
 
 .mdc-select--filled:active .mdc-select__ripple::before {
-	opacity: 0.08;
+	opacity: $opacity-ripple-text-field-active;
 }
