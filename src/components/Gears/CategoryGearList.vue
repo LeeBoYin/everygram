@@ -1,10 +1,9 @@
 <template>
 	<div class="category-gear-list mdc-list-group">
-		<h3 :key="'categoryLabel' + category.uuid" class="mdc-list-group__subheader d-flex align-items-center">
-			<div class="category-avatar mr-2" :style="{ 'background-color': category.color }">
-				<i class="category-avatar__icon material-icons-outlined">{{ category.iconName }}</i>
-			</div>
-			<b class="text-gray-800">{{ getCategoryName(category) }}</b>
+		<h3 class="mdc-list-group__subheader d-flex align-items-center">
+			<CategoryAvatar v-if="category" :icon-type="category.iconType" :icon-name="category.iconName" :background-color="category.color" />
+			<CategoryAvatar v-else :icon-type="constant('ICON_TYPE_MATERIAL')" icon-name="help_outline" />
+			<b class="text-gray-800">{{ category ? getCategoryName(category) : lang('category_others') }}</b>
 		</h3>
 		<Board>
 			<MdcList>
@@ -16,10 +15,12 @@
 
 <script>
 import Board from '@components/Board';
+import CategoryAvatar from '@components/CategoryAvatar';
 import MdcList from '@components/MdcList';
 export default {
 	components: {
 		Board,
+		CategoryAvatar,
 		MdcList,
 	},
 	props: {

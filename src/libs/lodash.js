@@ -10,6 +10,7 @@ import {
 	get,
 	includes,
 	indexOf,
+	isEmpty,
 	isFunction,
 	isNil,
 	join,
@@ -26,6 +27,7 @@ import {
 	some,
 	split,
 	trim,
+	without,
 } from 'lodash-es';
 
 export default {
@@ -40,6 +42,7 @@ export default {
 	get,
 	includes,
 	indexOf,
+	isEmpty,
 	isFunction,
 	isNil,
 	join,
@@ -56,4 +59,5 @@ export default {
 	some,
 	split,
 	trim,
+	without,
 };

@@ -1,4 +1,4 @@
-<template functional>
+<template>
 	<li class="mdc-list-item gear-list-item fake">
 		<div class="mdc-list-item__text flex-grow-1">
 			<div class="row align-items-center">

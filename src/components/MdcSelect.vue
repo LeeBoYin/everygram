@@ -18,7 +18,7 @@
 <!--				v-if="_.get(selectedOption, 'iconName')"-->
 <!--				class="mdc-select__icon"-->
 <!--				:class="{-->
-<!--					'material-icons material-icons-outlined': selectedOption.iconType === 'material',-->
+<!--					'material-icons material-icons-outlined': selectedOption.iconType === constant('ICON_TYPE_MATERIAL'),-->
 <!--				}"-->
 <!--				aria-hidden="true"-->
 <!--			>-->
@@ -51,7 +51,7 @@
 						v-if="option.iconName"
 						class="material-icons material-icons-outlined mdc-list-item__graphic"
 						:class="{
-							'material-icons material-icons-outlined': option.iconType === 'material',
+							'material-icons material-icons-outlined': option.iconType === constant('ICON_TYPE_MATERIAL'),
 						}" aria-hidden="true">
 						{{ option.iconName }}
 					</i>

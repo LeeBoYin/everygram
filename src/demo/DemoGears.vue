@@ -22,9 +22,9 @@
 					<div class="text-gray-700">共有 54 個裝備</div>
 				</template>
 				<template #right>
-					<MdcButton class="mdc-button--text ml-2">選取</MdcButton>
-					<MdcButton class="mdc-button--text ml-2">編輯排序</MdcButton>
-					<MdcButton class="mdc-button--text ml-2">
+					<MdcButton class="mdc-button--text">選取</MdcButton>
+					<MdcButton class="mdc-button--text">編輯排序</MdcButton>
+					<MdcButton class="mdc-button--text">
 						檢視密度<i slot="trailing-icon" class="material-icons-outlined mdc-button__icon" aria-hidden="true">arrow_drop_down</i>
 					</MdcButton>
 
@@ -40,21 +40,21 @@
 			<PageToolBar>
 				<template #left>
 					<div class="font-weight-bolder text-gray-700">已選取 5 個裝備</div>
-					<MdcButton class="mdc-button--text ml-2">
+					<MdcButton class="mdc-button--text">
 						<i slot="leading-icon" class="material-icons-outlined mdc-button__icon" aria-hidden="true">add</i>
 						新增到
 					</MdcButton>
-					<MdcButton class="mdc-button--text ml-2">
+					<MdcButton class="mdc-button--text">
 						<i slot="leading-icon" class="material-icons-outlined mdc-button__icon" aria-hidden="true">archive</i>
 						封存
 					</MdcButton>
-					<MdcButton class="mdc-button--text ml-2">
+					<MdcButton class="mdc-button--text">
 						<i slot="leading-icon" class="material-icons-outlined mdc-button__icon" aria-hidden="true">delete</i>
 						刪除
 					</MdcButton>
 				</template>
 				<template #right>
-					<MdcButton class="mdc-button--text ml-2">取消選取</MdcButton>
+					<MdcButton class="mdc-button--text">取消選取</MdcButton>
 				</template>
 			</PageToolBar>
 
@@ -64,177 +64,64 @@
 					<div class="font-weight-bolder text-gray-700">拖動裝備進行排序</div>
 				</template>
 				<template #right>
-					<MdcButton class="mdc-button--text ml-2">完成</MdcButton>
+					<MdcButton class="mdc-button--text">完成</MdcButton>
 				</template>
 			</PageToolBar>
-<div class="category-list">
-			<div v-for="(gearList, categoryLabel) in gearLists" :key="categoryLabel">
-				<h3 :key="'categoryLabel' + categoryLabel" class="mdc-list-group__subheader d-flex align-items-center mb-3">
-					<CategoryAvatar class="mr-3" icon-type="material" :icon-name="gearList.categoryIconName" :background-color="gearList.color" />
-					<b class="text-gray-800">{{ gearList.categoryLabel}}</b>
-				</h3>
-				<Board :key="'categoryGears' + categoryLabel" class="mb-6">
-					<div class="mdc-list-group">
-						<MdcList>
-							<li v-for="(gear, id) in gearList.gears" :key="id" class="mdc-list-item gear-list-item">
-								<span class="mdc-list-item__ripple"></span>
-								<!-- 編輯排序模式才出現 -->
-								<!-- <span class="mdc-list-item__graphic material-icons-outlined" aria-hidden="true">drag_handle</span> -->
-								<div class="mdc-list-item__text flex-grow-1">
-									<div class="row align-items-center">
-										<div class="col-lg-9">
-											<div class="d-flex align-items-start">
-												<div class="img-thumbnail gear-list-item__img-thumbnail flex-shrink-0">
-													<img v-if="gear.imgUrl" :src="gear.imgUrl" alt="...">
-													<i v-else class="material-icons-outlined">{{ gearList.categoryIconName }}</i>
-												</div>
-												<div>
-													<h5 class="mt-0 mb-1">{{ gear.title }}</h5>
-													<div class="text-gray-600">{{ gear.brand }}</div>
-													<div class="text-gray-600">{{ gear.model }}</div>
-												</div>
-											</div>
-										</div>
-										<div class="col-lg-3 d-none d-lg-block text-right text-gray-600">
-											{{ gear.weight }}
-										</div>
-									</div>
-								</div>
-								<span class="mdc-list-item__meta text-nowrap">
-									<MdcIconButton>more_vert</MdcIconButton>
-								</span>
-							</li>
-						</MdcList>
-					</div>
-				</Board>
-			</div>
-
-			<h3 class="mdc-list-group__subheader d-flex align-items-center mb-3">
-				<CategoryAvatar class="mr-3" icon-type="material" icon-name="backpack" />
-				<b class="text-gray-800">背包</b>
-			</h3>
-			<Board class="mb-6">
-				<div class="mdc-list-group">
-					<MdcList>
-						<li class="mdc-list-item gear-list-item fake">
-							<span class="mdc-list-item__ripple"></span>
-							<div class="mdc-list-item__text flex-grow-1">
-								<div class="row align-items-center">
-									<div class="col-lg-9">
-										<div class="d-flex align-items-start">
-											<div class="img-thumbnail gear-list-item__img-thumbnail flex-shrink-0 shimmer shimmer-1"></div>
-											<div class="flex-grow-1">
-												<h5 class="mt-0 mb-1 shimmer shimmer-2"></h5>
-												<div class="text-gray-600 shimmer shimmer-3"></div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li class="mdc-list-item gear-list-item gear-list-item--expand">
-							<span class="mdc-list-item__ripple"></span>
-							<!-- <span class="mdc-list-item__graphic material-icons-outlined" aria-hidden="true">drag_handle</span> -->
-							<div class="mdc-list-item__text flex-grow-1">
-								<div class="row align-items-center">
-									<div class="col-lg-9">
-										<div class="d-flex align-items-start">
-											<div class="img-thumbnail gear-list-item__img-thumbnail flex-shrink-0">
-												<i class="material-icons-outlined">backpack</i>
-											</div>
-											<div class="flex-grow-1">
-												<h5 class="mt-0 mb-1">Item expanded demo</h5>
-												<div class="text-gray-600">Everygram</div>
-												<div class="text-gray-600">Everygram</div>
-											</div>
-										</div>
-									</div>
-									<div class="col-lg-3 d-none d-lg-block text-right text-gray-600">
-										100g
-									</div>
-								</div>
-							</div>
-							<span class="mdc-list-item__meta text-nowrap">
-								<MdcIconButton>more_vert</MdcIconButton>
-							</span>
-						</li>
-						<li class="mdc-list-item gear-list-item">
-							<span class="mdc-list-item__ripple"></span>
-							<span class="mdc-list-item__graphic material-icons-outlined" aria-hidden="true">drag_handle</span>
-							<div class="mdc-list-item__text flex-grow-1">
-								<div class="row align-items-center">
-									<div class="col-lg-9">
-										<div class="d-flex align-items-start">
-											<div class="img-thumbnail gear-list-item__img-thumbnail flex-shrink-0">
-												<i class="material-icons-outlined">backpack</i>
-											</div>
-											<div class="flex-grow-1">
-												<h5 class="mt-0 mb-1">Draggable</h5>
-												<div class="text-gray-600">Everygram</div>
-												<div class="text-gray-600">Everygram</div>
-											</div>
-										</div>
-									</div>
-									<div class="col-lg-3 d-none d-lg-block text-right text-gray-600">
-										100g
-									</div>
-								</div>
-							</div>
-							<span class="mdc-list-item__meta text-nowrap">
-								<MdcIconButton>more_vert</MdcIconButton>
-							</span>
-						</li>
-						<li class="mdc-list-item mdc-list-item--selected gear-list-item">
-							<span class="mdc-list-item__graphic material-icons-outlined" aria-hidden="true">
-								<div class="mdc-checkbox mdc-checkbox--selected">
-									<input type="checkbox"
-										class="mdc-checkbox__native-control"
-										id="checkbox-1"
-										checked/>
-									<div class="mdc-checkbox__background">
-									<svg class="mdc-checkbox__checkmark"
-										viewBox="0 0 24 24">
-										<path class="mdc-checkbox__checkmark-path"
-											fill="none"
-											d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
-									</svg>
-									<div class="mdc-checkbox__mixedmark"></div>
-									</div>
-									<div class="mdc-checkbox__ripple"></div>
-								</div>
-							</span>
-							<div class="mdc-list-item__text flex-grow-1">
-								<div class="row align-items-center">
-									<div class="col-lg-9">
-										<div class="d-flex align-items-start">
-											<div class="img-thumbnail gear-list-item__img-thumbnail flex-shrink-0">
-												<i class="material-icons-outlined">backpack</i>
-											</div>
-											<div class="flex-grow-1">
-												<h5 class="mt-0 mb-1">Selectable</h5>
-												<div class="text-gray-600">Everygram</div>
-												<div class="text-gray-600">Everygram</div>
-											</div>
-										</div>
-									</div>
-									<div class="col-lg-3 d-none d-lg-block text-right text-gray-600">
-										100g
-									</div>
-								</div>
-							</div>
-							<span class="mdc-list-item__meta text-nowrap">
-								<MdcIconButton>more_vert</MdcIconButton>
-							</span>
-						</li>
-					</MdcList>
-				</div>
-			</Board>
-
+			<CategoryGearList
+				v-for="categoryData in categoryDataList"
+				:key="categoryData.category.uuid"
+				:category="categoryData.category"
+				class="mb-6"
+			>
+				<template #gear-list-items>
+					<GearListItem
+						v-for="(gear, gearId) in categoryData.gearList"
+						:key="gearId"
+						:gear="gear"
+						:category="categoryData.category"
+					/>
+				</template>
+			</CategoryGearList>
+			<CategoryGearList
+				class="mb-6"
+			>
+				<template #gear-list-items>
+					<GearListItem
+						:gear="{
+							name: 'Expanded',
+							brand: 'Everygram',
+							model: 'Everygram',
+							weight: 100,
+							unitSystem: constant('UNIT_SYSTEM_METRIC')
+						}"
+						:is-expand="true"
+					/>
+					<GearListItem
+						:gear="{
+							name: 'Draggable',
+							brand: 'Everygram',
+							model: 'Everygram',
+							weight: 100,
+							unitSystem: constant('UNIT_SYSTEM_METRIC')
+						}"
+						:mode="constant('GEAR_LIST_MODE_SORT')"
+					/>
+					<GearListItem
+						:gear="{
+							name: 'Selectable',
+							brand: 'Everygram',
+							model: 'Everygram',
+							weight: 100,
+							unitSystem: constant('UNIT_SYSTEM_METRIC')
+						}"
+						:mode="constant('GEAR_LIST_MODE_SELECT')"
+					/>
+				</template>
+			</CategoryGearList>
 			<div class="mt-5 text-center">
 				<img src="/static/images/logo-icon-gray.svg" alt="" width="40">
 				<div class="mt-1 text-gray-400 text-sm">沒有更多裝備了</div>
 			</div>
-</div>
 		</div>
 		<div class="fab--sticky">
 			<MdcFab
@@ -253,137 +140,137 @@
 </template>
 
 <script>
-import Board from '@components/Board';
+import CategoryGearList from '@components/Gears/CategoryGearList';
+import GearListItem from '@components/Gears/GearListItem';
 import GearEditorDialog from '@components/Gears/GearEditorDialog';
-import CategoryAvatar from '@components/CategoryAvatar';
 import MdcButton from '@components/MdcButton';
 import MdcFab from '@components/MdcFab';
-import MdcIconButton from '@components/MdcIconButton';
-import MdcList from '@components/MdcList';
 import PageToolBar from '@components/PageToolBar';
 import settingsConfig from '@/settingsConfig';
 
 export default {
 	components: {
-		Board,
-		CategoryAvatar,
+		CategoryGearList,
+		GearListItem,
 		GearEditorDialog,
 		MdcButton,
 		MdcFab,
-		MdcIconButton,
-		MdcList,
 		PageToolBar,
 	},
 	data() {
 		return {
-			gearLists: [
+			categoryDataList: [
 				{
-					categoryLabel: "背包",
-					categoryIconName: "backpack",
-					color: "#999",
-					gears: [
+					category: {
+						uuid: uuid(),
+						name: '背包',
+						iconType: constant('ICON_TYPE_MATERIAL'),
+						iconName: 'backpack',
+						color: '#999',
+					},
+					gearList: [
 						{
-							id: "1",
-							imgUrl: "https://scontent.ftpe7-3.fna.fbcdn.net/v/t1.0-9/103585657_5473153589367637_1310014277959382298_o.jpg?_nc_cat=108&_nc_sid=cdbe9c&_nc_ohc=t2WkNZPi8rYAX8UHaWU&_nc_ht=scontent.ftpe7-3.fna&oh=69d035275590f913a351b01348af3562&oe=5F801880",
-							title: "Rawlow Bambi 輕量包awlow Bambi 輕量包awlow Bambi 輕量包awlow Bambi 輕量包",
-							brand: "Rawlow Mountain Works",
-							model: "Bambi 28L",
-							category: "背包背包背包背包背包背包背包背包",
-							weight: "1,580g",
-							age: " 1 歲 2 個月",
+							photoURL: 'https://scontent.ftpe7-3.fna.fbcdn.net/v/t1.0-9/103585657_5473153589367637_1310014277959382298_o.jpg?_nc_cat=108&_nc_sid=cdbe9c&_nc_ohc=t2WkNZPi8rYAX8UHaWU&_nc_ht=scontent.ftpe7-3.fna&oh=69d035275590f913a351b01348af3562&oe=5F801880',
+							name: 'Rawlow Bambi 輕量包awlow Bambi 輕量包awlow Bambi 輕量包awlow Bambi 輕量包',
+							brand: 'Rawlow Mountain Works',
+							model: 'Bambi 28L',
+							weight: 1580,
+							unitSystem: constant('UNIT_SYSTEM_METRIC')
 						},
 						{
-							id: "2",
-							title: "Rawlow Bambi 輕量包",
-							brand: "Rawlow Mountain Works",
-							model: "Bambi 28L",
-							category: "背包",
-							weight: "580g",
-							age: " 2 個月",
+							name: 'Rawlow Bambi 輕量包',
+							brand: 'Rawlow Mountain Works',
+							model: 'Bambi 28L',
+							weight: 580,
+							unitSystem: constant('UNIT_SYSTEM_METRIC'),
 						},
 						{
-							id: "3",
-							title: "Rawlow Bambi 輕量包",
-							brand: "Rawlow Mountain Works",
-							model: "Bambi 28L",
-							category: "背包",
-							weight: "580g",
-							age: "－",
+							name: 'Rawlow Bambi 輕量包',
+							brand: 'Rawlow Mountain Works',
+							model: 'Bambi 28L',
+							weight: 580,
+							unitSystem: constant('UNIT_SYSTEM_METRIC'),
 						},
-					]
+					],
 				},
 				{
-					categoryLabel: "睡眠系統",
-					categoryIconName: "airline_seat_individual_suite",
-					color: "#CC4545",
-					gears: [
+					category: {
+						uuid: uuid(),
+						name: '睡眠系統',
+						iconType: constant('ICON_TYPE_MATERIAL'),
+						iconName: 'airline_seat_individual_suite',
+						color: '#CC4545',
+					},
+					gearList: [
 						{
-							id: "4",
-							title: "Keep On 睡袋",
-							brand: "Keep On",
-							model: "945 S 山吹茶",
-							weight: "1,580g",
-							age: " 1 歲 2 個月",
+							name: 'Keep On 睡袋',
+							brand: 'Keep On',
+							model: '945 S 山吹茶',
+							weight: 1580,
+							unitSystem: constant('UNIT_SYSTEM_METRIC'),
 						},
 						{
-							id: "5",
-							imgUrl: "https://scontent.ftpe7-3.fna.fbcdn.net/v/t1.0-9/103585657_5473153589367637_1310014277959382298_o.jpg?_nc_cat=108&_nc_sid=cdbe9c&_nc_ohc=t2WkNZPi8rYAX8UHaWU&_nc_ht=scontent.ftpe7-3.fna&oh=69d035275590f913a351b01348af3562&oe=5F801880",
-							title: "Rawlow Bambi 輕量包",
-							brand: "Rawlow Mountain Works",
-							model: "Bambi 28L",
-							weight: "580g",
-							age: " 2 個月",
+							photoURL: 'https://scontent.ftpe7-3.fna.fbcdn.net/v/t1.0-9/103585657_5473153589367637_1310014277959382298_o.jpg?_nc_cat=108&_nc_sid=cdbe9c&_nc_ohc=t2WkNZPi8rYAX8UHaWU&_nc_ht=scontent.ftpe7-3.fna&oh=69d035275590f913a351b01348af3562&oe=5F801880',
+							name: 'Rawlow Bambi 輕量包',
+							brand: 'Rawlow Mountain Works',
+							model: 'Bambi 28L',
+							weight: 580,
+							unitSystem: constant('UNIT_SYSTEM_METRIC'),
 						},
 						{
-							id: "6",
 
-							title: "Rawlow Bambi 輕量包",
-							brand: "Rawlow Mountain Works",
-							model: "Bambi 28L",
-							weight: "580g",
-							age: " 2 個月",
+							name: 'Rawlow Bambi 輕量包',
+							brand: 'Rawlow Mountain Works',
+							model: 'Bambi 28L',
+							weight: 580,
+							unitSystem: constant('UNIT_SYSTEM_METRIC'),
 						},
-					]
+					],
 				},
 				{
-					categoryLabel: "遮蔽系統",
-					categoryIconName: "foundation",
-					color: "#EFA33D",
-					gears: [
+					category: {
+						uuid: uuid(),
+						name: '遮蔽系統',
+						iconType: constant('ICON_TYPE_MATERIAL'),
+						iconName: 'foundation',
+						color: '#EFA33D',
+					},
+					gearList: [
 						{
-							id: "7",
-							title: "MSR 三人帳",
-							brand: "MSR",
-							model: "Hubba",
-							weight: "2,180g",
-							age: " 2 歲 2 個月",
+							name: 'MSR 三人帳',
+							brand: 'MSR',
+							model: 'Hubba',
+							weight: 2180,
+							unitSystem: constant('UNIT_SYSTEM_METRIC'),
 						},
 						{
-							id: "8",
-							imgUrl: "https://scontent.ftpe7-3.fna.fbcdn.net/v/t1.0-9/103585657_5473153589367637_1310014277959382298_o.jpg?_nc_cat=108&_nc_sid=cdbe9c&_nc_ohc=t2WkNZPi8rYAX8UHaWU&_nc_ht=scontent.ftpe7-3.fna&oh=69d035275590f913a351b01348af3562&oe=5F801880",
-							title: "Snow Peak 天幕",
-							brand: "Snow Peak",
-							model: "Penda",
-							weight: "580g",
-							age: " 10 個月",
+							photoURL: 'https://scontent.ftpe7-3.fna.fbcdn.net/v/t1.0-9/103585657_5473153589367637_1310014277959382298_o.jpg?_nc_cat=108&_nc_sid=cdbe9c&_nc_ohc=t2WkNZPi8rYAX8UHaWU&_nc_ht=scontent.ftpe7-3.fna&oh=69d035275590f913a351b01348af3562&oe=5F801880',
+							name: 'Snow Peak 天幕',
+							brand: 'Snow Peak',
+							model: 'Penda',
+							weight: 580,
+							unitSystem: constant('UNIT_SYSTEM_METRIC'),
 						},
-					]
+					],
 				},
 				{
-					categoryLabel: "炊事系統",
-					categoryIconName: "outdoor_grill",
-					color: "#2C67BA",
-					gears: [
+					category: {
+						uuid: uuid(),
+						name: '炊事系統',
+						iconType: constant('ICON_TYPE_MATERIAL'),
+						iconName: 'outdoor_grill',
+						color: '#2C67BA',
+					},
+					gearList: [
 						{
-							id: "9",
-							title: "Soto 爐頭",
-							brand: "Soto",
-							model: "310",
-							weight: "75g",
-							age: " 3 歲 2 個月",
+							name: 'Soto 爐頭',
+							brand: 'Soto',
+							model: '310',
+							weight: 75,
+							unitSystem: constant('UNIT_SYSTEM_METRIC'),
 						},
-					]
-				}
+					],
+				},
 			],
 			settingsConfig,
 		};

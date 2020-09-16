@@ -27,7 +27,7 @@
 	"category_footwear": "鞋襪",
 	"category_hydration": "飲水裝備",
 	"category_medical_supplies": "醫護用品",
-	"category_others": "其他",
+	"category_others": "未分類",
 	"category_shelter_system": "遮蔽系統",
 	"category_sleeping_system": "睡眠系統",
 	"category_tools": "技術裝備",
@@ -111,5 +111,11 @@
 	"weight_unit_gram": "g",
 	"weight_unit_ounce": "oz",
 	"info_gears_empty": "你的裝備庫是空的",
+	"action_add_to": "新增到",
+	"action_archive": "封存",
+	"action_cancel_select": "取消選取",
+	"action_complete": "完成",
+	"info_gear_selected_num": "已選取 %s 個裝備",
+	"hint_sort_gears": "拖動裝備進行排序",
 	"util_or": "或"
 }
