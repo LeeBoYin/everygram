@@ -3,11 +3,13 @@
 		:class="{
 			'mdc-list-item--selected': isSelected,
 			'gear-list-item--expand': isExpand,
+			'gear-list-item--sortable': mode === constant('GEAR_LIST_MODE_SORT'),
 		}"
 		class="mdc-list-item gear-list-item"
 		@click="onClick"
 	>
-		<span class="mdc-list-item__ripple"></span>
+		<!-- no ripple on sortable list item -->
+		<span v-show="mode !== constant('GEAR_LIST_MODE_SORT')" class="mdc-list-item__ripple"></span>
 		<!-- 排序模式 -->
 		<span v-if="mode === constant('GEAR_LIST_MODE_SORT')" class="mdc-list-item__graphic material-icons-outlined" aria-hidden="true">drag_handle</span>
 		<!-- 選取模式 -->

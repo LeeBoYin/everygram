@@ -83,15 +83,19 @@
 					</template>
 				</PageToolBar>
 				<CategoryGearList
-					v-for="(categoryData, index) in categoryDataList"
-					:key="index"
+					v-for="categoryData in categoryDataList"
+					:key="_.get(categoryData, 'category.uuid', constant('CATEGORY_OTHERS'))"
 					:category="categoryData.category"
+					:gear-list="categoryData.gearList"
+					:mode="mode"
 					class="mb-6"
+					@sort="onSortGear"
 				>
 					<template #gear-list-items>
 						<GearListItem
 							v-for="(gear, gearId) in categoryData.gearList"
 							:key="gearId"
+							:data-gear-id="gearId"
 							:gear="gear"
 							:category="categoryData.category"
 							:mode="mode"
@@ -153,7 +157,7 @@ export default {
 			const categoryDataList = [];
 			_.forEach(this.memberSettings.categories, category => {
 				const gearIdList = _.get(this.gearListData, ['order', category.uuid], []);
-				if(!gearIdList.length) {
+				if(this.mode !== constant('GEAR_LIST_MODE_SORT') && !gearIdList.length) {
 					return;
 				}
 				const gearList = _.mapValues(_.keyBy(gearIdList), gearId => _.get(this.gearListData, ['gearData', gearId]));
@@ -220,6 +224,14 @@ console.log(gearData);
 console.log(gearData);
 			//
 		},
+		async onSortGear({ gearId, fromCategoryUuid, toCategoryUuid, index }) {
+			await this.sortGear({
+				gearId,
+				fromCategoryUuid,
+				toCategoryUuid,
+				index,
+			});
+		},
 		changeMode(mode) {
 			switch (mode) {
 				case constant('GEAR_LIST_MODE_DEFAULT'):
@@ -240,6 +252,7 @@ console.log(gearData);
 		]),
 		...mapActions('gearList', [
 			'appendGearToGearList',
+			'sortGear',
 			'init',
 		]),
 	},

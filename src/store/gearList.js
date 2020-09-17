@@ -51,12 +51,7 @@ const actions = {
 			throw errorMessageLang(e.code);
 		}
 	},
-	async appendGearToGearList(context, { gearId, categoryUuid }) {
-		const gear = await context.dispatch('gear/getGear', gearId, { root: true });
-		const updateObj = {
-			[`gearData.${ gearId }`]: gear.data(),
-			[`order.${ categoryUuid || constant('CATEGORY_OTHERS') }`]: firebase.firestore.FieldValue.arrayUnion(gearId),
-		};
+	async updateGearList(context, updateObj) {
 		try {
 			context.state.gearListDocRef.update(updateObj).then(() => {
 				// update successfully written to the backend
@@ -67,6 +62,28 @@ const actions = {
 			console.log(e);
 			throw errorMessageLang(e.code);
 		}
+	},
+	async appendGearToGearList(context, { gearId, categoryUuid }) {
+		const gear = await context.dispatch('gear/getGear', gearId, { root: true });
+		await context.dispatch('updateGearList', {
+			[`gearData.${ gearId }`]: gear.data(),
+			[`order.${ categoryUuid || constant('CATEGORY_OTHERS') }`]: firebase.firestore.FieldValue.arrayUnion(gearId),
+		});
+	},
+
+	async sortGear(context, { gearId, fromCategoryUuid, toCategoryUuid, index }) {
+		const updateObj = {};
+		if(fromCategoryUuid !== toCategoryUuid) {
+			// remove gearId from previous category
+			updateObj[`order.${ fromCategoryUuid || constant('CATEGORY_OTHERS') }`] = firebase.firestore.FieldValue.arrayRemove(gearId);
+		}
+		// update target category
+		let gearIdList = _.get(context.state.gearListData, ['order', toCategoryUuid || constant('CATEGORY_OTHERS')], [])
+		gearIdList = _.without(gearIdList, gearId);
+		gearIdList.splice(index, 0, gearId);
+		updateObj[`order.${ toCategoryUuid || constant('CATEGORY_OTHERS') }`] = gearIdList;
+
+		await context.dispatch('updateGearList', updateObj);
 	},
 };
 
