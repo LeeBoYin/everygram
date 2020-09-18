@@ -33,39 +33,24 @@
 			<span v-if="label" class="mdc-floating-label">{{ label }}</span>
 			<span class="mdc-line-ripple"></span>
 		</div>
-
-		<div class="mdc-select__menu mdc-menu mdc-menu-surface">
-			<ul class="mdc-list">
-				<li
-					v-for="option in options"
-					:key="option.value"
-					:data-value="option.value"
-					:class="{
-						'mdc-list-item--selected': option.value === value,
-						'mdc-list-item--disabled': option.disabled,
-					}"
-					class="mdc-list-item"
-				>
-					<span class="mdc-list-item__ripple"></span>
-					<i
-						v-if="option.iconName"
-						class="material-icons material-icons-outlined mdc-list-item__graphic"
-						:class="{
-							'material-icons material-icons-outlined': option.iconType === constant('ICON_TYPE_MATERIAL'),
-						}" aria-hidden="true">
-						{{ option.iconName }}
-					</i>
-					<span class="mdc-list-item__text">{{ option.text }}</span>
-				</li>
-			</ul>
-		</div>
+		<MdcMenu
+			class="mdc-select__menu"
+			:options="options"
+		>
+			<template #footer>
+				<slot name="menu-footer" />
+			</template>
+		</MdcMenu>
 	</div>
 </template>
 
 <script>
 import { MDCSelect } from '@material/select';
-
+import MdcMenu from '@components/MdcMenu';
 export default {
+	components: {
+		MdcMenu,
+	},
 	props: {
 		label: {
 			type: String,

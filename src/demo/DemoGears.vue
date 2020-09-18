@@ -135,6 +135,7 @@
 		<GearEditorDialog
 			ref="gearEditorDialog"
 			:categories="settingsConfig.default.categories"
+			@to-settings-categories="$router.push({ name: 'DemoSettingsCategories' })"
 		/>
 	</div>
 </template>

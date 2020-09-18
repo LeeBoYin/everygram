@@ -118,6 +118,7 @@
 				ref="gearEditorDialog"
 				:on-create-gear="onCreateGear"
 				:on-update-gear="onUpdateGear"
+				@to-settings-categories="$router.push({ name: 'SettingsCategories' })"
 			/>
 		</div>
 	</div>

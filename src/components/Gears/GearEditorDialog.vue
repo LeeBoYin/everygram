@@ -38,7 +38,18 @@
 								:label="lang('label_category')"
 								:options="categoryOptions"
 								class="mdc-select--fullwidth"
-							/>
+							>
+								<template #menu-footer>
+									<div class="text-right">
+										<MdcButton class="mdc-button--text" @click.native="onClickToSettingsCategories">
+											{{ lang('title_settings_categories') }}
+											<template #trailing-icon>
+												<i class="material-icons-outlined">keyboard_arrow_right</i>
+											</template>
+										</MdcButton>
+									</div>
+								</template>
+							</MdcSelect>
 						</div>
 						<div class="mb-3">
 							<MdcTextField
@@ -130,6 +141,7 @@
 import mixinForm from '@mixins/mixinForm';
 import DateTextField from '@components/DateTextField';
 import ImageFileInput from '@components/ImageFileInput';
+import MdcButton from '@components/MdcButton';
 import MdcDialog from '@components/MdcDialog';
 import MdcDialogActionButton from '@components/MdcDialogActionButton';
 import MdcSelect from '@components/MdcSelect';
@@ -164,6 +176,7 @@ export default {
 	components: {
 		DateTextField,
 		ImageFileInput,
+		MdcButton,
 		MdcDialog,
 		MdcDialogActionButton,
 		MdcSelect,
@@ -227,6 +240,10 @@ export default {
 		},
 		onClickCancel() {
 			this.$refs.mdcDialog.close();
+		},
+		onClickToSettingsCategories() {
+			this.$refs.mdcDialog.close();
+			this.$emit('to-settings-categories');
 		},
 		async onClickAccept() {
 			try {

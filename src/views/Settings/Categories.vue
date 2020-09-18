@@ -4,14 +4,14 @@
 			<MdcTopAppBar
 				:title="lang('title_settings_categories')"
 				navigation-icon="arrow_back_ios"
-				@click:navigation="$router.push({ name: 'Settings' })"
+				@click:navigation="$router.go(-1)"
 			/>
 		</template>
 		<div class="container-lg">
 			<div class="row">
 				<div class="col-lg-6 mx-auto">
 					<div class="d-none d-lg-block">
-						<MdcButton el="router-link" class="mdc-button--text" :to="{ name: 'Settings' }">
+						<MdcButton class="mdc-button--text" @click.native="$router.go(-1)">
 							<i slot="leading-icon" class="material-icons-outlined mdc-button__icon">keyboard_arrow_left</i>
 							{{ lang('action_back') }}
 						</MdcButton>
