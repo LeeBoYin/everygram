@@ -9,13 +9,13 @@
 				<!-- Title cannot contain leading whitespace due to mdc-typography-baseline-top() -->
 				<h2 v-if="title" class="mdc-dialog__title" id="my-dialog-title">{{ title }}</h2>
 				<div v-if="$slots['tab-bar']" class="mdc-dialog__tab-bar">
-					<slot name="tab-bar"></slot>
+					<slot v-if="isOpen" name="tab-bar"></slot>
 				</div>
 				<div ref="content" class="mdc-dialog__content">
-					<slot></slot>
+					<slot v-if="isOpen"></slot>
 				</div>
 				<div v-if="$slots.actions" class="mdc-dialog__actions">
-					<slot name="actions"></slot>
+					<slot v-if="isOpen" name="actions"></slot>
 				</div>
 			</div>
 		</div>
@@ -34,6 +34,7 @@ export default {
 	},
 	data() {
 		return {
+			isOpen: false,
 			mdcDialog: null,
 		};
 	},
@@ -48,6 +49,7 @@ export default {
 		bindEvents() {
 			// Making dialogs accessible
 			this.mdcDialog.listen('MDCDialog:opening', () => {
+				this.isOpen = true;
 				this.$emit('opening');
 			});
 			this.mdcDialog.listen('MDCDialog:opened', () => {
@@ -59,6 +61,7 @@ export default {
 				this.$emit('closing');
 			});
 			this.mdcDialog.listen('MDCDialog:closed', () => {
+				this.isOpen = false;
 				this.$emit('closed');
 			});
 		},
