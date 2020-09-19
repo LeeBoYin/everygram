@@ -1,7 +1,7 @@
 <template>
 	<li
 		:class="{
-			'mdc-list-item--selected': isSelected,
+			// 'mdc-list-item--selected': isSelected, // make ripple broken
 			'gear-list-item--expand': isExpand,
 			'gear-list-item--sortable': mode === constant('GEAR_LIST_MODE_SORT'),
 		}"
@@ -39,15 +39,29 @@
 				</div>
 			</div>
 		</div>
-		<span v-if="mode === constant('GEAR_LIST_MODE_DEFAULT')" class="mdc-list-item__meta text-nowrap">
-			<MdcIconButton>more_vert</MdcIconButton>
-		</span>
+		<div v-if="mode === constant('GEAR_LIST_MODE_DEFAULT')" class="mdc-list-item__meta text-nowrap">
+			<div class="mdc-menu-surface--anchor">
+				<MdcIconButton @click.native="onClickOption">more_vert</MdcIconButton>
+				<MdcMenu
+					ref="menu"
+					:options="[
+						{
+							text: lang('action_edit'),
+						},
+						{
+							text: lang('action_delete'),
+						}
+					]"
+				/>
+			</div>
+		</div>
 	</li>
 </template>
 
 <script>
 import MdcCheckbox from '@components/MdcCheckbox';
 import MdcIconButton from '@components/MdcIconButton';
+import MdcMenu from '@components/MdcMenu';
 import mixinRipple from '@/mixins/mixinRipple';
 export default {
 	mixins: [
@@ -56,6 +70,7 @@ export default {
 	components: {
 		MdcCheckbox,
 		MdcIconButton,
+		MdcMenu,
 	},
 	props: {
 		mode: {
@@ -99,6 +114,9 @@ export default {
 			if(this.mode === constant('GEAR_LIST_MODE_SELECT')) {
 				this.isSelected = !this.isSelected;
 			}
+		},
+		onClickOption() {
+			this.$refs.menu.open();
 		},
 	},
 }

@@ -26,7 +26,11 @@
 
 <script>
 import { MDCCheckbox } from '@material/checkbox';
+import mixinRipple from '@/mixins/mixinRipple';
 export default {
+	mixins: [
+		mixinRipple
+	],
 	props: {
 		disabled: {
 			type: Boolean,
@@ -61,6 +65,7 @@ export default {
 		this.mdcCheckBox = new MDCCheckbox(this.$el);
 		this.mdcCheckBox.indeterminate = this.indeterminate;
 		this.mdcCheckBox.disabled = this.disabled;
+		this.ripple.unbounded = true;
 	},
 	methods: {
 		onChange() {

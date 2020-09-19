@@ -1,27 +1,12 @@
 <template>
 	<div class="mdc-menu mdc-menu-surface">
 		<ul class="mdc-list">
-			<li
-				v-for="option in options"
-				:key="option.value"
+			<MdcMenuItem
+				v-for="(option, index) in options"
+				:key="option.value || index"
 				:data-value="option.value"
-				:class="{
-						'mdc-list-item--selected': option.value === value,
-						'mdc-list-item--disabled': option.disabled,
-					}"
-				class="mdc-list-item"
-			>
-				<span class="mdc-list-item__ripple"></span>
-				<i
-					v-if="option.iconName"
-					class="material-icons material-icons-outlined mdc-list-item__graphic"
-					:class="{
-							'material-icons material-icons-outlined': option.iconType === constant('ICON_TYPE_MATERIAL'),
-						}" aria-hidden="true">
-					{{ option.iconName }}
-				</i>
-				<span class="mdc-list-item__text">{{ option.text }}</span>
-			</li>
+				:option="option"
+			/>
 		</ul>
 		<div v-if="$slots.footer" class="mdc-menu__footer">
 			<slot name="footer" />
@@ -31,7 +16,11 @@
 
 <script>
 import { MDCMenu } from '@material/menu';
+import MdcMenuItem from '@components/MdcMenuItem';
 export default {
+	components: {
+		MdcMenuItem,
+	},
 	props: {
 		options: {
 			type: Array,
@@ -49,9 +38,15 @@ export default {
 	},
 	mounted() {
 		this.mdcMenu = new MDCMenu(this.$el);
+		this.mdcMenu.setFixedPosition(true);
 	},
 	destroyed() {
 		this.mdcMenu.destroy();
+	},
+	methods: {
+		open() {
+			this.mdcMenu.open = true;
+		},
 	},
 }
 </script>

@@ -36,6 +36,7 @@
 		<MdcMenu
 			class="mdc-select__menu"
 			:options="options"
+			:style="{ 'min-width': menuMinWidth }"
 		>
 			<template #footer>
 				<slot name="menu-footer" />
@@ -80,6 +81,7 @@ export default {
 	data() {
 		return {
 			mdcSelect: null,
+			menuMinWidth: null,
 		};
 	},
 	computed: {
@@ -92,6 +94,9 @@ export default {
 		this.mdcSelect.listen('MDCSelect:change', () => {
 			this.$emit('input', this.mdcSelect.value);
 		});
+
+		// set menu as wide as select dynamically
+		this.menuMinWidth = `${ this.$el.clientWidth }px`;
 	},
 	destroyed() {
 		this.mdcSelect.destroy();

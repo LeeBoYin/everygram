@@ -7,15 +7,9 @@
 	@include select.label-color($c-gray-600);
 	@include select.focused-label-color($c-primary-dark);
 
-	&--fullwidth,
-	&--fullwidth &__anchor,
-	&--fullwidth &__menu {
+	&--fullwidth {
 		width: 100%;
 	}
-}
-
-.mdc-select-width {
-	width: 100%;
 }
 
 // 修正 Ripple 顏色
