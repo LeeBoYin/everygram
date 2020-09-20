@@ -179,6 +179,7 @@
 							</span>
 						</li>
 						<li class="mdc-list-item mdc-list-item--selected gear-list-item">
+							<span class="mdc-list-item__ripple"></span>
 							<span class="mdc-list-item__graphic material-icons-outlined" aria-hidden="true">
 								<div class="mdc-checkbox mdc-checkbox--selected">
 									<input type="checkbox"

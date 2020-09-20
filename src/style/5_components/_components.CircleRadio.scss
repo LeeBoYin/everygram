@@ -1,4 +1,4 @@
-.color-radio {
+.circle-radio {
 	$root: &;
 	display: inline-block;
 	position: relative;
@@ -18,8 +18,7 @@
 
 
 	&__icon {
-		display: none;
-		color: #FFF;
+		color: $c-gray-600;
 		font-size: $font-size-lg;
 	}
 
@@ -29,12 +28,11 @@
 		cursor: pointer;
 
 		&:checked + #{$root}__circle {
-			border: 4px solid #FFF;
-			box-shadow: $box-shadow-md;
-			transform: scale(1.4);
+			background-color: $c-gray-400;
+			box-shadow: 0 0 0 4px #FFF, 0 2px 8px 4px rgba(0, 0, 0, 0.16);
 
 			#{$root}__icon {
-				display: block;
+				color: #FFF;
 			}
 		}
 	}
