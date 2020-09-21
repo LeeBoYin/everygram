@@ -1,5 +1,6 @@
 .category-avatar {
 	@extend .icon-circle;
+	background-color: $c-gray-400;
 
 	&__icon {
 		font-size: $font-size-lg;

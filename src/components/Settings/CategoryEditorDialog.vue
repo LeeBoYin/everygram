@@ -21,13 +21,38 @@
 					</div>
 				</ValidationProvider>
 
+				<h5 class="mb-2">類別顏色</h5>
+				<div class="mb-4">
+					<div class="row no-gutters">
+						<div class="col-auto">
+							<label class="circle-radio">
+								<input type="radio" name="category_color" checked>
+								<div class="circle-radio__circle mr-2" :style="{ 'background-color': '#999' }">
+									<!-- Checked 才有打勾 -->
+									<i class="circle-radio__icon material-icons-outlined">check</i>
+								</div>
+							</label>
+						</div>
+						<div class="col-auto">
+							<label class="circle-radio">
+								<input type="radio" name="category_color">
+								<div class="circle-radio__circle" :style="{ 'background-color': '#999' }">
+									<!-- <i class="circle-radio__icon material-icons-outlined">check</i> -->
+								</div>
+							</label>
+						</div>
+					</div>
+				</div>
+
 				<h5 class="mb-2">類別圖示</h5>
 				<ValidationProvider :name="lang('label_category_icon')" rules="required" v-slot="{ errors }">
 					<div class="row no-gutters">
 						<div class="col-auto" v-for="(categoryIcon, index) in categoryIcons" :key="index">
-							<label class="icon-radio">
+							<label class="circle-radio">
 								<input type="radio" name="category_icon" v-model="iconIndex" :value="index">
-								<CategoryIcon class="icon-radio__icon" :icon-type="categoryIcon.type" :icon-name="categoryIcon.name" />
+								<div class="circle-radio__circle">
+									<CategoryIcon class="circle-radio__icon" :icon-type="categoryIcon.type" :icon-name="categoryIcon.name" />
+								</div>
 							</label>
 						</div>
 						<TextFieldErrorMessage :message="errors[0]" />
@@ -38,28 +63,6 @@
 					{{ errorMessage }}
 				</AlertInline>
 			</ValidationObserver>
-
-			<h5 class="mb-2">類別顏色</h5>
-			<div class="mb-4">
-				<div class="row no-gutters">
-					<div class="col-auto">
-						<label class="color-radio">
-							<input type="radio" name="category_color">
-							<div class="color-radio__circle mr-2" :style="{ 'background-color': '#999' }">
-								<i class="color-radio__icon material-icons-outlined">check</i>
-							</div>
-						</label>
-					</div>
-					<div class="col-auto">
-						<label class="color-radio">
-							<input type="radio" name="category_color">
-							<div class="color-radio__circle mr-2" :style="{ 'background-color': '#999' }">
-								<i class="color-radio__icon material-icons-outlined">check</i>
-							</div>
-						</label>
-					</div>
-				</div>
-			</div>
 		</template>
 		<template #actions>
 			<MdcDialogActionButton @click.native="onClickCancel">
