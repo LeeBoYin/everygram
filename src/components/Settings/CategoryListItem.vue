@@ -3,7 +3,12 @@
 		<!-- no ripple on sortable list item -->
 		<span class="category-list-item__handle mdc-list-item__graphic material-icons-outlined" aria-hidden="true">drag_handle</span>
 		<span class="mdc-list-item__text d-flex align-items-center">
-			<CategoryAvatar class="mr-3" :icon-type="category.iconType" :icon-name="category.iconName" />
+			<CategoryAvatar
+				class="mr-3"
+				:icon-type="category.iconType"
+				:icon-name="category.iconName"
+				:background-color="category.color"
+			/>
 			<span>
 				{{ getCategoryName(category) }}
 			</span>

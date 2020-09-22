@@ -118,5 +118,6 @@
 	"info_gear_selected_num": "已選取 %s 個裝備",
 	"hint_sort_gears": "拖動裝備進行排序",
 	"action_edit": "編輯",
+	"label_category_color": "類別顏色",
 	"util_or": "或"
 }

@@ -318,5 +318,18 @@
 			"type": "material",
 			"name": "more_horiz"
 		}
+	],
+	"categoryColors": [
+		"#A7A4A2",
+		"#CC4545",
+		"#B68383",
+		"#E1BA51",
+		"#A47723",
+		"#EFA33D",
+		"#C4A34A",
+		"#8BB683",
+		"#6E7A6C",
+		"#2C67BA",
+		"#304869"
 	]
 }

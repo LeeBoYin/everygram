@@ -31,6 +31,8 @@ $c-background: #f2f3f2;
 
 $c-overlay: rgba(0,0,0,0.3);
 
+$c-category-default: #A7A4A2;
+
 // Material Design Components Theme Colors
 @use 'node_modules/@material/theme' with (
   $primary: $c-primary,
