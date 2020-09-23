@@ -31,8 +31,8 @@
 								:radio-value="categoryColor"
 								:background-color="categoryColor"
 							>
-								<template #icon>
-									<i v-if="color === categoryColor" class="circle-radio__icon material-icons-outlined">check</i>
+								<template v-slot:icon="{ checked }">
+									<i v-if="checked" class="circle-radio__icon material-icons-outlined">check</i>
 								</template>
 							</CircleRadio>
 						</div>

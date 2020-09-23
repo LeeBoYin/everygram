@@ -1,12 +1,18 @@
 <template>
 	<div class="mdc-menu mdc-menu-surface">
 		<ul class="mdc-list">
-			<MdcMenuItem
+			<slot
+				name="menu-item"
 				v-for="(option, index) in options"
-				:key="option.value || index"
-				:data-value="option.value"
 				:option="option"
-			/>
+			>
+				<!-- slot default menu-item -->
+				<MdcMenuItem
+					:key="option.value || index"
+					:data-value="option.value"
+					:option="option"
+				/>
+			</slot>
 		</ul>
 		<div v-if="$slots.footer" class="mdc-menu__footer">
 			<slot name="footer" />

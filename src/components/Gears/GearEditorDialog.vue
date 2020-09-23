@@ -39,6 +39,21 @@
 								:options="categoryOptions"
 								class="mdc-select--fullwidth"
 							>
+								<template v-slot:option="{ option }">
+									<MdcMenuItem
+										:option="option"
+										:data-value="option.value"
+									>
+										<template #graphic>
+											<CategoryAvatar
+												:icon-type="option.category.iconType"
+												:icon-name="option.category.iconName"
+												:background-color="option.category.color"
+												class="mr-3"
+											/>
+										</template>
+									</MdcMenuItem>
+								</template>
 								<template #menu-footer>
 									<div class="text-right">
 										<MdcButton class="mdc-button--text" @click.native="onClickToSettingsCategories">
@@ -139,11 +154,13 @@
 
 <script>
 import mixinForm from '@mixins/mixinForm';
+import CategoryAvatar from '@components/CategoryAvatar';
 import DateTextField from '@components/DateTextField';
 import ImageFileInput from '@components/ImageFileInput';
 import MdcButton from '@components/MdcButton';
 import MdcDialog from '@components/MdcDialog';
 import MdcDialogActionButton from '@components/MdcDialogActionButton';
+import MdcMenuItem from '@components/MdcMenuItem';
 import MdcSelect from '@components/MdcSelect';
 import MdcTextField from '@components/MdcTextField';
 import NumberTextField from '@components/NumberTextField';
@@ -174,11 +191,13 @@ export default {
 		mixinForm,
 	],
 	components: {
+		CategoryAvatar,
 		DateTextField,
 		ImageFileInput,
 		MdcButton,
 		MdcDialog,
 		MdcDialogActionButton,
+		MdcMenuItem,
 		MdcSelect,
 		MdcTextField,
 		NumberTextField,
@@ -204,8 +223,7 @@ export default {
 				return {
 					value: category.uuid,
 					text: getCategoryName(category),
-					iconType: category.iconType,
-					iconName: category.iconName,
+					category,
 				};
 			});
 		},

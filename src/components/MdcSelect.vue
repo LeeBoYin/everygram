@@ -38,6 +38,9 @@
 			:options="options"
 			:style="{ 'min-width': menuMinWidth }"
 		>
+			<template v-slot:menu-item="{ option }">
+				<slot name="option" :option="option"></slot>
+			</template>
 			<template #footer>
 				<slot name="menu-footer" />
 			</template>

@@ -7,14 +7,17 @@
 		class="mdc-list-item"
 	>
 		<span class="mdc-list-item__ripple"></span>
-		<i
-			v-if="option.iconName"
-			class="material-icons material-icons-outlined mdc-list-item__graphic"
-			:class="{
-							'material-icons material-icons-outlined': option.iconType === constant('ICON_TYPE_MATERIAL'),
-						}" aria-hidden="true">
-			{{ option.iconName }}
-		</i>
+		<slot name="graphic">
+			<!-- graphic slot default icon -->
+			<i
+				v-if="option.iconName"
+				class="material-icons material-icons-outlined mdc-list-item__graphic"
+				:class="{
+					'material-icons material-icons-outlined': option.iconType === constant('ICON_TYPE_MATERIAL'),
+				}" aria-hidden="true">
+				{{ option.iconName }}
+			</i>
+		</slot>
 		<span class="mdc-list-item__text">{{ option.text }}</span>
 	</li>
 </template>

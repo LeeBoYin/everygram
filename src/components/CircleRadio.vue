@@ -5,10 +5,10 @@
 			:name="name"
 			:value="radioValue"
 			v-model="modelValue"
+			:checked="checked"
 		>
 		<div class="circle-radio__circle" :style="{ 'background-color': backgroundColor }">
-			<slot name="icon"></slot>
-			<!-- Checked 才有打勾 -->
+			<slot name="icon" :checked="checked"></slot>
 		</div>
 	</label>
 </template>
@@ -42,7 +42,10 @@ export default {
 				// Communicate the change to parent component so that selectedValue can be updated
 				this.$emit('input', this.radioValue)
 			}
-		}
+		},
+		checked() {
+			return this.radioValue === this.value;
+		},
 	},
 }
 </script>
