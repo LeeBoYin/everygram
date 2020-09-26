@@ -7,6 +7,7 @@
 export default function (data = {}) {
 	const {
 		brand,
+		categoryUuid,
 		manufacturedDate,
 		model,
 		name,
@@ -23,6 +24,9 @@ export default function (data = {}) {
 	return {
 		role: {
 			[ownerUserUid]: constant('ROLE_OWNER'),
+		},
+		category: {
+			[ownerUserUid]: categoryUuid,
 		},
 		brand,
 		manufacturedDate,

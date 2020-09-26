@@ -78,12 +78,22 @@ const actions = {
 			updateObj[`order.${ fromCategoryUuid || constant('CATEGORY_OTHERS') }`] = firebase.firestore.FieldValue.arrayRemove(gearId);
 		}
 		// update target category
-		let gearIdList = _.get(context.state.gearListData, ['order', toCategoryUuid || constant('CATEGORY_OTHERS')], [])
+		let gearIdList = _.get(context.state.gearListData, ['order', toCategoryUuid || constant('CATEGORY_OTHERS')], []);
 		gearIdList = _.without(gearIdList, gearId);
 		gearIdList.splice(index, 0, gearId);
 		updateObj[`order.${ toCategoryUuid || constant('CATEGORY_OTHERS') }`] = gearIdList;
 
 		await context.dispatch('updateGearList', updateObj);
+
+		// update gear category
+		if(fromCategoryUuid !== toCategoryUuid) {
+			context.dispatch('gear/updateGear', {
+				gearId,
+				updateObj: {
+					[`category.${ context.rootState.user.user.uid }`]: toCategoryUuid,
+				},
+			}, { root: true });
+		}
 	},
 };
 

@@ -106,6 +106,7 @@
 				</CategoryGearList>
 				<div class="fab--sticky">
 					<MdcFab
+						v-if="mode === constant('GEAR_LIST_MODE_DEFAULT')"
 						icon="add"
 						:label="lang('action_create_gear')"
 						class="mdc-fab--extended"
@@ -214,6 +215,7 @@ console.log(gearData);
 			// create gear
 			const gearId = await this.createGear({
 				gearData,
+				categoryUuid,
 			});
 			// insert gear into main gear list
 			await this.appendGearToGearList({

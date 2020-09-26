@@ -5,7 +5,7 @@
 		"clean": "rimraf dist",
 		"analyze": "npm run clean && webpack --env.analyze --mode production",
 		"build": "npm run clean && webpack --env.production --mode production",
-		"watch": "npm run clean && webpack --watch --env.development",
+		"watch": "npm run clean && webpack --watch --env.watch",
 		"serve": "npm run clean && webpack-dev-server --env.development --mode development"
 	},
 	"author": "leeboyin",
