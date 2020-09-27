@@ -77,12 +77,31 @@ export const onUpdateGear = functions.region(REGION_TOKYO).firestore
 				}
 			});
 
+			if (dataBefore.photoFileName && dataBefore.photoFileName !== dataAfter.photoFileName) {
+				await Promise.all(getAllHooksPromises('onGearPhotoUpdate', {
+					deletingPhotoFileName: dataBefore.photoFileName,
+				}));
+			}
+
 			// general update
 			await Promise.all(getAllHooksPromises('onGearUpdate', {
 				gearId: context.params.gearId,
 			}));
 
 			// end of onUpdateGear
+			resolve();
+		});
+	});
+
+export const onDeleteGear = functions.region(REGION_TOKYO).firestore
+	.document('/gear/{gearId}')
+	.onDelete(async (snapshot, context) => {
+		return new Promise<null>(async (resolve) => {
+			await Promise.all(getAllHooksPromises('onGearDelete', {
+				gearId: context.params.gearId,
+				deletingPhotoFileName: snapshot.data()?.photoFileName,
+			}));
+			// end of onDeleteGear
 			resolve();
 		});
 	});

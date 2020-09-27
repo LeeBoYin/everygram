@@ -1,9 +1,12 @@
 <template>
-	<MdcDialog ref="mdcDialog">
+	<MdcDialog
+		ref="mdcDialog"
+		@closed="onDialogClosed"
+	>
 		<template #default>
-			{{ lang('confirm_delete_category', [categoryName]) }}
+			{{ lang('confirm_delete_gear', [gear.name]) }}
 			<br>
-			<small class="text-muted">{{ lang('hint_delete_category') }}</small>
+			<small class="text-muted">{{ lang('hint_delete_gear') }}</small>
 		</template>
 		<template #actions>
 			<MdcDialogActionButton @click.native="onClickCancel">
@@ -22,32 +25,31 @@
 <script>
 import MdcDialog from '@components/MdcDialog';
 import MdcDialogActionButton from '@components/MdcDialogActionButton';
+
+const initialState = () => {
+	return {
+		gear: null,
+		isDeleting: false,
+	};
+};
+
 export default {
 	components: {
 		MdcDialog,
 		MdcDialogActionButton,
 	},
 	props: {
-		categories: {
-			type: Array,
-			default: () => [],
-		},
-		onDeleteCategory: {
+		onDeleteGear: {
 			type: Function,
 			default: () => {},
 		},
 	},
 	data() {
-		return {
-			categoryIndex: null,
-			categoryName: null,
-			isDeleting: false,
-		};
+		return initialState();
 	},
 	methods: {
-		open(index) {
-			this.categoryIndex = index;
-			this.categoryName = getCategoryName(this.categories[index]);
+		open({ gear }) {
+			this.gear = gear;
 			this.$refs.mdcDialog.open();
 		},
 		onClickCancel() {
@@ -59,9 +61,9 @@ export default {
 			}
 			try {
 				this.isDeleting = true;
-				await this.onDeleteCategory(this.categoryIndex);
+				await this.onDeleteGear();
 				this.$snackbar({
-					message: lang('msg_category_deleted', [this.categoryName]),
+					message: lang('msg_gear_deleted', [this.gear.name]),
 				});
 				this.$refs.mdcDialog.close('accept');
 			} catch (errorMessage) {
@@ -71,6 +73,9 @@ export default {
 			} finally {
 				this.isDeleting = false;
 			}
+		},
+		onDialogClosed() {
+			_.assign(this.$data, initialState());
 		},
 	},
 }

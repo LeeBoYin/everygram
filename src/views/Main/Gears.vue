@@ -130,13 +130,17 @@
 					</MdcFab>
 				</div>
 			</template>
-			<GearEditorDialog
-				ref="gearEditorDialog"
-				:on-create-gear="onCreateGear"
-				:on-update-gear="onUpdateGear"
-				@to-settings-categories="$router.push({ name: 'SettingsCategories' })"
-			/>
 		</div>
+		<GearEditorDialog
+			ref="gearEditorDialog"
+			:on-create-gear="onCreateGear"
+			:on-update-gear="onUpdateGear"
+			@to-settings-categories="$router.push({ name: 'SettingsCategories' })"
+		/>
+		<GearDeleteDialog
+			ref="gearDeleteDialog"
+			:on-delete-gear="onDeleteGear"
+		/>
 	</div>
 </template>
 
@@ -144,6 +148,7 @@
 import gearListStore from '@store/gearList';
 import CategoryGearList from '@components/Gears/CategoryGearList';
 import EmptyState from '@components/EmptyState';
+import GearDeleteDialog from '@components/Gears/GearDeleteDialog';
 import GearEditorDialog from '@components/Gears/GearEditorDialog';
 import GearListItem from '@components/Gears/GearListItem';
 import GearListLoading from '@components/Gears/GearListLoading';
@@ -155,6 +160,7 @@ export default {
 	components: {
 		CategoryGearList,
 		EmptyState,
+		GearDeleteDialog,
 		GearEditorDialog,
 		GearListItem,
 		GearListLoading,
@@ -168,6 +174,7 @@ export default {
 			mode: constant('GEAR_LIST_MODE_DEFAULT'),
 			selectedGearIdList: [],
 			editingGearId: null,
+			deletingGearId: null,
 		};
 	},
 	computed: {
@@ -252,6 +259,15 @@ export default {
 				toCategoryUuid: categoryUuid,
 			});
 		},
+		async onDeleteGear() {
+			await this.deleteGear({
+				gearId: this.deletingGearId,
+			});
+			// remove gear from gear list immediately
+			await this.removeGearFromGearList({
+				gearId: this.deletingGearId,
+			});
+		},
 		async onSortGear({ gearId, fromCategoryUuid, toCategoryUuid, index }) {
 			await this.sortGear({
 				gearId,
@@ -282,15 +298,20 @@ export default {
 			});
 		},
 		onClickDeleteGear(gearId) {
-			console.log('delete', this.gearListData.gearData[gearId].name);
+			this.deletingGearId = gearId;
+			this.$refs.gearDeleteDialog.open({
+				gear: this.gearListData.gearData[gearId],
+			});
 		},
 		...mapActions('gear', [
 			'createGear',
+			'deleteGear',
 			'overwriteGear',
 			'getGear',
 		]),
 		...mapActions('gearList', [
 			'appendGearToGearList',
+			'removeGearFromGearList',
 			'updateGearInGearList',
 			'getGearList',
 			'sortGear',

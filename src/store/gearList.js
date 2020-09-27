@@ -1,6 +1,6 @@
 import { errorMessageLang } from '@libs/lang';
 import GearList from '@class/GearList';
-window.GearList = GearList;
+
 const state = {
 	gearListDocRef: null,
 	gearListData: null,
@@ -70,7 +70,6 @@ const actions = {
 			[`order.${ categoryUuid || constant('CATEGORY_OTHERS') }`]: firebase.firestore.FieldValue.arrayUnion(gearId),
 		});
 	},
-
 	async updateGearInGearList(context, { gearId, fromCategoryUuid, toCategoryUuid }) {
 		const gear = await context.dispatch('gear/getGear', gearId, { root: true });
 		const updateObj = {
@@ -82,7 +81,15 @@ const actions = {
 		}
 		await context.dispatch('updateGearList', updateObj);
 	},
-
+	async removeGearFromGearList(context, { gearId }) {
+		const categoryUuid = _.findKey(context.state.gearListData.order, gearIdList => {
+			return _.includes(gearIdList, gearId);
+		});
+		await context.dispatch('updateGearList', {
+			[`gearData.${ gearId }`]: firebase.firestore.FieldValue.delete(),
+			[`order.${ categoryUuid || constant('CATEGORY_OTHERS') }`]: firebase.firestore.FieldValue.arrayRemove(gearId),
+		});
+	},
 	async sortGear(context, { gearId, fromCategoryUuid, toCategoryUuid, index = null }) {
 		const updateObj = {};
 		if(fromCategoryUuid !== toCategoryUuid) {

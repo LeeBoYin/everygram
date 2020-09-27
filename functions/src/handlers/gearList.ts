@@ -76,3 +76,23 @@ export async function updateGearDataInGearLists(payload: {
 	});
 	return Promise.all(promises);
 }
+
+export async function removeGearFromGearLists(payload: {
+	gearId: string,
+}) {
+	const promises: Promise<any>[] = [];
+	const gearLists = admin.firestore().collectionGroup('gearList').where(`gearData.${ payload.gearId }.name`, '>', '');
+	await gearLists.get().then((querySnapshot) => {
+		querySnapshot.forEach((doc) => {
+			const categoryUuid = _.findKey(doc.data().order, gearIdList => {
+				return _.includes(gearIdList, payload.gearId);
+			});
+			const updateObj = {
+				[`gearData.${ payload.gearId }`]: admin.firestore.FieldValue.delete(),
+				[`order.${ categoryUuid }`]: admin.firestore.FieldValue.arrayRemove(payload.gearId),
+			};
+			promises.push(doc.ref.update(updateObj));
+		});
+	});
+	return Promise.all(promises);
+}

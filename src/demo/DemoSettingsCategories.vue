@@ -43,9 +43,11 @@
 		</div>
 		<CategoryEditorDialog
 			ref="categoryEditorDialog"
+			:categories="memberSettings.categories"
 		/>
 		<CategoryDeleteDialog
 			ref="categoryDeleteDialog"
+			:categories="memberSettings.categories"
 		/>
 	</FullLayout>
 </template>

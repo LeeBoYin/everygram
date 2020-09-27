@@ -79,6 +79,21 @@
 						:key="gearId"
 						:gear="gear"
 						:category="categoryData.category"
+						:options="[
+							{
+								text: '編輯',
+								onSelect: () => {
+									$refs.gearEditorDialog.edit({ gear });
+								},
+							},
+							{
+								text: '刪除',
+								onSelect: () => {
+									$refs.gearDeleteDialog.open({ gear });
+								},
+							},
+						]"
+						@select:option="arguments[0].onSelect()"
 					/>
 				</template>
 			</CategoryGearList>
@@ -137,13 +152,17 @@
 			:categories="settingsConfig.default.categories"
 			@to-settings-categories="$router.push({ name: 'DemoSettingsCategories' })"
 		/>
+		<GearDeleteDialog
+			ref="gearDeleteDialog"
+		/>
 	</div>
 </template>
 
 <script>
 import CategoryGearList from '@components/Gears/CategoryGearList';
-import GearListItem from '@components/Gears/GearListItem';
+import GearDeleteDialog from '@components/Gears/GearDeleteDialog';
 import GearEditorDialog from '@components/Gears/GearEditorDialog';
+import GearListItem from '@components/Gears/GearListItem';
 import MdcButton from '@components/MdcButton';
 import MdcFab from '@components/MdcFab';
 import PageToolBar from '@components/PageToolBar';
@@ -152,8 +171,9 @@ import settingsConfig from '@/settingsConfig';
 export default {
 	components: {
 		CategoryGearList,
-		GearListItem,
+		GearDeleteDialog,
 		GearEditorDialog,
+		GearListItem,
 		MdcButton,
 		MdcFab,
 		PageToolBar,

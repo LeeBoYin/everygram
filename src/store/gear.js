@@ -62,6 +62,16 @@ const actions = {
 			throw errorMessageLang(e.code);
 		}
 	},
+	async deleteGear(context, { gearId }) {
+		try {
+			context.state.gearCollectionRef.doc(gearId).delete().then(() => {
+				// delete successfully
+			});
+		} catch (e) {
+			console.log(e);
+			throw errorMessageLang(e.code);
+		}
+	},
 };
 
 export default {

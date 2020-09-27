@@ -119,5 +119,8 @@
 	"hint_sort_gears": "拖動裝備進行排序",
 	"action_edit": "編輯",
 	"label_category_color": "類別顏色",
+	"confirm_delete_gear": "確定要刪除「%s」嗎？",
+	"hint_delete_gear": "刪除裝備將會一併刪除行程及裝備組合中的相同裝備，如想保留此裝備的行程記錄請使用封存",
+	"msg_gear_deleted": "「%s」已刪除",
 	"util_or": "或"
 }

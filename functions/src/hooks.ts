@@ -1,4 +1,5 @@
 import * as gearListHandlers from './handlers/gearList';
+import * as storageHandlers from './handlers/storage';
 const hooks = {
 	'onCategoriesUpdate': [
 		gearListHandlers.updateCategoriesInGearLists,
@@ -12,6 +13,13 @@ const hooks = {
 	],
 	'onGearUpdate': [
 		gearListHandlers.updateGearDataInGearLists,
+	],
+	'onGearPhotoUpdate': [
+		storageHandlers.deleteGearPhoto,
+	],
+	'onGearDelete': [
+		gearListHandlers.removeGearFromGearLists,
+		storageHandlers.deleteGearPhoto,
 	],
 };
 
