@@ -75,13 +75,12 @@ export const onUpdateGear = functions.region(REGION_TOKYO).firestore
 						toCategoryUuid: dataAfter?.category[userUid],
 					}));
 				}
-
-				// general update
-				await Promise.all(getAllHooksPromises('onGearUpdate', {
-					userUid,
-					gearId: context.params.gearId,
-				}));
 			});
+
+			// general update
+			await Promise.all(getAllHooksPromises('onGearUpdate', {
+				gearId: context.params.gearId,
+			}));
 
 			// end of onUpdateGear
 			resolve();

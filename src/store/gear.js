@@ -34,6 +34,16 @@ const actions = {
 			throw errorMessageLang(e.code);
 		}
 	},
+	async overwriteGear(context, { gearId, gearData, categoryUuid }) {
+		await context.dispatch('updateGear', {
+			gearId: gearId,
+			updateObj: new Gear({
+				ownerUserUid: context.rootGetters['user/user'].uid,
+				categoryUuid,
+				...gearData,
+			})
+		});
+	},
 	async getGear(context, gearId) {
 		try {
 			return await context.state.gearCollectionRef.doc(gearId).get();

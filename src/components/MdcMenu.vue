@@ -11,6 +11,7 @@
 					:key="option.value || index"
 					:data-value="option.value"
 					:option="option"
+					:selected="option.value === value"
 				/>
 			</slot>
 		</ul>
@@ -45,6 +46,9 @@ export default {
 	mounted() {
 		this.mdcMenu = new MDCMenu(this.$el);
 		this.mdcMenu.setFixedPosition(true);
+		this.mdcMenu.listen('MDCMenu:selected', (e) => {
+			this.$emit('select', this.options[e.detail.index]);
+		});
 	},
 	destroyed() {
 		this.mdcMenu.destroy();

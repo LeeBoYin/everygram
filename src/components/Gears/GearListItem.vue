@@ -39,19 +39,13 @@
 				</div>
 			</div>
 		</div>
-		<div v-if="mode === constant('GEAR_LIST_MODE_DEFAULT')" class="mdc-list-item__meta text-nowrap">
+		<div v-if="!_.isEmpty(options) && mode === constant('GEAR_LIST_MODE_DEFAULT')" class="mdc-list-item__meta text-nowrap">
 			<div class="mdc-menu-surface--anchor">
 				<MdcIconButton @click.native="onClickOption">more_vert</MdcIconButton>
 				<MdcMenu
 					ref="menu"
-					:options="[
-						{
-							text: lang('action_edit'),
-						},
-						{
-							text: lang('action_delete'),
-						}
-					]"
+					:options="options"
+					@select="onSelectOption"
 				/>
 			</div>
 		</div>
@@ -89,6 +83,10 @@ export default {
 			type: Object,
 			default: null,
 		},
+		options: {
+			type: Array,
+			default: null,
+		},
 	},
 	data() {
 		return {
@@ -117,6 +115,9 @@ export default {
 		},
 		onClickOption() {
 			this.$refs.menu.open();
+		},
+		onSelectOption(option) {
+			this.$emit('select:option', option);
 		},
 	},
 }

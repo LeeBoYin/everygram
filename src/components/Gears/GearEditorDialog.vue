@@ -39,10 +39,11 @@
 								:options="categoryOptions"
 								class="mdc-select--fullwidth"
 							>
-								<template v-slot:option="{ option }">
+								<template v-slot:option="{ option, selected }">
 									<MdcMenuItem
 										:option="option"
 										:data-value="option.value"
+										:selected="selected"
 									>
 										<template #graphic>
 											<CategoryAvatar
@@ -182,8 +183,22 @@ const initialState = () => {
 		gearNote: null,
 		isEditing: false,
 		isSaving: false,
-		editingGear: null,
-	}
+	};
+};
+
+const editState = ({ gear, userUid }) => {
+	return _.pickBy({
+		gearName: _.get(gear, 'name'),
+		categoryUuid: _.get(gear, ['category', userUid]),
+		gearBrand: _.get(gear, 'brand'),
+		gearModel: _.get(gear, 'mode'),
+		gearSize: _.get(gear, 'size'),
+		gearWeight: _.get(gear, 'weight'),
+		gearQuantity: _.get(gear, 'quantity'),
+		gearManufacturedDate: _.get(gear, 'manufacturedDate'),
+		gearPhotoURL: _.get(gear, 'photoURL'),
+		gearNote: _.get(gear, 'note'),
+	});
 };
 
 export default {
@@ -244,15 +259,15 @@ export default {
 		},
 		...mapGetters('member', [
 			'memberSettings',
+			'user',
 		]),
 	},
 	methods: {
 		create() {
 			this.$refs.mdcDialog.open();
 		},
-		edit(gearId) {
-			console.log('edit', gearId);
-			// this.editingGear = gear;
+		edit({ gear, userUid }) {
+			_.assign(this.$data, editState({ gear, userUid }));
 			this.isEditing = true;
 			this.$refs.mdcDialog.open();
 		},

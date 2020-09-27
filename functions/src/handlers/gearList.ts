@@ -59,14 +59,13 @@ export async function moveGearToCategory(payload: {
 }
 
 export async function updateGearDataInGearLists(payload: {
-	userUid: string,
 	gearId: string,
 }) {
 	const promises: Promise<any>[] = [];
 	const gearData = await admin.firestore().doc(`gear/${ payload.gearId }`).get().then((gearSnapshot) => {
 		return gearSnapshot.data();
 	});
-	const gearLists = admin.firestore().collectionGroup('gearList').where('userUid', '==', payload.userUid);
+	const gearLists = admin.firestore().collectionGroup('gearList').where(`gearData.${ payload.gearId }.name`, '>', '');
 	await gearLists.get().then((querySnapshot) => {
 		querySnapshot.forEach((doc) => {
 			const updateObj = {
@@ -75,6 +74,5 @@ export async function updateGearDataInGearLists(payload: {
 			promises.push(doc.ref.update(updateObj));
 		});
 	});
-
 	return Promise.all(promises);
 }

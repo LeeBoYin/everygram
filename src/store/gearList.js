@@ -71,7 +71,19 @@ const actions = {
 		});
 	},
 
-	async sortGear(context, { gearId, fromCategoryUuid, toCategoryUuid, index }) {
+	async updateGearInGearList(context, { gearId, fromCategoryUuid, toCategoryUuid }) {
+		const gear = await context.dispatch('gear/getGear', gearId, { root: true });
+		const updateObj = {
+			[`gearData.${ gearId }`]: gear.data(),
+		};
+		if(fromCategoryUuid !== toCategoryUuid) {
+			updateObj[`order.${ fromCategoryUuid || constant('CATEGORY_OTHERS') }`] = firebase.firestore.FieldValue.arrayRemove(gearId);
+			updateObj[`order.${ toCategoryUuid || constant('CATEGORY_OTHERS') }`] = firebase.firestore.FieldValue.arrayUnion(gearId);
+		}
+		await context.dispatch('updateGearList', updateObj);
+	},
+
+	async sortGear(context, { gearId, fromCategoryUuid, toCategoryUuid, index = null }) {
 		const updateObj = {};
 		if(fromCategoryUuid !== toCategoryUuid) {
 			// remove gearId from previous category

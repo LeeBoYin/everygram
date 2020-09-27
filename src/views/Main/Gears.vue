@@ -99,8 +99,23 @@
 							:gear="gear"
 							:category="categoryData.category"
 							:mode="mode"
+							:options="[
+								{
+									text: lang('action_edit'),
+									onSelect: () => {
+										onClickEditGear(gearId);
+									},
+								},
+								{
+									text: lang('action_delete'),
+									onSelect: () => {
+										onClickDeleteGear(gearId);
+									},
+								},
+							]"
 							@checked="selectedGearIdList = _.concat(selectedGearIdList, gearId)"
 							@unchecked="selectedGearIdList = _.without(selectedGearIdList, gearId)"
+							@select:option="arguments[0].onSelect()"
 						/>
 					</template>
 				</CategoryGearList>
@@ -152,6 +167,7 @@ export default {
 			isInitialized: false,
 			mode: constant('GEAR_LIST_MODE_DEFAULT'),
 			selectedGearIdList: [],
+			editingGearId: null,
 		};
 	},
 	computed: {
@@ -211,7 +227,6 @@ export default {
 			this.$refs.gearEditorDialog.create();
 		},
 		async onCreateGear({ gearData, categoryUuid }) {
-console.log(gearData);
 			// create gear
 			const gearId = await this.createGear({
 				gearData,
@@ -223,9 +238,19 @@ console.log(gearData);
 				categoryUuid,
 			});
 		},
-		onUpdateGear({ gearData }) {
-console.log(gearData);
-			//
+		async onUpdateGear({ gearData, categoryUuid }) {
+			const originalCategoryUuid = _.get(this.gearListData, ['gearData', this.editingGearId, 'category', this.user.uid]);
+			await this.overwriteGear({
+				gearId: this.editingGearId,
+				gearData,
+				categoryUuid,
+			});
+			// update gear in gear list immediately
+			await this.updateGearInGearList({
+				gearId: this.editingGearId,
+				fromCategoryUuid: originalCategoryUuid,
+				toCategoryUuid: categoryUuid,
+			});
 		},
 		async onSortGear({ gearId, fromCategoryUuid, toCategoryUuid, index }) {
 			await this.sortGear({
@@ -249,12 +274,25 @@ console.log(gearData);
 					break;
 			}
 		},
+		onClickEditGear(gearId) {
+			this.editingGearId = gearId;
+			this.$refs.gearEditorDialog.edit({
+				gear: this.gearListData.gearData[gearId],
+				userUid: this.user.uid,
+			});
+		},
+		onClickDeleteGear(gearId) {
+			console.log('delete', this.gearListData.gearData[gearId].name);
+		},
 		...mapActions('gear', [
 			'createGear',
+			'overwriteGear',
 			'getGear',
 		]),
 		...mapActions('gearList', [
 			'appendGearToGearList',
+			'updateGearInGearList',
+			'getGearList',
 			'sortGear',
 			'init',
 		]),
