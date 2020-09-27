@@ -4,8 +4,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const webpack = require('webpack');
-const { InjectManifest } = require('workbox-webpack-plugin');
-const autoprefixer = require('autoprefixer');
 const GoogleFontsPlugin = require('google-fonts-plugin');
 
 module.exports = function () {
@@ -64,25 +62,16 @@ module.exports = function () {
 		},
 		module: {
 			rules: [
-				{ test: /\.js$/, use: 'babel-loader' },
-				{ test: /\.vue$/, use: 'vue-loader' },
 				{
-					test: /\.(png|svg|jpg|gif)$/,
-					use: [
-						'file-loader',
-					],
+					test: /\.vue$/,
+					include: path.resolve(__dirname, 'src'),
+					use: 'vue-loader'
 				},
 				{
 					test: /\.scss$/,
 					use: [
 						MiniCssExtractPlugin.loader,
 						{ loader: 'css-loader' },
-						{
-							loader: 'postcss-loader',
-							options: {
-								plugins: () => [autoprefixer()]
-							}
-						},
 						{
 							loader: 'sass-loader',
 							options: {
@@ -125,10 +114,8 @@ module.exports = function () {
 				constant: ['@libs/constants', 'constant'],
 				uuid: ['uuid', 'v4'],
 			}),
-			new InjectManifest({
-				swSrc: '@/service-worker.js',
-				swDest: 'service-worker.js',
-				maximumFileSizeToCacheInBytes: 10 * 1024 * 1024,
+			new webpack.DefinePlugin({
+				'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
 			}),
 		],
 	};

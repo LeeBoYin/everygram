@@ -6,8 +6,10 @@ module.exports = function(env) {
 	return merge(baseConfig, {
 		watch: true,
 		watchOptions: {
-			poll: true,
+			poll: 300,
+			ignored: ['node_modules/**'],
 		},
+		devtool: 'inline-source-map',
 		output: {
 			filename: '[name].bundle.js',
 		},
