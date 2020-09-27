@@ -263,21 +263,6 @@ export default {
 		]),
 	},
 	methods: {
-		create() {
-			this.$refs.mdcDialog.open();
-		},
-		edit({ gear, userUid }) {
-			_.assign(this.$data, editState({ gear, userUid }));
-			this.isEditing = true;
-			this.$refs.mdcDialog.open();
-		},
-		onClickCancel() {
-			this.$refs.mdcDialog.close();
-		},
-		onClickToSettingsCategories() {
-			this.$refs.mdcDialog.close();
-			this.$emit('to-settings-categories');
-		},
 		async onClickAccept() {
 			try {
 				this.resetFormState();
@@ -309,6 +294,21 @@ export default {
 			} finally {
 				this.isSaving = false;
 			}
+		},
+		create() {
+			this.$refs.mdcDialog.open();
+		},
+		edit({ gear, userUid }) {
+			_.assign(this.$data, editState({ gear, userUid }));
+			this.isEditing = true;
+			this.$refs.mdcDialog.open();
+		},
+		onClickCancel() {
+			this.$refs.mdcDialog.close();
+		},
+		onClickToSettingsCategories() {
+			this.$refs.mdcDialog.close();
+			this.$emit('to-settings-categories');
 		},
 		onDialogClosed() {
 			_.assign(this.$data, initialState());

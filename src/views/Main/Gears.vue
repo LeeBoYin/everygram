@@ -170,11 +170,11 @@ export default {
 	},
 	data() {
 		return {
+			deletingGearId: null,
+			editingGearId: null,
 			isInitialized: false,
 			mode: constant('GEAR_LIST_MODE_DEFAULT'),
 			selectedGearIdList: [],
-			editingGearId: null,
-			deletingGearId: null,
 		};
 	},
 	computed: {
@@ -230,9 +230,6 @@ export default {
 		store.unregisterModule('gearList');
 	},
 	methods: {
-		onClickCreateGear() {
-			this.$refs.gearEditorDialog.create();
-		},
 		async onCreateGear({ gearData, categoryUuid }) {
 			// create gear
 			const gearId = await this.createGear({
@@ -243,20 +240,6 @@ export default {
 			await this.appendGearToGearList({
 				gearId,
 				categoryUuid,
-			});
-		},
-		async onUpdateGear({ gearData, categoryUuid }) {
-			const originalCategoryUuid = _.get(this.gearListData, ['gearData', this.editingGearId, 'category', this.user.uid]);
-			await this.overwriteGear({
-				gearId: this.editingGearId,
-				gearData,
-				categoryUuid,
-			});
-			// update gear in gear list immediately
-			await this.updateGearInGearList({
-				gearId: this.editingGearId,
-				fromCategoryUuid: originalCategoryUuid,
-				toCategoryUuid: categoryUuid,
 			});
 		},
 		async onDeleteGear() {
@@ -276,6 +259,20 @@ export default {
 				index,
 			});
 		},
+		async onUpdateGear({ gearData, categoryUuid }) {
+			const originalCategoryUuid = _.get(this.gearListData, ['gearData', this.editingGearId, 'category', this.user.uid]);
+			await this.overwriteGear({
+				gearId: this.editingGearId,
+				gearData,
+				categoryUuid,
+			});
+			// update gear in gear list immediately
+			await this.updateGearInGearList({
+				gearId: this.editingGearId,
+				fromCategoryUuid: originalCategoryUuid,
+				toCategoryUuid: categoryUuid,
+			});
+		},
 		changeMode(mode) {
 			switch (mode) {
 				case constant('GEAR_LIST_MODE_DEFAULT'):
@@ -290,12 +287,8 @@ export default {
 					break;
 			}
 		},
-		onClickEditGear(gearId) {
-			this.editingGearId = gearId;
-			this.$refs.gearEditorDialog.edit({
-				gear: this.gearListData.gearData[gearId],
-				userUid: this.user.uid,
-			});
+		onClickCreateGear() {
+			this.$refs.gearEditorDialog.create();
 		},
 		onClickDeleteGear(gearId) {
 			this.deletingGearId = gearId;
@@ -303,19 +296,26 @@ export default {
 				gear: this.gearListData.gearData[gearId],
 			});
 		},
+		onClickEditGear(gearId) {
+			this.editingGearId = gearId;
+			this.$refs.gearEditorDialog.edit({
+				gear: this.gearListData.gearData[gearId],
+				userUid: this.user.uid,
+			});
+		},
 		...mapActions('gear', [
 			'createGear',
 			'deleteGear',
-			'overwriteGear',
 			'getGear',
+			'overwriteGear',
 		]),
 		...mapActions('gearList', [
 			'appendGearToGearList',
-			'removeGearFromGearList',
-			'updateGearInGearList',
 			'getGearList',
-			'sortGear',
 			'init',
+			'removeGearFromGearList',
+			'sortGear',
+			'updateGearInGearList',
 		]),
 	},
 };
