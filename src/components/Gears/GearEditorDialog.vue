@@ -181,8 +181,8 @@ const initialState = () => {
 		gearPhotoFileName: uuid(), // random file name
 		gearPhotoURL: null,
 		gearNote: null,
-		isEditing: false,
 		isSaving: false,
+		oldGear: null,
 	};
 };
 
@@ -198,6 +198,7 @@ const editState = ({ gear, userUid }) => {
 		gearManufacturedDate: _.get(gear, 'manufacturedDate'),
 		gearPhotoURL: _.get(gear, 'photoURL'),
 		gearNote: _.get(gear, 'note'),
+		oldGear: gear,
 	});
 };
 
@@ -243,7 +244,7 @@ export default {
 			});
 		},
 		gearData() {
-			return {
+			const gearData = {
 				brand: this.gearBrand,
 				manufacturedDate: this.gearManufacturedDate,
 				model: this.gearModel,
@@ -256,6 +257,16 @@ export default {
 				weight: this.gearWeight,
 				note: this.gearNote,
 			};
+			if(this.isEditing) {
+				if(gearData.photoURL && gearData.photoURL === this.oldGear.photoURL) {
+					// keep the same file name if no new photo was uploaded
+					gearData.photoFileName = this.oldGear.photoFileName;
+				}
+			}
+			return gearData;
+		},
+		isEditing() {
+			return !!this.oldGear;
 		},
 		...mapGetters('member', [
 			'memberSettings',
@@ -300,7 +311,6 @@ export default {
 		},
 		edit({ gear, userUid }) {
 			_.assign(this.$data, editState({ gear, userUid }));
-			this.isEditing = true;
 			this.$refs.mdcDialog.open();
 		},
 		onClickCancel() {

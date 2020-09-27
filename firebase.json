@@ -29,10 +29,10 @@
   },
   "emulators": {
     "functions": {
-      "port": "3680"
+      "port": "3662"
     },
     "firestore": {
-      "port": "3670"
+      "port": "3661"
     },
     "hosting": {
       "port": "3660"

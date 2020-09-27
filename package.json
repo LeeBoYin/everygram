@@ -3,10 +3,11 @@
 	"version": "1.0.0",
 	"scripts": {
 		"clean": "rimraf dist",
-		"analyze": "npm run clean && webpack --env.analyze --mode production",
-		"build": "npm run clean && webpack --env.production --mode production",
-		"watch": "npm run clean && webpack --watch --progress --env.watch --mode development",
-		"serve": "npm run clean && webpack-dev-server --env.development --mode development"
+		"analyze": "npm run clean && webpack --env.analyze --env.NODE_ENV=production --mode production",
+		"build": "npm run clean && webpack --env.production --env.NODE_ENV=production --mode production",
+		"watch": "npm run clean && webpack --watch --progress --env.watch --env.NODE_ENV=development --mode development",
+		"serve": "npm run clean && webpack-dev-server --env.development --env.NODE_ENV=development --mode development",
+		"deploy": "firebase deploy --only hosting"
 	},
 	"author": "leeboyin",
 	"license": "ISC",

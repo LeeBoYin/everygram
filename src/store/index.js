@@ -16,9 +16,9 @@ const getters = {
 const mutations = {
 	setDB(state, db) {
 		if (location.hostname === "localhost" && location.port === "3660") {
-			console.log('db host = localhost:3670');
+			console.log('db host = localhost:3661');
 			db.settings({
-				host: "localhost:3670",
+				host: "localhost:3661",
 				ssl: false
 			});
 		}
@@ -45,7 +45,6 @@ const actions = {
 		await context.dispatch('user/init');
 		await context.dispatch('gear/init');
 		context.commit('setIsInitialized');
-		console.log('store initialized');
 	},
 	onInstallReady(context, installPrompt) {
 		context.commit('setInstallPrompt', installPrompt);

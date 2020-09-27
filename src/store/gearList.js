@@ -68,6 +68,7 @@ const actions = {
 		await context.dispatch('updateGearList', {
 			[`gearData.${ gearId }`]: gear.data(),
 			[`order.${ categoryUuid || constant('CATEGORY_OTHERS') }`]: firebase.firestore.FieldValue.arrayUnion(gearId),
+			gearIdList: firebase.firestore.FieldValue.arrayUnion(gearId),
 		});
 	},
 	async updateGearInGearList(context, { gearId, fromCategoryUuid, toCategoryUuid }) {
@@ -88,6 +89,7 @@ const actions = {
 		await context.dispatch('updateGearList', {
 			[`gearData.${ gearId }`]: firebase.firestore.FieldValue.delete(),
 			[`order.${ categoryUuid || constant('CATEGORY_OTHERS') }`]: firebase.firestore.FieldValue.arrayRemove(gearId),
+			gearIdList: firebase.firestore.FieldValue.arrayRemove(gearId),
 		});
 	},
 	async sortGear(context, { gearId, fromCategoryUuid, toCategoryUuid, index = null }) {

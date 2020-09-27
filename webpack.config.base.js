@@ -5,8 +5,8 @@ const CopyPlugin = require('copy-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const webpack = require('webpack');
 const GoogleFontsPlugin = require('google-fonts-plugin');
-
-module.exports = function () {
+const autoprefixer = require('autoprefixer');
+module.exports = function (env) {
 	return {
 		// js
 		entry: {
@@ -63,6 +63,11 @@ module.exports = function () {
 		module: {
 			rules: [
 				{
+					test: /\.js$/,
+					include: path.resolve(__dirname, 'src'),
+					loader: 'babel-loader',
+				},
+				{
 					test: /\.vue$/,
 					include: path.resolve(__dirname, 'src'),
 					use: 'vue-loader'
@@ -72,6 +77,12 @@ module.exports = function () {
 					use: [
 						MiniCssExtractPlugin.loader,
 						{ loader: 'css-loader' },
+						{
+							loader: 'postcss-loader',
+							options: {
+								plugins: () => [autoprefixer()]
+							}
+						},
 						{
 							loader: 'sass-loader',
 							options: {
@@ -115,7 +126,7 @@ module.exports = function () {
 				uuid: ['uuid', 'v4'],
 			}),
 			new webpack.DefinePlugin({
-				'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
+				'process.env.NODE_ENV': JSON.stringify(env.NODE_ENV || 'development')
 			}),
 		],
 	};

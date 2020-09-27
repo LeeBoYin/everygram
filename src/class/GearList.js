@@ -8,10 +8,6 @@ export default function (data = {}) {
 		[constant('CATEGORY_OTHERS')]: [],
 	};
 
-	_.forEach(categories, category => {
-		order[category.uuid] = [];
-	});
-
 	return {
 		userUid,
 		// keep order of gears in each category
@@ -20,5 +16,6 @@ export default function (data = {}) {
 		categories,
 		// copy of gear data
 		gearData: {},
+		gearIdList: [],
 	};
 }
