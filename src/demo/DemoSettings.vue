@@ -6,13 +6,14 @@
 					<Board>
 						<template #header>
 							<div class="settings__profile-header">
-								<div
-									class="avatar settings__profile-avatar"
-									:style="{ 'background-image': `url(${ constant('DEFAULT_MEMBER_PHOTO_URL') }` }"
-								>
-									<i class="material-icons-outlined settings__profile-camera">photo_camera</i>
-									<input type="file">
-								</div>
+								<ImageFileInput
+									class="settings__profile-avatar"
+									:value="constant('DEFAULT_MEMBER_PHOTO_URL')"
+									:max-width="300"
+									:max-height="300"
+									:path="`demo`"
+									file-name="profile_picture"
+								/>
 							</div>
 						</template>
 						<template #body>
@@ -64,8 +65,8 @@
 							<MdcListItemSelect
 								label="預設單位"
 								:options="[
-									{ value: 'metric', text: '公制' },
-									{ value: 'imperial', text: '英制' },
+									{ value: constant('UNIT_SYSTEM_METRIC'), text: '公制' },
+									{ value: constant('UNIT_SYSTEM_IMPERIAL'), text: '英制' },
 								]"
 								v-model="unitSystem"
 							/>
@@ -118,6 +119,7 @@
 import Board from '@components/Board';
 import ChangePasswordDialog from '@components/Settings/ChangePasswordDialog';
 import EditableTextField from '@components/EditableTextField';
+import ImageFileInput from '@components/ImageFileInput';
 import MdcButton from '@components/MdcButton';
 import MdcList from '@components/MdcList';
 import MdcListItem from '@components/MdcListItem';
@@ -129,6 +131,7 @@ export default {
 		Board,
 		ChangePasswordDialog,
 		EditableTextField,
+		ImageFileInput,
 		MdcButton,
 		MdcList,
 		MdcListItem,

@@ -19,7 +19,7 @@ module.exports = function(env) {
 			host: '0.0.0.0',
 			port: 3690,
 			historyApiFallback: true,// for vue router mode history
-			// writeToDisk: true,
+			writeToDisk: true,
 			watchOptions: {
 				poll: true
 			},

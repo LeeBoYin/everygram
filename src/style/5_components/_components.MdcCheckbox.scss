@@ -1,8 +1,6 @@
-@use "@material/checkbox";
-@use "@material/form-field";
+@use "node_modules/@material/checkbox";
 
 @include checkbox.core-styles;
-@include form-field.core-styles;
 
 .mdc-checkbox {
 	@include checkbox.container-colors($c-gray-400, transparent, $c-primary, $c-primary, true);

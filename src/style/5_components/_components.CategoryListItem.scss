@@ -1,14 +1,9 @@
 .category-list-item {
 	background-color: $c-bright;
-	cursor: grab;
+	@extend %grab;
 
 	.mdc-list & {
 		padding-top: 16px;
 		padding-bottom: 16px;
-	}
-
-
-	&:active {
-		cursor: grabbing;
 	}
 }

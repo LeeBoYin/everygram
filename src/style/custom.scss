@@ -18,6 +18,7 @@
 @import "1_tools/tools.background";
 @import "1_tools/tools.flex";
 @import "1_tools/tools.position";
+@import "1_tools/tools.sortable";
 @import "1_tools/tools.text";
 
 // 2. generic
@@ -57,10 +58,13 @@
 @import "5_components/components.CircleRadio";
 @import "5_components/components.Board";
 @import "5_components/components.CategoryAvatar";
+@import "5_components/components.CategoryGearList";
 @import "5_components/components.CategoryListItem";
 @import "5_components/components.DrawerHeader";
 @import "5_components/components.EditableTextField";
+@import "5_components/components.GearListLoading";
 @import "5_components/components.GearListItem";
+@import "5_components/components.ImageFileInput";
 @import "5_components/components.ImageThumbnail";
 @import "5_components/components.Login";
 @import "5_components/components.Main";

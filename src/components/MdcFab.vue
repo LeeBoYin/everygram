@@ -7,9 +7,12 @@
 </template>
 
 <script>
-import { MDCRipple } from '@material/ripple';
 
+import mixinRipple from '@/mixins/mixinRipple';
 export default {
+	mixins: [
+		mixinRipple
+	],
 	props: {
 		icon: {
 			type: String,
@@ -19,17 +22,6 @@ export default {
 			type: String,
 			default: null,
 		},
-	},
-	data() {
-		return {
-			fab: null,
-		};
-	},
-	mounted() {
-		this.fab = new MDCRipple(this.$el);
-	},
-	destroyed() {
-		this.fab.destroy();
 	},
 };
 </script>

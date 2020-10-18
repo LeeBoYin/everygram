@@ -15,11 +15,11 @@
 	}
 
 	&__profile-avatar {
-		position: relative;
 		width: $setting-avatar-width;
 		height: $setting-avatar-width;
 		margin: 0 auto;
 		z-index: 1;
+		border-radius: 50%;
 		box-shadow: $box-shadow-md;
 		transition: box-shadow .3s;
 		background-color: $c-bright;
@@ -28,32 +28,10 @@
 			box-shadow: $box-shadow-lg;
 		}
 
-		> input[type=file] {
-			position: absolute;
-			top: 0;
-			bottom: 0;
-			left: 0;
-			width: 100%;
-			opacity: 0;
-			cursor: pointer;
+		.image-file-input__camera-lower-right {
+			right: 4px;
+			bottom: 4px;
 		}
-	}
-
-	&__profile-camera {
-		position: absolute;
-		left: auto;
-		right: 4px;
-		bottom: 4px;
-		padding: 4px;
-		background-color: $c-bright;
-		border-radius: 50%;
-		color: $c-gray-800;
-		font-size: $font-size-md;
-		box-shadow: $box-shadow-md;
-	}
-
-	&__profile-avatar-loading.mdc-circular-progress {
-		@extend %absolute-center;
 	}
 
 	&__board {

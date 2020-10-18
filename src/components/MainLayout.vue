@@ -8,11 +8,11 @@
 		<aside ref="mdcDrawer" class="mdc-drawer mdc-drawer--modal">
 			<div class="mdc-drawer__header">
 				<div class="drawer-header">
-					<div
+					<Avatar
 						v-if="user.photoURL"
-						class="avatar drawer-header__avatar"
-						:style="{ 'background-image': `url(${ user.photoURL })` }"
-					></div>
+						class="drawer-header__avatar"
+						:image-url="user.photoURL"
+					/>
 					<div class="drawer-header__title">
 						{{ user.displayName }}
 					</div>
@@ -20,24 +20,12 @@
 			</div>
 			<div class="mdc-drawer__content">
 				<nav ref="mdcList" class="mdc-list">
-					<RouterLink
+					<MainMenuItem
 						v-for="page in pageList"
-						ref="listItem"
 						:key="page.name"
-						:to="{ name: page.name }"
-						:class="{ 'mdc-list-item--activated': page.name === currentPage.name }"
-						class="mdc-list-item"
-						:aria-current="page.name === currentPage.name ? 'page' : null"
-						:tabindex="page.name === currentPage.name ? 0 : -1"
-					>
-						<span class="mdc-list-item__ripple"></span>
-						<i class="material-icons-outlined mdc-list-item__graphic" aria-hidden="true">
-							{{ page.icon }}
-						</i>
-						<span class="mdc-list-item__text">
-							{{ page.text }}
-						</span>
-					</RouterLink>
+						:page="page"
+						:current-page-name="currentPage.name"
+					/>
 				</nav>
 			</div>
 		</aside>
@@ -54,10 +42,13 @@
 import { MDCList } from "@material/list";
 import { MDCDrawer } from "@material/drawer";
 import { MDCTopAppBar } from "@material/top-app-bar";
-import { MDCRipple } from '@material/ripple/index';
+import Avatar from '@components/Avatar';
+import MainMenuItem from '@components/MainMenuItem';
 import MdcTopAppBar from '@components/MdcTopAppBar';
 export default {
 	components: {
+		Avatar,
+		MainMenuItem,
 		MdcTopAppBar,
 	},
 	props: {
@@ -77,7 +68,6 @@ export default {
 	},
 	mounted() {
 		this.initResponsiveDrawer();
-		this.initRipple()
 	},
 	methods: {
 		initResponsiveDrawer() {
@@ -130,11 +120,6 @@ export default {
 				}
 			};
 			window.addEventListener('resize', resizeHandler);
-		},
-		initRipple() {
-			this.$refs.listItem.forEach(listItem => {
-				new MDCRipple(listItem.$el);
-			});
 		},
 	},
 };

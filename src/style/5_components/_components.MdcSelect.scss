@@ -6,10 +6,10 @@
 	@include select.hover-bottom-line-color($c-primary);
 	@include select.label-color($c-gray-600);
 	@include select.focused-label-color($c-primary-dark);
-}
 
-.mdc-select-width {
-	width: 100%;
+	&--fullwidth {
+		width: 100%;
+	}
 }
 
 // 修正 Ripple 顏色

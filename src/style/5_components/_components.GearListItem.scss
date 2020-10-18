@@ -1,6 +1,11 @@
 .gear-list-item {
 	font-size: $font-size-sm;
 	line-height: 1.4;
+	background-color: $c-bright;
+
+	&--sortable {
+		@extend %grab;
+	}
 
 	&__img-thumbnail {
 		width: 64px;
