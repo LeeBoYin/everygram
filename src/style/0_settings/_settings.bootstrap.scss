@@ -1,3 +1,5 @@
+// Color system
+
 $theme-colors: (
 	"primary":    $c-primary,
 	"secondary":  $c-secondary,
@@ -21,6 +23,12 @@ $grays:(
   "900": $c-gray-900
 );
 
+// Options
+
+$enable-shadows:  true;
+
+// Spacing
+
 $spacer: 1rem;
 $spacers:(
 	0: 0,
@@ -33,9 +41,50 @@ $spacers:(
 	7: ($spacer * 3),
 );
 
+// Grid columns
 $grid-gutter-width: $padding-container * 2;
 $form-grid-gutter-width: $padding-container;
+
+// Components
+
+$border-radius:		6px;
+$border-radius-lg:	8px;
+$border-radius-sm:	4px;
+
+// Dropdowns
+//
+// Dropdown menu container and contents.
+
+$dropdown-min-width:                10rem;
+$dropdown-padding-x:                0;
+$dropdown-padding-y:                0;
+$dropdown-spacer:                   0;
+$dropdown-border-color:             transparent;
+$dropdown-border-radius:            $border-radius-lg;
+$dropdown-border-width:             0;
+// $dropdown-inner-border-radius:      subtract($dropdown-border-radius, $dropdown-border-width);
+// $dropdown-divider-bg:               $gray-200;
+// $dropdown-divider-margin-y:         $nav-divider-margin-y;
+$dropdown-box-shadow:               0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
+
+$dropdown-link-color:               $c-gray-800;
+$dropdown-link-hover-color:         $c-gray-800;
+$dropdown-link-hover-bg:            $c-gray-40;
+
+$dropdown-link-active-color:        $c-gray-800;
+$dropdown-link-active-bg:           $c-primary-ligther;
+
+$dropdown-link-disabled-color:      $c-gray-400;
+
+$dropdown-item-padding-y:           1.6rem;
+$dropdown-item-padding-x:           1.6rem;
+
+$dropdown-header-color:             $c-gray-400;
+$dropdown-header-padding:           $dropdown-item-padding-y / 4 $dropdown-item-padding-x;
+
+// Thumbnail
 
 $thumbnail-padding:                 0;
 $thumbnail-bg:                      $c-gray-50;
 $thumbnail-border-width:            0;
+

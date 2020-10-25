@@ -33,39 +33,181 @@
 							</ValidationProvider>
 						</div>
 						<div class="mb-3">
-							<MdcSelect
-								v-model="categoryUuid"
-								:label="lang('label_category')"
-								:options="categoryOptions"
-								class="mdc-select--fullwidth"
-							>
-								<template v-slot:option="{ option, selected }">
-									<MdcMenuItem
-										:option="option"
-										:data-value="option.value"
-										:selected="selected"
-									>
-										<template #graphic>
+							<div class="dropdown">
+								<div
+									class="mdc-select mdc-select--filled mdc-select--fullwidth"
+									data-toggle="dropdown"
+									aria-haspopup="true"
+									aria-expanded="false"
+									data-display="static"
+								>
+									<div class="mdc-select__anchor">
+										<span class="mdc-select__ripple"></span>
+										<span class="mdc-select__selected-text"></span>
+										<span class="mdc-select__dropdown-icon">
+											<svg
+												class="mdc-select__dropdown-icon-graphic"
+												viewBox="7 10 10 5">
+												<polygon
+													class="mdc-select__dropdown-icon-inactive"
+													stroke="none"
+													fill-rule="evenodd"
+													points="7 10 12 15 17 10">
+												</polygon>
+												<polygon
+													class="mdc-select__dropdown-icon-active"
+													stroke="none"
+													fill-rule="evenodd"
+													points="7 15 12 10 17 15">
+												</polygon>
+											</svg>
+										</span>
+										<span class="mdc-floating-label">類別</span>
+										<span class="mdc-line-ripple"></span>
+									</div>
+								</div>
+								<div
+									class="dropdown-menu w-100"
+									aria-labelledby="dropdownMenuButton"
+								>
+									<div class="dropdown-header d-md-none">
+										選擇裝備類別
+									</div>
+									<div class="mdc-list">
+										<a class="dropdown-item mdc-list-item active" href="#">
 											<CategoryAvatar
-												:icon-type="option.category.iconType"
-												:icon-name="option.category.iconName"
-												:background-color="option.category.color"
+												:icon-type="'material'"
+												:icon-name="'backpack'"
+												:background-color="'#999'"
 												class="mr-3"
 											/>
-										</template>
-									</MdcMenuItem>
-								</template>
-								<template #menu-footer>
-									<div class="text-right">
-										<MdcButton class="mdc-button--text" @click.native="onClickToSettingsCategories">
-											{{ lang('title_settings_categories') }}
-											<template #trailing-icon>
-												<i class="material-icons-outlined">keyboard_arrow_right</i>
-											</template>
-										</MdcButton>
+											<span class="mdc-list-item__text">
+												背包
+											</span>
+										</a>
+										<a class="dropdown-item mdc-list-item" href="#">
+											<CategoryAvatar
+												:icon-type="'material'"
+												:icon-name="'backpack'"
+												:background-color="'#999'"
+												class="mr-3"
+											/>
+											<span class="mdc-list-item__text">
+												背包
+											</span>
+										</a>
+										<a class="dropdown-item mdc-list-item" href="#">
+											<CategoryAvatar
+												:icon-type="'material'"
+												:icon-name="'backpack'"
+												:background-color="'#999'"
+												class="mr-3"
+											/>
+											<span class="mdc-list-item__text">
+												背包
+											</span>
+										</a>
+										<a class="dropdown-item mdc-list-item" href="#">
+											<CategoryAvatar
+												:icon-type="'material'"
+												:icon-name="'backpack'"
+												:background-color="'#999'"
+												class="mr-3"
+											/>
+											<span class="mdc-list-item__text">
+												背包
+											</span>
+										</a>
+										<a class="dropdown-item mdc-list-item" href="#">
+											<CategoryAvatar
+												:icon-type="'material'"
+												:icon-name="'backpack'"
+												:background-color="'#999'"
+												class="mr-3"
+											/>
+											<span class="mdc-list-item__text">
+												背包
+											</span>
+										</a>
+										<a class="dropdown-item mdc-list-item" href="#">
+											<CategoryAvatar
+												:icon-type="'material'"
+												:icon-name="'backpack'"
+												:background-color="'#999'"
+												class="mr-3"
+											/>
+											<span class="mdc-list-item__text">
+												背包
+											</span>
+										</a>
+										<a class="dropdown-item mdc-list-item" href="#">
+											<CategoryAvatar
+												:icon-type="'material'"
+												:icon-name="'backpack'"
+												:background-color="'#999'"
+												class="mr-3"
+											/>
+											<span class="mdc-list-item__text">
+												背包
+											</span>
+										</a>
+										<a class="dropdown-item mdc-list-item" href="#">
+											<CategoryAvatar
+												:icon-type="'material'"
+												:icon-name="'backpack'"
+												:background-color="'#999'"
+												class="mr-3"
+											/>
+											<span class="mdc-list-item__text">
+												背包
+											</span>
+										</a>
+										<a class="dropdown-item mdc-list-item" href="#">
+											<CategoryAvatar
+												:icon-type="'material'"
+												:icon-name="'backpack'"
+												:background-color="'#999'"
+												class="mr-3"
+											/>
+											<span class="mdc-list-item__text">
+												背包
+											</span>
+										</a>
+										<a class="dropdown-item mdc-list-item" href="#">
+											<CategoryAvatar
+												:icon-type="'material'"
+												:icon-name="'backpack'"
+												:background-color="'#999'"
+												class="mr-3"
+											/>
+											<span class="mdc-list-item__text">
+												背包
+											</span>
+										</a>
+										<a class="dropdown-item mdc-list-item" href="#">
+											<CategoryAvatar
+												:icon-type="'material'"
+												:icon-name="'backpack'"
+												:background-color="'#999'"
+												class="mr-3"
+											/>
+											<span class="mdc-list-item__text">
+												背包
+											</span>
+										</a>
 									</div>
-								</template>
-							</MdcSelect>
+									<div class="dropdown-menu__footer">
+										<div class="text-right">
+											<MdcButton class="mdc-button--text" @click.native="onClickToSettingsCategories">
+												{{ lang('title_settings_categories') }}
+												<template #trailing-icon>
+													<i class="material-icons-outlined">keyboard_arrow_right</i>
+												</template>
+											</MdcButton>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 						<div class="mb-3">
 							<MdcTextField
@@ -154,6 +296,8 @@
 </template>
 
 <script>
+import 'bootstrap/js/dist/util';
+import 'bootstrap/js/dist/dropdown';
 import mixinForm from '@mixins/mixinForm';
 import CategoryAvatar from '@components/CategoryAvatar';
 import DateTextField from '@components/DateTextField';

@@ -1,14 +1,3 @@
 @use "node_modules/@material/menu-surface/mdc-menu-surface";
 @use "node_modules/@material/menu/mdc-menu";
 //@use "node_modules/@material/list/mdc-list";
-
-.mdc-menu {
-	&__footer {
-		position: sticky;
-		bottom: 0;
-		z-index: 2;
-		padding: 2px;
-		border-top: 1px solid $c-gray-50;
-		background-color: $c-bright;
-	}
-}

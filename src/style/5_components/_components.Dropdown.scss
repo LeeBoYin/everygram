@@ -1,0 +1,52 @@
+@import "node_modules/bootstrap/scss/dropdown";
+
+.dropdown-menu {
+
+	.mdc-list {
+		max-height: 50vh;
+		overflow-y: auto;
+	}
+
+	.dropdown-header + .mdc-list {
+		padding-top: 0;
+	}
+
+	&__footer {
+		padding: 2px;
+		border-top: 1px solid $c-gray-50;
+		background-color: $c-bright;
+		border-radius: 0 0 $border-radius $border-radius;
+	}
+
+	@include media-breakpoint-down(sm) {
+		display: block;
+		visibility: hidden;
+		opacity: 0;
+		position: fixed !important;
+		top: auto !important;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		z-index: 99;
+		box-shadow: 0 0 0 100vh rgba(0, 0, 0, .4);
+		border-bottom-left-radius: 0;
+		border-bottom-right-radius: 0;
+		transition: .15s;
+
+		&.show {
+			visibility: visible;
+			opacity: 1;
+			animation: scrollUp .2s ease-in;
+
+		}
+
+		@keyframes scrollUp {
+			from {
+				transform: translateY(100%);
+			}
+			to {
+				transform: translateY(0);
+			}
+		}
+	}
+}
