@@ -37,7 +37,7 @@ import { min_value } from 'vee-validate/dist/rules';
 extend('min_value', min_value);
 
 extend('yearMonthDate', value => {
-	const DATE_FORMAT = 'YYYY/MM/DD';
+	const DATE_FORMAT = 'YYYY-MM-DD';
 	return moment(value, DATE_FORMAT).format(DATE_FORMAT) === value;
 });
 

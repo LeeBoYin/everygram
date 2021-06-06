@@ -2,6 +2,7 @@
 @use "node_modules/@material/select/mdc-select";
 
 .mdc-select {
+	@include select.container-fill-color($c-gray-40);
 	@include select.bottom-line-color($c-gray-200);
 	@include select.hover-bottom-line-color($c-primary);
 	@include select.label-color($c-gray-600);

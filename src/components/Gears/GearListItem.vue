@@ -19,7 +19,7 @@
 		<div class="mdc-list-item__text flex-grow-1">
 			<div class="row align-items-center">
 				<div class="col-lg-9">
-					<div class="d-flex align-items-start">
+					<div class="d-flex align-items-center">
 						<div class="img-thumbnail gear-list-item__img-thumbnail flex-shrink-0">
 							<img v-if="gear.photoURL" :src="gear.photoURL">
 							<i v-else-if="category && category.iconType === constant('ICON_TYPE_MATERIAL')" class="material-icons-outlined">{{ category.iconName }}</i>

@@ -1,7 +1,7 @@
 <template>
 	<MdcTextField
 		ref="textField"
-		type="text"
+		type="date"
 		v-bind="$attrs"
 		v-on="$listeners"
 	/>
