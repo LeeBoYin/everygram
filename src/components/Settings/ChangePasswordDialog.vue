@@ -94,8 +94,10 @@ export default {
 		open() {
 			this.currentPassword = this.newPassword = '';
 			this.errorMessage = null;
-			this.$refs.validationObserver.reset();
 			this.$refs.mdcDialog.open();
+			this.$nextTick(() => {
+				this.$refs.validationObserver.reset();
+			});
 		},
 		onClickCancel() {
 			this.$refs.mdcDialog.close('cancel');
