@@ -19,6 +19,7 @@ import GearEditor from '@views/Gear/GearEditor';
 import NotFound from '@views/NotFound';
 
 const getCurrentUser = () => {
+console.log('getCurrentUser');
 	return new Promise((resolve, reject) => {
 		const unsubscribe = firebase.auth().onAuthStateChanged(user => {
 			unsubscribe();
@@ -54,11 +55,13 @@ const untilMemberLoaded = () => {
 };
 
 const isLoginAndReady = async () => {
+console.log('isLoginAndReady');
 	if (await getCurrentUser()) {
 		await untilMemberLoaded();
 		await untilInitialized();
 		return true;
 	}
+console.log('isLoginAndReady return false');
 	return false;
 };
 
@@ -68,6 +71,7 @@ export default [
 		component: Main,
 		beforeEnter: async (to, from, next) => {
 			if (!await isLoginAndReady()) {
+console.log('redirect to sign in');
 				next({
 					name: 'SignIn',
 				});
@@ -220,7 +224,7 @@ export default [
 		path: '/login',
 		component: Login,
 		beforeEnter: async (to, from, next) => {
-			if (!await isLoginAndReady()) {
+			if (await isLoginAndReady()) {
 				next({
 					name: 'Gears',
 				});

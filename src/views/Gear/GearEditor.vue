@@ -271,6 +271,9 @@ export default {
 		...mapGetters('user', [
 			'user',
 		]),
+		...mapGetters('gearList', [
+			'gearListData',
+		]),
 	},
 	async created() {
 		if (this.isEditing) {
@@ -335,6 +338,7 @@ export default {
 		},
 		async onUpdateGear() {
 			const originalCategoryUuid = _.get(this.gearListData, ['gearData', this.gearId, 'category', this.user.uid]);
+console.log(originalCategoryUuid, this.gearId, this.user.uid);
 			await this.overwriteGear({
 				gearId: this.gearId,
 				gearData: this.gearData,
@@ -361,7 +365,6 @@ export default {
 			'overwriteGear',
 		]),
 		...mapActions('gearList', [
-			'gearListData',
 			'appendGearToGearList',
 			'updateGearInGearList',
 		]),
