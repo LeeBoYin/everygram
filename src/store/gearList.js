@@ -64,17 +64,17 @@ const actions = {
 		}
 	},
 	async appendGearToGearList(context, { gearId, categoryUuid }) {
-		const gear = await context.dispatch('gear/getGear', gearId, { root: true });
+		const gearData = await context.dispatch('gear/getGear', gearId, { root: true });
 		await context.dispatch('updateGearList', {
-			[`gearData.${ gearId }`]: gear.data(),
+			[`gearData.${ gearId }`]: gearData,
 			[`order.${ categoryUuid || constant('CATEGORY_OTHERS') }`]: firebase.firestore.FieldValue.arrayUnion(gearId),
 			gearIdList: firebase.firestore.FieldValue.arrayUnion(gearId),
 		});
 	},
 	async updateGearInGearList(context, { gearId, fromCategoryUuid, toCategoryUuid }) {
-		const gear = await context.dispatch('gear/getGear', gearId, { root: true });
+		const gearData = await context.dispatch('gear/getGear', gearId, { root: true });
 		const updateObj = {
-			[`gearData.${ gearId }`]: gear.data(),
+			[`gearData.${ gearId }`]: gearData,
 		};
 		if(fromCategoryUuid !== toCategoryUuid) {
 			updateObj[`order.${ fromCategoryUuid || constant('CATEGORY_OTHERS') }`] = firebase.firestore.FieldValue.arrayRemove(gearId);

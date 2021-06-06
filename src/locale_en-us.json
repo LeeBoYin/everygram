@@ -95,6 +95,8 @@
 	"msg_changes_are_saved": "All changes are saved",
 	"msg_gear_created": "Gear created",
 	"msg_gear_deleted": "%s has been deleted",
+	"msg_gear_no_edit_permission": "You have no permission to edit this gear",
+	"msg_gear_not_exist": "Gear does not exist",
 	"msg_password_changed": "Your password has been updated",
 	"msg_password_reset": "Password reset successfully, please sign in again",
 	"msg_password_reset_email_sent": "Password reset email sent",

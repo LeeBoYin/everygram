@@ -131,12 +131,6 @@
 				</div>
 			</template>
 		</div>
-		<GearEditorDialog
-			ref="gearEditorDialog"
-			:on-create-gear="onCreateGear"
-			:on-update-gear="onUpdateGear"
-			@to-settings-categories="$router.push({ name: 'SettingsCategories' })"
-		/>
 		<GearDeleteDialog
 			ref="gearDeleteDialog"
 			:on-delete-gear="onDeleteGear"
@@ -145,23 +139,22 @@
 </template>
 
 <script>
+import store from '@/store';
 import gearListStore from '@store/gearList';
 import CategoryGearList from '@components/Gears/CategoryGearList';
 import EmptyState from '@components/EmptyState';
 import GearDeleteDialog from '@components/Gears/GearDeleteDialog';
-import GearEditorDialog from '@components/Gears/GearEditorDialog';
 import GearListItem from '@components/Gears/GearListItem';
 import GearListLoading from '@components/Gears/GearListLoading';
 import MdcButton from '@components/MdcButton';
 import MdcFab from '@components/MdcFab';
 import PageToolBar from '@components/PageToolBar';
-import store from '@/store';
+
 export default {
 	components: {
 		CategoryGearList,
 		EmptyState,
 		GearDeleteDialog,
-		GearEditorDialog,
 		GearListItem,
 		GearListLoading,
 		MdcButton,
@@ -230,18 +223,6 @@ export default {
 		store.unregisterModule('gearList');
 	},
 	methods: {
-		async onCreateGear({ gearData, categoryUuid }) {
-			// create gear
-			const gearId = await this.createGear({
-				gearData,
-				categoryUuid,
-			});
-			// insert gear into main gear list
-			await this.appendGearToGearList({
-				gearId,
-				categoryUuid,
-			});
-		},
 		async onDeleteGear() {
 			await this.deleteGear({
 				gearId: this.deletingGearId,
@@ -259,20 +240,6 @@ export default {
 				index,
 			});
 		},
-		async onUpdateGear({ gearData, categoryUuid }) {
-			const originalCategoryUuid = _.get(this.gearListData, ['gearData', this.editingGearId, 'category', this.user.uid]);
-			await this.overwriteGear({
-				gearId: this.editingGearId,
-				gearData,
-				categoryUuid,
-			});
-			// update gear in gear list immediately
-			await this.updateGearInGearList({
-				gearId: this.editingGearId,
-				fromCategoryUuid: originalCategoryUuid,
-				toCategoryUuid: categoryUuid,
-			});
-		},
 		changeMode(mode) {
 			switch (mode) {
 				case constant('GEAR_LIST_MODE_DEFAULT'):
@@ -288,7 +255,9 @@ export default {
 			}
 		},
 		onClickCreateGear() {
-			this.$refs.gearEditorDialog.create();
+			this.$router.push({
+				name: 'GearCreate',
+			});
 		},
 		onClickDeleteGear(gearId) {
 			this.deletingGearId = gearId;
@@ -297,25 +266,22 @@ export default {
 			});
 		},
 		onClickEditGear(gearId) {
-			this.editingGearId = gearId;
-			this.$refs.gearEditorDialog.edit({
-				gear: this.gearListData.gearData[gearId],
-				userUid: this.user.uid,
-			});
+			this.$router.push({
+				name: 'GearEdit',
+				params: {
+					gearId,
+				},
+			}).catch(() => {});
 		},
 		...mapActions('gear', [
-			'createGear',
 			'deleteGear',
 			'getGear',
-			'overwriteGear',
 		]),
 		...mapActions('gearList', [
-			'appendGearToGearList',
 			'getGearList',
 			'init',
 			'removeGearFromGearList',
 			'sortGear',
-			'updateGearInGearList',
 		]),
 	},
 };

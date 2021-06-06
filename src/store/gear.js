@@ -46,7 +46,8 @@ const actions = {
 	},
 	async getGear(context, gearId) {
 		try {
-			return await context.state.gearCollectionRef.doc(gearId).get();
+			const gearSnapshot = await context.state.gearCollectionRef.doc(gearId).get();
+			return gearSnapshot.exists ? gearSnapshot.data() : null;
 		} catch (e) {
 			console.log(e);
 			throw errorMessageLang(e.code);

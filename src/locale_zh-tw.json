@@ -95,6 +95,8 @@
 	"msg_changes_are_saved": "變更已儲存",
 	"msg_gear_created": "裝備已新增",
 	"msg_gear_deleted": "「%s」已刪除",
+	"msg_gear_no_edit_permission": "您沒有編輯此裝備的權限",
+	"msg_gear_not_exist": "裝備不存在",
 	"msg_password_changed": "更改密碼成功",
 	"msg_password_reset": "密碼重新設定完成，請重新登入",
 	"msg_password_reset_email_sent": "密碼重設信件已寄出",

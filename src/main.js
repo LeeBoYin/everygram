@@ -7,7 +7,7 @@ import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/storage';
 import firebaseConfig from '../firebase.config';
-export const project = firebase.initializeApp(firebaseConfig);
+const firebaseApp = firebase.initializeApp(firebaseConfig);
 
 // vue
 import Vue from 'vue';
@@ -32,7 +32,7 @@ Object.defineProperty(Vue.prototype, 'constant', { value: constant });
 import snackbar from '@plugins/snackbar';
 Vue.use(snackbar);
 
-new Vue({
+const vueApp = new Vue({
 	el: '#app',
 	store,
 	router,
@@ -94,3 +94,8 @@ if(process.env.NODE_ENV === 'production') {
 		});
 	}
 }
+
+export {
+	firebaseApp,
+	vueApp,
+};
