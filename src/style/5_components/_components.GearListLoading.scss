@@ -1,0 +1,8 @@
+.gear-list-loading {
+	&__title {
+		@extend .shimmer;
+		height: 20px;
+		width: 150px;
+		margin: 18px 0;
+	}
+}

@@ -3,6 +3,8 @@ function buildConfigFunc(env) {
 	console.log('env', env);
 	if (env.development) {
 		return require('./webpack.config.dev.js')(env);
+	} else if (env.watch) {
+		return require('./webpack.config.watch.js')(env);
 	} else if (env.production) {
 		return require('./webpack.config.prod.js')(env);
 	} else if (env.analyze) {

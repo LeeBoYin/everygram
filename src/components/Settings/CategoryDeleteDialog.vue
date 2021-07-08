@@ -54,6 +54,9 @@ export default {
 			this.$refs.mdcDialog.close();
 		},
 		async onClickAccept() {
+			if(this.isDeleting) {
+				return;
+			}
 			try {
 				this.isDeleting = true;
 				await this.onDeleteCategory(this.categoryIndex);

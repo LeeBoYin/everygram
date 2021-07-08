@@ -1,4 +1,5 @@
 import store from '@/store';
+import { vueApp } from '@/main';
 import Home from '@views/Home';
 import Login from '@views/Login';
 import SignIn from '@views/Login/SignIn';
@@ -14,9 +15,11 @@ import Wishes from '@views/main/Wishes';
 import Archives from '@views/main/Archives';
 import Settings from '@views/main/Settings';
 import Categories from '@views/Settings/Categories';
+import GearEditor from '@views/Gear/GearEditor';
 import NotFound from '@views/NotFound';
 
 const getCurrentUser = () => {
+console.log('getCurrentUser');
 	return new Promise((resolve, reject) => {
 		const unsubscribe = firebase.auth().onAuthStateChanged(user => {
 			unsubscribe();
@@ -51,20 +54,30 @@ const untilMemberLoaded = () => {
 	});
 };
 
+const isLoginAndReady = async () => {
+console.log('isLoginAndReady');
+	if (await getCurrentUser()) {
+		await untilMemberLoaded();
+		await untilInitialized();
+		return true;
+	}
+console.log('isLoginAndReady return false');
+	return false;
+};
+
 export default [
 	{
 		path: '/',
 		component: Main,
 		beforeEnter: async (to, from, next) => {
-			if (await getCurrentUser()) {
-				await untilMemberLoaded();
-				await untilInitialized();
-				next();
-			} else {
+			if (!await isLoginAndReady()) {
+console.log('redirect to sign in');
 				next({
 					name: 'SignIn',
 				});
+				return;
 			}
+			next();
 		},
 		children: [
 			{
@@ -122,19 +135,81 @@ export default [
 		path: '/settings/categories',
 		name: 'SettingsCategories',
 		component: Categories,
-		beforeEnter: async ( to, from, next ) => {
-			if ( await getCurrentUser() ) {
-				await untilMemberLoaded();
-				await untilInitialized();
-				next();
-			} else {
+		beforeEnter: async (to, from, next) => {
+			if (!await isLoginAndReady()) {
 				next({
 					name: 'SignIn',
 				});
+				return;
 			}
+			next();
 		},
 		meta: {
 			title: 'title_settings_categories',
+		},
+	},
+	{
+		path: '/gear/create',
+		name: 'GearCreate',
+		component: GearEditor,
+		beforeEnter: async (to, from, next) => {
+			if (!await isLoginAndReady()) {
+				next({
+					name: 'SignIn',
+				});
+				return;
+			}
+			next();
+		},
+		meta: {
+			title: 'title_create_gear',
+		},
+	},
+	{
+		path: '/gear/edit/:gearId?',
+		name: 'GearEdit',
+		component: GearEditor,
+		beforeEnter: async (to, from, next) => {
+			if (!await isLoginAndReady()) {
+				next({
+					name: 'SignIn',
+				});
+				return;
+			}
+			if (!to.params.gearId) {
+				vueApp.$snackbar({
+					message: lang('msg_gear_not_exist'),
+				});
+				next({
+					name: 'Gears',
+				});
+				return;
+			}
+			const gearData = await store.dispatch('gear/getGear', to.params.gearId);
+			const userUid = store.getters['user/user'].uid;
+			if (!gearData) {
+				vueApp.$snackbar({
+					message: lang('msg_gear_not_exist'),
+				});
+				next({
+					name: 'Gears',
+				});
+				return;
+			}
+			if(gearData.role[userUid] !== constant('ROLE_OWNER')) {
+				vueApp.$snackbar({
+					message: lang('msg_gear_no_edit_permission'),
+				});
+				next({
+					name: 'Gears',
+				});
+				return;
+			}
+			next();
+		},
+		props: true,
+		meta: {
+			title: 'title_edit_gear',
 		},
 	},
 	{
@@ -149,14 +224,13 @@ export default [
 		path: '/login',
 		component: Login,
 		beforeEnter: async (to, from, next) => {
-			if (await getCurrentUser()) {
+			if (await isLoginAndReady()) {
 				next({
 					name: 'Gears',
-					replace: true,
 				});
-			} else {
-				next();
+				return;
 			}
+			next();
 		},
 		children: [
 			{

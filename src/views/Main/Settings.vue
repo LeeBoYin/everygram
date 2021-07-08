@@ -6,14 +6,15 @@
 					<Board>
 						<template #header>
 							<div class="settings__profile-header">
-								<div
-									class="avatar settings__profile-avatar"
-									:style="{ 'background-image': isUploadingProfilePicture ? '' : `url(${ user.photoURL })` }"
-								>
-									<i class="material-icons-outlined settings__profile-camera">photo_camera</i>
-									<input type="file" @change="onProfilePictureSelected" accept="image/*" title="" />
-									<MdcCircularProgress v-if="isUploadingProfilePicture" class="settings__profile-avatar-loading" />
-								</div>
+								<ImageFileInput
+									class="settings__profile-avatar"
+									v-model="photoURL"
+									:max-width="300"
+									:max-height="300"
+									:path="`member/${ user.uid }`"
+									file-name="profile_picture"
+									@input="onSettingChange('photoURL', arguments[0])"
+								/>
 							</div>
 						</template>
 						<template #body>
@@ -115,14 +116,12 @@
 </template>
 
 <script>
-import { uploadFile } from '@libs/storage';
 import settingsConfig from '@/settingsConfig.json';
-import Compressor from 'compressorjs';
 import Board from '@components/Board';
 import ChangePasswordDialog from '@components/Settings/ChangePasswordDialog';
 import EditableTextField from '@components/EditableTextField';
+import ImageFileInput from '@components/ImageFileInput';
 import MdcButton from '@components/MdcButton';
-import MdcCircularProgress from '@components/MdcCircularProgress';
 import MdcList from '@components/MdcList';
 import MdcListItem from '@components/MdcListItem';
 import MdcListItemSelect from '@components/MdcListItemSelect';
@@ -133,8 +132,8 @@ export default {
 		Board,
 		ChangePasswordDialog,
 		EditableTextField,
+		ImageFileInput,
 		MdcButton,
-		MdcCircularProgress,
 		MdcList,
 		MdcListItem,
 		MdcListItemSelect,
@@ -145,10 +144,9 @@ export default {
 			currency: '',
 			dateFormat: '',
 			isSigningOut: false,
-			isUploadingProfilePicture: false,
 			language: '',
-			mode: 'viewMode',
 			newDisplayName: '',
+			photoURL: '',
 			unitSystem: '',
 		};
 	},
@@ -194,6 +192,7 @@ export default {
 			this.unitSystem = this.memberSettings.unitSystem;
 			this.dateFormat = this.memberSettings.dateFormat;
 			this.currency = this.memberSettings.currency;
+			this.photoURL = this.user.photoURL;
 		},
 		onClickChangePassword() {
 			this.$refs.changePasswordDialog.open();
@@ -241,46 +240,6 @@ export default {
 				this.$snackbar({
 					message: errorMessage,
 				});
-			}
-		},
-		async onProfilePictureSelected(e) {
-			const file = e.target.files[0];
-			if (!file || this.isUploadingProfilePicture) {
-				return;
-			}
-			try {
-				this.isUploadingProfilePicture = true;
-				// compress image
-				const compressedFile = await new Promise((resolve) => {
-					new Compressor(file, {
-						quality: 0.8,
-						maxHeight: 300,
-						maxWidth: 300,
-						success(result) {
-							resolve(result);
-						},
-						error(err) {
-							console.log(err.message);
-							throw err.message;
-						},
-					});
-				});
-				// clear input
-				e.target.value = '';
-				// upload
-				const photoURL = await uploadFile({
-					path: `member/${ this.user.uid }`,
-					file: compressedFile,
-					fileName: 'profile_picture',
-				});
-				// update member data
-				await this.onSettingChange('photoURL', photoURL);
-			} catch (errorMessage) {
-				this.$snackbar({
-					message: errorMessage,
-				});
-			} finally {
-				this.isUploadingProfilePicture = false;
 			}
 		},
 		...mapActions('member', [

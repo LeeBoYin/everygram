@@ -7,21 +7,7 @@ import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/storage';
 import firebaseConfig from '../firebase.config';
-export const project = firebase.initializeApp(firebaseConfig);
-
-// enable firestore offline persistence
-firebase.firestore().enablePersistence()
-.then(() => {
-	// enablePersistence success
-})
-.catch((err) => {
-	console.log('EnablePersistence fail', err);
-	if (err.code == 'failed-precondition') {
-		console.log('multiple tabs open');
-	} else if (err.code == 'unimplemented') {
-		console.log('current browser does not support');
-	}
-});
+const firebaseApp = firebase.initializeApp(firebaseConfig);
 
 // vue
 import Vue from 'vue';
@@ -36,6 +22,8 @@ import { lang, getCategoryName } from '@libs/lang';
 
 // use _ in all of vue component template
 Object.defineProperty(Vue.prototype, '_', { value: _ });
+Object.defineProperty(Vue.prototype, 'moment', { value: moment });
+Object.defineProperty(Vue.prototype, 'uuid', { value: uuid });
 Object.defineProperty(Vue.prototype, 'lang', { value: lang });
 Object.defineProperty(Vue.prototype, 'getCategoryName', { value: getCategoryName });
 Object.defineProperty(Vue.prototype, 'constant', { value: constant });
@@ -44,14 +32,27 @@ Object.defineProperty(Vue.prototype, 'constant', { value: constant });
 import snackbar from '@plugins/snackbar';
 Vue.use(snackbar);
 
-export const EventBus = new Vue();
-
-new Vue({
+const vueApp = new Vue({
 	el: '#app',
 	store,
 	router,
 	created() {
 		this.$store.dispatch('init');
+		// enable firestore offline persistence
+		firebase.firestore().enablePersistence({
+			synchronizeTabs: true,
+		})
+		.then(() => {
+			// enablePersistence success
+		})
+		.catch((err) => {
+			console.log('EnablePersistence fail', err);
+			if (err.code === 'failed-precondition') {
+				console.log('multiple tabs open');
+			} else if (err.code === 'unimplemented') {
+				console.log('current browser does not support');
+			}
+		});
 		this.bindEvents();
 	},
 	methods: {
@@ -84,10 +85,17 @@ new Vue({
 	}
 });
 
-// Check that service workers are supported
-if ('serviceWorker' in navigator) {
-	// Use the window load event to keep the page load performant
-	window.addEventListener('load', () => {
-		navigator.serviceWorker.register('/service-worker.js');
-	});
+if(process.env.NODE_ENV === 'production') {
+	// Check that service workers are supported
+	if ('serviceWorker' in navigator) {
+		// Use the window load event to keep the page load performant
+		window.addEventListener('load', () => {
+			navigator.serviceWorker.register('/service-worker.js');
+		});
+	}
 }
+
+export {
+	firebaseApp,
+	vueApp,
+};

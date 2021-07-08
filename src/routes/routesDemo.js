@@ -1,20 +1,8 @@
-import DemoHome from '@demo/DemoHome';
-import DemoLogin from '@demo/DemoLogin';
-import DemoMain from '@demo/DemoMain';
-import DemoGears from '@demo/DemoGears';
-import DemoTrips from '@demo/DemoTrips';
-import DemoCollections from '@demo/DemoCollections';
-import DemoWishes from '@demo/DemoWishes';
-import DemoArchives from '@demo/DemoArchives';
-import DemoSettings from '@demo/DemoSettings';
-import DemoSettingsCategories from '@demo/DemoSettingsCategories';
-import DemoComponents from '@demo/DemoComponents';
-
 export default [
 	{
 		path: '/demo/home' ,
 		name: 'DemoHome',
-		component: DemoHome,
+		component: () => import(/* webpackChunkName: 'DemoHome' */ '@demo/DemoHome'),
 		meta: {
 			title: 'Demo Home',
 		},
@@ -22,7 +10,7 @@ export default [
 	{
 		path: '/demo/login' ,
 		name: 'DemoLogin',
-		component: DemoLogin,
+		component: () => import(/* webpackChunkName: 'DemoLogin' */ '@demo/DemoLogin'),
 		meta: {
 			title: 'Demo Login',
 		},
@@ -30,13 +18,13 @@ export default [
 	{
 		path: '/demo/main',
 		name: 'DemoMain',
-		component: DemoMain,
+		component: () => import(/* webpackChunkName: 'DemoMain' */ '@demo/DemoMain'),
 		children: [
 			{
 				path: '/demo/main',
 				alias: '/demo/gears',
 				name: 'DemoGears',
-				component: DemoGears,
+				component: () => import(/* webpackChunkName: 'DemoGears' */ '@demo/DemoGears'),
 				meta: {
 					title: 'Demo Gears',
 				},
@@ -44,7 +32,7 @@ export default [
 			{
 				path: '/demo/trips',
 				name: 'DemoTrips',
-				component: DemoTrips,
+				component: () => import(/* webpackChunkName: 'DemoTrips' */ '@demo/DemoTrips'),
 				meta: {
 					title: 'Demo Trips',
 				},
@@ -52,7 +40,7 @@ export default [
 			{
 				path: '/demo/collections',
 				name: 'DemoCollections',
-				component: DemoCollections,
+				component: () => import(/* webpackChunkName: 'DemoCollections' */ '@demo/DemoCollections'),
 				meta: {
 					title: 'Demo Collections',
 				},
@@ -60,7 +48,7 @@ export default [
 			{
 				path: '/demo/wishes',
 				name: 'DemoWishes',
-				component: DemoWishes,
+				component: () => import(/* webpackChunkName: 'DemoWishes' */ '@demo/DemoWishes'),
 				meta: {
 					title: 'Demo Wishes',
 				},
@@ -68,7 +56,7 @@ export default [
 			{
 				path: '/demo/archives',
 				name: 'DemoArchives',
-				component: DemoArchives,
+				component: () => import(/* webpackChunkName: 'DemoArchives' */ '@demo/DemoArchives'),
 				meta: {
 					title: 'Demo Archives',
 				},
@@ -76,7 +64,7 @@ export default [
 			{
 				path: '/demo/settings',
 				name: 'DemoSettings',
-				component: DemoSettings,
+				component: () => import(/* webpackChunkName: 'DemoSettings' */ '@demo/DemoSettings'),
 				meta: {
 					title: 'Demo Settings',
 				},
@@ -86,7 +74,7 @@ export default [
 	{
 		path: '/demo/settings/categories',
 		name: 'DemoSettingsCategories',
-		component: DemoSettingsCategories,
+		component: () => import(/* webpackChunkName: 'DemoSettingsCategories' */ '@demo/DemoSettingsCategories'),
 		meta: {
 			title: 'Demo Settings Categories',
 		},
@@ -94,7 +82,7 @@ export default [
 	{
 		path: '/demo/components' ,
 		name: 'DemoComponents',
-		component: DemoComponents,
+		component: () => import(/* webpackChunkName: 'DemoComponents' */ '@demo/DemoComponents'),
 		meta: {
 			title: 'Demo Components',
 		},

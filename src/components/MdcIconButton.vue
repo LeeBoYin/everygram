@@ -9,9 +9,11 @@
 </template>
 
 <script>
-import { MDCRipple } from '@material/ripple/index';
-
+import mixinRipple from '@/mixins/mixinRipple';
 export default {
+	mixins: [
+		mixinRipple
+	],
 	props: {
 		el: {
 			type: String,
@@ -22,17 +24,8 @@ export default {
 			default: null,
 		},
 	},
-	data() {
-		return {
-			mdcIconButton: null,
-		};
-	},
 	mounted() {
-		this.mdcIconButton = new MDCRipple(this.$el);
-		this.mdcIconButton.unbounded = true;
-	},
-	destroyed() {
-		this.mdcIconButton.destroy();
+		this.ripple.unbounded = true;
 	},
 };
 </script>

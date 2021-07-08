@@ -1,5 +1,5 @@
 <template>
-	<i :class="iconClass"><template v-if="iconType === 'material'">{{ iconName }}</template></i>
+	<i :class="iconClass"><template v-if="iconType === constant('ICON_TYPE_MATERIAL')">{{ iconName }}</template></i>
 </template>
 
 <script>
@@ -17,7 +17,7 @@ export default {
 	computed: {
 		iconClass() {
 			switch (this.iconType) {
-				case 'material':
+				case constant('ICON_TYPE_MATERIAL'):
 				default:
 					return 'material-icons-outlined';
 			}

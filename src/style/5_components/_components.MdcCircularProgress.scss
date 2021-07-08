@@ -3,6 +3,10 @@
 
 .mdc-circular-progress {
 	vertical-align: middle;
+
+	// #hack fix other element disappear problem in gear editor dialog
+	overflow: hidden;
+
 	&--on-dark {
 		@include circular-progress.color($c-bright);
 	}

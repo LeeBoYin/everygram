@@ -21,39 +21,39 @@
 					</div>
 				</ValidationProvider>
 
-				<h5 class="mb-2">類別顏色</h5>
-				<div class="mb-4">
+				<h5 class="mb-2">{{ lang('label_category_color') }}</h5>
+				<ValidationProvider :name="lang('label_category_color')" rules="required" v-slot="{ errors }">
 					<div class="row no-gutters">
-						<div class="col-auto">
-							<label class="circle-radio">
-								<input type="radio" name="category_color" checked>
-								<div class="circle-radio__circle mr-2" :style="{ 'background-color': '#999' }">
-									<!-- Checked 才有打勾 -->
-									<i class="circle-radio__icon material-icons-outlined">check</i>
-								</div>
-							</label>
+						<div class="col-auto" v-for="categoryColor in categoryColors" :key="categoryColor">
+							<CircleRadio
+								name="category_color"
+								v-model="color"
+								:radio-value="categoryColor"
+								:background-color="categoryColor"
+							>
+								<template v-slot:icon="{ checked }">
+									<i v-if="checked" class="circle-radio__icon material-icons-outlined">check</i>
+								</template>
+							</CircleRadio>
 						</div>
-						<div class="col-auto">
-							<label class="circle-radio">
-								<input type="radio" name="category_color">
-								<div class="circle-radio__circle" :style="{ 'background-color': '#999' }">
-									<!-- <i class="circle-radio__icon material-icons-outlined">check</i> -->
-								</div>
-							</label>
-						</div>
+						<TextFieldErrorMessage :message="errors[0]" />
 					</div>
-				</div>
+				</ValidationProvider>
 
-				<h5 class="mb-2">類別圖示</h5>
+				<h5 class="mb-2">{{ lang('label_category_icon') }}</h5>
 				<ValidationProvider :name="lang('label_category_icon')" rules="required" v-slot="{ errors }">
 					<div class="row no-gutters">
 						<div class="col-auto" v-for="(categoryIcon, index) in categoryIcons" :key="index">
-							<label class="circle-radio">
-								<input type="radio" name="category_icon" v-model="iconIndex" :value="index">
-								<div class="circle-radio__circle">
+							<CircleRadio
+								name="category_icon"
+								v-model="iconIndex"
+								:radio-value="index"
+								:background-color="iconIndex === index ? color : null"
+							>
+								<template #icon>
 									<CategoryIcon class="circle-radio__icon" :icon-type="categoryIcon.type" :icon-name="categoryIcon.name" />
-								</div>
-							</label>
+								</template>
+							</CircleRadio>
 						</div>
 						<TextFieldErrorMessage :message="errors[0]" />
 					</div>
@@ -79,30 +79,39 @@
 </template>
 
 <script>
-import { ValidationObserver, ValidationProvider } from 'vee-validate';
-import AlertInline from '@components/AlertInline';
+import mixinForm from '@mixins/mixinForm';
 import settingsConfig from '@/settingsConfig';
 import CategoryIcon from '@components/CategoryIcon';
+import CircleRadio from '@components/CircleRadio';
 import MdcDialog from '@components/MdcDialog';
 import MdcDialogActionButton from '@components/MdcDialogActionButton';
 import MdcTextField from '@components/MdcTextField';
 import TextFieldErrorMessage from '@components/TextFieldErrorMessage';
+
+const initialState = () => {
+	return {
+		categoryIndex: null,
+		categoryName: '',
+		color: _.head(settingsConfig.categoryColors),
+		iconIndex: null,
+		isEditing: false,
+		isSaving: false,
+	};
+};
+
 export default {
+	mixins: [
+		mixinForm,
+	],
 	components: {
-		AlertInline,
 		CategoryIcon,
+		CircleRadio,
 		MdcDialog,
 		MdcDialogActionButton,
 		MdcTextField,
 		TextFieldErrorMessage,
-		ValidationObserver,
-		ValidationProvider,
 	},
 	props: {
-		categories: {
-			type: Array,
-			default: () => [],
-		},
 		onCreateCategory: {
 			type: Function,
 			default: () => {},
@@ -113,24 +122,17 @@ export default {
 		},
 	},
 	data() {
-		return {
-			categoryIndex: null,
-			categoryName: '',
-			errorMessage: null,
-			iconIndex: null,
-			isEditing: false,
-			isSaving: false,
-		};
+		return initialState();
 	},
 	computed: {
 		categoryIcons() {
 			if(this.isEditing) {
-				const category = this.categories[this.categoryIndex];
+				const category = this.memberSettings.categories[this.categoryIndex];
 				const isCurrentIconIncluded = _.some(settingsConfig.categoryIcons, categoryIcon => {
 					return category.iconType === categoryIcon.type && category.iconName === categoryIcon.name;
 				});
 				if(!isCurrentIconIncluded) {
-					// prepend original icon if it is no loner existing
+					// prepend original icon if it is no longer existing
 					return [
 						{
 							type: category.iconType,
@@ -143,29 +145,52 @@ export default {
 
 			return settingsConfig.categoryIcons;
 		},
+		categoryColors() {
+			if(this.isEditing) {
+				const category = this.memberSettings.categories[this.categoryIndex];
+				const isCurrentColorIncluded = _.includes(settingsConfig.categoryColors, category.color);
+				if(category.color && !isCurrentColorIncluded) {
+					// prepend original color if it is no longer existing
+					return [
+						category.color,
+						...settingsConfig.categoryColors,
+					];
+				}
+			}
+
+			return settingsConfig.categoryColors;
+		},
 		newCategory() {
-			if(!this.categoryName || _.isNil(this.iconIndex)) {
+			if(!this.categoryName || _.isNil(this.iconIndex) || _.isNil(this.color)) {
 				return  null;
 			}
 			return {
 				name: this.categoryName,
 				iconType: this.categoryIcons[this.iconIndex].type,
 				iconName: this.categoryIcons[this.iconIndex].name,
+				color: this.color,
+				uuid: this.isEditing ? this.memberSettings.categories[this.categoryIndex].uuid : uuid(),
 			};
 		},
+		...mapGetters('member', [
+			'memberSettings',
+		]),
 	},
 	methods: {
 		create() {
 			this.$refs.mdcDialog.open();
 		},
 		edit(index) {
-			const category = this.categories[index];
+			const category = this.memberSettings.categories[index];
 			this.isEditing = true;
 			this.categoryIndex = index;
 			this.categoryName = getCategoryName(category);
 			this.iconIndex = _.findIndex(this.categoryIcons, categoryIcon => {
 				return category.iconType === categoryIcon.type && category.iconName === categoryIcon.name;
 			});
+			if(category.color) {
+				this.color = category.color;
+			}
 			this.$refs.mdcDialog.open();
 		},
 		onClickCancel() {
@@ -203,15 +228,11 @@ export default {
 			}
 		},
 		onDialogClosed() {
-			this.categoryName = '';
-			this.categoryIndex = null;
-			this.iconIndex = null;
-			this.isEditing = false;
-			this.errorMessage = null;
-			this.$refs.validationObserver.reset();
+			_.assign(this.$data, initialState());
+			this.resetFormState();
 		},
 		checkIsCategoryNameExisting() {
-			const existingIndex = _.findIndex(this.categories, category => {
+			const existingIndex = _.findIndex(this.memberSettings.categories, category => {
 				return this.categoryName === getCategoryName(category);
 			});
 			if(existingIndex !== -1) {

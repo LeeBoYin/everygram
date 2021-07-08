@@ -4,11 +4,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const webpack = require('webpack');
-const { InjectManifest } = require('workbox-webpack-plugin');
-const autoprefixer = require('autoprefixer');
 const GoogleFontsPlugin = require('google-fonts-plugin');
-
-module.exports = function () {
+const autoprefixer = require('autoprefixer');
+module.exports = function (env) {
 	return {
 		// js
 		entry: {
@@ -49,10 +47,12 @@ module.exports = function () {
 				'vue$': 'vue/dist/vue.esm.js',
 				'@': path.resolve(__dirname, 'src'),
 				'@assets': path.resolve(__dirname, 'src/assets'),
+				'@class': path.resolve(__dirname, 'src/class'),
 				'@components': path.resolve(__dirname, 'src/components'),
 				'@demo': path.resolve(__dirname, 'src/demo'),
 				'@directives': path.resolve(__dirname, 'src/directives'),
 				'@libs': path.resolve(__dirname, 'src/libs'),
+				'@mixins': path.resolve(__dirname, 'src/mixins'),
 				'@plugins': path.resolve(__dirname, 'src/plugins'),
 				'@store': path.resolve(__dirname, 'src/store'),
 				'@style': path.resolve(__dirname, 'src/style'),
@@ -62,13 +62,15 @@ module.exports = function () {
 		},
 		module: {
 			rules: [
-				{ test: /\.js$/, use: 'babel-loader' },
-				{ test: /\.vue$/, use: 'vue-loader' },
 				{
-					test: /\.(png|svg|jpg|gif)$/,
-					use: [
-						'file-loader',
-					],
+					test: /\.js$/,
+					include: path.resolve(__dirname, 'src'),
+					loader: 'babel-loader',
+				},
+				{
+					test: /\.vue$/,
+					include: path.resolve(__dirname, 'src'),
+					use: 'vue-loader'
 				},
 				{
 					test: /\.scss$/,
@@ -121,11 +123,10 @@ module.exports = function () {
 				lang: ['@libs/lang', 'lang'],
 				getCategoryName: ['@libs/lang', 'getCategoryName'],
 				constant: ['@libs/constants', 'constant'],
+				uuid: ['uuid', 'v4'],
 			}),
-			new InjectManifest({
-				swSrc: '@/service-worker.js',
-				swDest: 'service-worker.js',
-				maximumFileSizeToCacheInBytes: 10 * 1024 * 1024,
+			new webpack.DefinePlugin({
+				'process.env.NODE_ENV': JSON.stringify(env.NODE_ENV || 'development')
 			}),
 		],
 	};

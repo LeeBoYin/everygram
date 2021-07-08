@@ -17,9 +17,12 @@
 </template>
 
 <script>
-import { MDCRipple } from '@material/ripple/index';
 import MdcCircularProgress from '@components/MdcCircularProgress';
+import mixinRipple from '@/mixins/mixinRipple';
 export default {
+	mixins: [
+		mixinRipple
+	],
 	components: {
 		MdcCircularProgress,
 	},
@@ -36,17 +39,6 @@ export default {
 			type: Boolean,
 			default: false,
 		},
-	},
-	data() {
-		return {
-			mdcButton: null,
-		};
-	},
-	mounted() {
-		this.mdcButton = new MDCRipple(this.$el);
-	},
-	destroyed() {
-		this.mdcButton.destroy();
 	},
 };
 </script>

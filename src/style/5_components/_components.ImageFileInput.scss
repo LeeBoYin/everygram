@@ -1,0 +1,34 @@
+.image-file-input {
+	@extend %bg-center;
+	position: relative;
+	overflow: visible;
+	&__loading.mdc-circular-progress {
+		@extend %absolute-center;
+	}
+	&__input {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		opacity: 0;
+		cursor: pointer;
+		z-index: 2;
+	}
+	&__camera-lower-right {
+		position: absolute;
+		left: auto;
+		right: -5px;
+		bottom: -5px;
+		padding: 4px;
+		background-color: $c-bright;
+		border-radius: 50%;
+		color: $c-gray-800;
+		font-size: $font-size-md;
+		box-shadow: $box-shadow-md;
+		z-index: 1;
+	}
+	&__camera-background {
+		@extend %absolute-center;
+	}
+}

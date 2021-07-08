@@ -12,18 +12,10 @@
 </template>
 
 <script>
-import { MDCRipple } from '@material/ripple/index';
+import mixinRipple from '@/mixins/mixinRipple';
 export default {
-	data() {
-		return {
-			mdcListItem: null,
-		};
-	},
-	mounted() {
-		this.mdcListItem = new MDCRipple(this.$el);
-	},
-	destroyed() {
-		this.mdcListItem.destroy();
-	},
+	mixins: [
+		mixinRipple
+	],
 };
 </script>
