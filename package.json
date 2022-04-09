@@ -67,7 +67,7 @@
 		"bootstrap": "^4.5.0",
 		"compressorjs": "^1.0.6",
 		"lodash-es": "^4.17.15",
-		"moment": "^2.27.0",
+		"moment": "^2.29.2",
 		"serviceworker-webpack-plugin": "^1.0.1",
 		"sortablejs": "^1.10.2",
 		"vee-validate": "^3.3.7",
